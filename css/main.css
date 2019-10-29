@@ -20,19 +20,21 @@ p {
 }
 
 .main_wrapper {
-  display: inline-block;
-  width: 100%;
+  display: grid;
+  width: 90%;
 }
 
 #inline_menu {
-  display: inline-flex;
+  display: inline-block;
   color: red;
+  width: 90%;
   border: 1px red solid;
+  /* margin: 10px 30px 10px 30px; */
   padding: 1% 5% 1% 5%;
 }
 
 # inline_menu a {
-  margin: 0vw 2vw 0vw 2vw;
+  margin: 10px 30px 10px 30px;
 }
 
 #side_panel {
