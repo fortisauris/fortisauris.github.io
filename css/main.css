@@ -19,16 +19,25 @@ p {
   text-align: justify;
 }
 
+header {
+  padding: 5% 10%;
+}
+
 .main_wrapper {
   display: grid;
-  width: 90%;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+  width: 100%;
+  /* padding: 0% 10%; */
 }
 
 #inline_menu {
-  display: inline-block;
+  grid-row: 1;
+  grid-column: 2;
   color: red;
-  width: 90%;
+  width: 100%;
   border: 1px red solid;
+  text-align: center;
   /* margin: 10px 30px 10px 30px; */
   padding: 1% 5% 1% 5%;
 }
@@ -38,16 +47,21 @@ p {
 }
 
 #side_panel {
-  display: block;
-  position: relative;
-  width: 20%;
+  grid-column: 1;
+  grid-row: 2;
+  width: auto;
   height: auto;
+  text-align: left;
+  padding: 15%;
   border: 2px solid blue;
 }
 
 #main_content {
+  grid-column: 2;
+  grid-row: 2;
+  padding: 5%;
   height: auto;
-  width: 80%;
+  width: auto;
   border: 2px solid blue;
 }
 
