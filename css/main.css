@@ -38,8 +38,8 @@ footer {
 
 .main_wrapper {
   display: grid;
-  grid-template-columns: 1;
-  grid-template-rows: 4;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
   grid-gap: 25px;
   width: 100%;
   /* padding: 0% 10%; */
