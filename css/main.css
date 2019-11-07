@@ -40,7 +40,7 @@ footer {
 .main_wrapper {
   display: grid;
   grid-template-columns: auto;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto;
   grid-gap: 25px;
   width: 100%;
   /* padding: 0% 10%; */
@@ -87,8 +87,17 @@ footer {
   padding: 10%;
 }
 
-#kontakty {
+#Open {
   grid-row: 4;
+  background-color: blue;
+  text-align: left;
+  color: white;
+  padding: 10%;
+}
+
+
+#kontakty {
+  grid-row: 5;
   background-color: green;
   color: ghostwhite;
   text-align: left;
@@ -97,4 +106,3 @@ footer {
   font-size: large;
   padding: 10%;
 }
-
