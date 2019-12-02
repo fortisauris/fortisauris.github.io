@@ -1,1 +1,89 @@
-  
+ ==================================================================
+https://keybase.io/andrejli
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://fortisauris.com
+  * I am andrejli (https://keybase.io/andrejli) on keybase.
+  * I have a public key with fingerprint B130 BBA3 DE6C CF45 0B63  31FC 21C0 EB38 F066 E018
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120754b33d9894bae4404850bf4527a76f5a788339505d9c6998e332cb544230a990a",
+      "fingerprint": "b130bba3de6ccf450b6331fc21c0eb38f066e018",
+      "host": "keybase.io",
+      "key_id": "21c0eb38f066e018",
+      "kid": "0101502dca49c38ae22cea84472ff7128583d22819d21927533435a2988268939ef00a",
+      "uid": "df4239ab24a5f5d1760931e2c08ce419",
+      "username": "andrejli"
+    },
+    "merkle_root": {
+      "ctime": 1575295879,
+      "hash_meta": "e426281acb17c42bbd5ef22bb11372373dc667b0511916a92434a7283f8acb34",
+      "seqno": 11760670
+    },
+    "revoke": {
+      "sig_ids": [
+        "34b3916b4ff83f2ba96ccb612360085025fbf4ee7efda88bf29bd9f0705af3e90f"
+      ]
+    },
+    "service": {
+      "hostname": "fortisauris.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "ctime": 1575295879,
+  "expire_in": 157680000,
+  "prev": "142061fa2ba13f4510004933a82c7fddef5a994dd78cffa2c76b9f50cfdd9d03",
+  "seqno": 35,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.1.3
+Comment: https://keybase.io/crypto
+
+yMQEAnicbVNrUFVVFAYVGMEH6DQYCuHRsXJ47LP3eW0c8nGzEntYOs7Yha57n7M3
+HIF7rudeCCXKx6iBRtj4GkQnoYZKwkyNSFFTJiHNUhzBGs0xnbEBX1m+eu7L6PTH
+82fP2etb3/rWt9ZuHzowIjZy7MFe4zo/Pyry6KHFJRF5l0avKpeoYy2SssqlQtZ/
+sCKLBUO+QtuSsiQgQ6CrCkXIwgZWKGGKAhRDBZQrKtSJrnGV6IaBEFaBamFTw9hg
+CEGTqooCESAYAyKlSdz25zM34Nr+kKClMgKUEmQxzTQFE6AaQjI3oWwCRpHBgaYx
+IBsiscAJhjOEOEqCLMN2xJ348fXLewj+gW4gqwBaJlGwiQzCIDQZMRRFh5zrMjRU
+A1kQGjK2oIyhriKkIJVAbBhQMzDCjIN+3SX9dBYXvWBCoUJUrlqyrgGMZAZNYJhM
+kXEYGGSunxQzgSZ+y2ULimypIk0qZm5hEfO5jhMKm2uG7DBEVnUVYtXQsWiQBAt8
+xSxERCZToCZEEZPKuqlASi2VcShOWUY6RDqyTE3TKVBlGcsawVBBCtGhgbghcpAi
+dATZQr8jKoQ1ajoQElxW6hSycPWgnS98C0pZXgmJmQoKqnAusiElWEyCajJEGgBi
+vlDlYsSM6YxbxDAoh5hamAMdqIQjhgGX8irC1dxS2+wnDw/qvgHccUN2kJS4djDD
+dIqFqoDrhBzTKRLBglAoEMwKexNaFAijX2fUd5/HR22/JTZFZJQyN2g7ftGJQD7E
+NlYWsF3ms/3915oBxBeuw0oFpaxAoMmciL5kJPZLFkEFI0QMaOrcspjYWowVy9IN
+kwuYqWsUcxWYIoYtgP73EalCJ8kXnMI8PwmVuEyqOPR17qCIyNiI6KgB4ScUETs4
+/sHDmjlz+N+PnoM74ouUzE9fTt/fMcHtrRxQ1XfTl3N8zpjmzMp7aeMHZUdnjPd8
+T3/K27Bpz0jpyeSe95fXrx2x4vjY3B3p10ZMs6OHdcf9dgR0tU49fG+jN/VK8u2V
+l6s/lmojhmaW+Pt2/p767pfr09u2Jy/0ywuvpeZe3T1pBl9DR91Kz2spe7XhpWWn
+Fw+WD9wMVQ6p8EyK35t/6eSPCalLu8ZPNTunXP1uc82throrb2lj1h1rN7pnVPbW
+tm6LW352zq+7vDkJLQn15YuW1SXF7028XtP+1ZnnU964KT0xoWlNzCd/ebbu2rHu
+blJSXd+dwIDcCWylHRmT1vTUln3TpapQdsvWjQmn5y6tKmn4IK5j55EZcwadzC/r
+2lNxp/fz1bO8CY2h3UNP9qr0kTrPRw3vTRuYkp98J2l5z3Ru1e66OK+6Em27WHBh
+/pDJX8Tdezs+y3l6Q9foyfXdng83dTT0RTUl3u20K6M6544c1b3E/xg88M7+za+d
+aB7X/EJOa+PZf1qvL7lwKiFr577RPW8WtpSuWtDZdMLprlrrXeyJqQhEPzfuBk4Z
+PvWXjGZnyuxneyYeLWvTZiueeYnr2575Nyd2VvVnPz++58qNYWPbahp7zqR98+2W
++mONnlnnDt9uP19Pq7wvrv5zvr8jMZsuG5Y6eMUpb3HMxOqGeeWXS46fTpv9R2b2
+KykTo37Y3jOp9mi32SynHrz7H98e+u0=
+=r5ED
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/andrejli
+
+==================================================================
+ 
