@@ -46,6 +46,15 @@ footer {
   /* padding: 0% 10%; */
 }
 
+#main_nav_panel {
+  display: inline-block;
+  position: relative;
+  float: none;
+  text-align: center;
+  text-decoration: none;
+  color: lawngreen;
+  font-size: 3vw;
+}
 
 #inline_menu a {
   margin: 10px 30px 10px 30px;
