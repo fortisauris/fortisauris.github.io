@@ -47,6 +47,7 @@ footer {
 }
 
 #main_nav_panel {
+  font-family: 'Fjalla One', sans-serif;
   display: inline-block;
   position: relative;
   float: none;
@@ -84,6 +85,13 @@ footer {
   color: lawngreen;
   background-color: black;
 }
+
+.info_card  {
+  margin: 3%;
+  border: 3px solid orange;
+  border-radius: 5%;
+}
+
 #social_panel {
   grid-row: 3;
   /*grid-column: 2;*/
