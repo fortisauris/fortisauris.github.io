@@ -12,7 +12,7 @@
 body {
   margin: 0% 15% 0% 15%;
   /*border: 1px solid lawngreen;*/
-  background-color: #282c34;
+  background-color: black;
   /*min-width: 600px;*/
   font-family: 'Ubuntu', sans-serif;
 }
@@ -23,16 +23,21 @@ p {
 
 header {
   padding: 5% 10%;
-  color: lawngreen;
+  color: #ffc65c;
 }
 
 header h1 {
   font-size: 7.5vw;
 }
 
+li  {
+  text-align: left;
+
+}
+
 footer {
   text-align: center;
-  color: lawngreen;
+  color: black;
   padding: 10%;
 }
 
@@ -53,7 +58,7 @@ footer {
   float: none;
   text-align: center;
   text-decoration: none;
-  color: lawngreen;
+  color: black;
   font-size: 3vw;
 }
 
@@ -82,13 +87,13 @@ footer {
   height: auto;
   width: auto;
   font-size: large;
-  color: lawngreen;
-  background-color: black;
+  color: black;
+  background-color: #ffc65c;
 }
 
 .info_card  {
   margin: 3%;
-  border: 3px solid orange;
+  /* border: 3px solid orange; */
   border-radius: 5%;
 }
 
