@@ -41,6 +41,11 @@ footer {
   padding: 10%;
 }
 
+nav a {
+  color: lawngreen;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  text-decoration: none !important;
+}
 
 .main_wrapper {
   display: grid;
