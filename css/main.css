@@ -12,7 +12,7 @@
 body {
   margin: 0% 15% 0% 15%;
   /*border: 1px solid lawngreen;*/
-  background-color: black;
+  background-color: #00314f;
   /*min-width: 600px;*/
   font-family: 'Ubuntu', sans-serif;
 }
@@ -23,7 +23,7 @@ p {
 
 header {
   padding: 5% 10%;
-  color: #ffc65c;
+  color: #ff9933;
 }
 
 header h1 {
@@ -35,21 +35,25 @@ li  {
 
 }
 
+ul  {
+  list-style-type: none;
+}
+
 footer {
   text-align: center;
-  color: black;
+  color: #ff9933;
   padding: 10%;
 }
 
-nav a {
-  color: lawngreen;
+a {
+  color: #00314f;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   text-decoration: none !important;
 }
 
 .main_wrapper {
   display: grid;
-  grid-template-columns: auto;
+  grid-template-columns: 33.3% 66.6%;
   grid-template-rows: auto auto auto auto auto;
   grid-gap: 25px;
   width: 100%;
@@ -63,7 +67,7 @@ nav a {
   float: none;
   text-align: center;
   text-decoration: none;
-  color: black;
+  color: #00314f;
   font-size: 3vw;
 }
 
@@ -72,13 +76,13 @@ nav a {
 }
 
 #side_panel {
-  /*grid-column: 1;*/
-  grid-row: 1;
+  grid-column: 1;
+  grid-row: 0;
   width: auto;
   height: auto;
   text-align: left;
   padding: 15%;
-  border: 2px solid blue;
+  border: 2px solid #ff9933;
 }
 
 #side_panel ul {
@@ -86,14 +90,19 @@ nav a {
 }
 
 #main_content {
-  /*grid-column: 2;*/
-  grid-row: 2;
+  grid-column: 2;
+  grid-row: span 2;
   padding: 5%;
   height: auto;
   width: auto;
   font-size: large;
   color: black;
-  background-color: #ffc65c;
+  background-color: #ff9933;
+}
+
+#aktivity {
+  display: inline-flex;
+  align-content: left;
 }
 
 .info_card  {
@@ -104,19 +113,21 @@ nav a {
 
 #social_panel {
   grid-row: 3;
-  /*grid-column: 2;*/
+  grid-column: 0;
   background-color: firebrick;
   width: auto;
+  height: 50%;
   /*border: 1px red solid;*/
   text-align: center;
-  color: lawngreen;
+  color: #99cc33;
   /* margin: 10px 30px 10px 30px; */
   padding: 10%;
 }
 
 #Open {
-  grid-row: 4;
-  background-color: blue;
+  grid-row: 1;
+  grid-column: 0;
+  background-color: #ff9933;
   text-align: left;
   color: white;
   padding: 10%;
@@ -124,8 +135,9 @@ nav a {
 
 
 #kontakty {
-  grid-row: 5;
-  background-color: green;
+  grid-row: 2;
+  grid-column: 0;
+  background-color: #8581bd;  /* violet */
   color: ghostwhite;
   text-align: left;
   width: auto;
@@ -133,3 +145,4 @@ nav a {
   font-size: large;
   padding: 10%;
 }
+
