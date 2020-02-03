@@ -81,7 +81,7 @@ a {
   width: auto;
   height: auto;
   text-align: left;
-  padding: 15%;
+  /* padding: 15%; */
   border: 2px solid #ff9933;
 }
 
