@@ -53,8 +53,8 @@ a {
 
 .main_wrapper {
   display: grid;
-  /* grid-template-columns: 33.3% 66.6%; */
-  grid-template-rows: auto auto auto auto auto auto;
+  grid-template-columns: 33.3% 66.6%;
+  grid-template-rows: auto auto auto auto auto;
   grid-gap: 25px;
   width: 100%;
   /* padding: 0% 10%; */
@@ -76,8 +76,8 @@ a {
 }
 
 #side_panel {
-  /* grid-column: 1; */
-  grid-row: 2;
+  grid-column: 1;
+  grid-row: 0;
   width: auto;
   height: auto;
   text-align: left;
@@ -90,8 +90,8 @@ a {
 }
 
 #main_content {
-  /* grid-column: 1; */
-  grid-row: 1;
+  grid-column: 2;
+  grid-row: span 2;
   padding: 5%;
   height: auto;
   width: auto;
@@ -101,7 +101,6 @@ a {
 }
 
 #aktivity {
-  grid-row: 2;
   display: inline-flex;
   align-content: left;
 }
@@ -113,11 +112,11 @@ a {
 }
 
 #social_panel {
-  grid-row: 5;
-  /* grid-column: 0; */
+  grid-row: 3;
+  grid-column: 0;
   background-color: firebrick;
-  /* width: auto; */
-  /* height: 50%; */
+  width: auto;
+  height: 50%;
   /*border: 1px red solid;*/
   text-align: center;
   color: #99cc33;
@@ -126,8 +125,8 @@ a {
 }
 
 #Open {
-  grid-row: 3;
-  /* grid-column: 0; */
+  grid-row: 1;
+  grid-column: 0;
   background-color: #ff9933;
   text-align: left;
   color: white;
@@ -136,8 +135,8 @@ a {
 
 
 #kontakty {
-  grid-row: 4;
-  /* grid-column: 0; */
+  grid-row: 2;
+  grid-column: 0;
   background-color: #8581bd;  /* violet */
   color: ghostwhite;
   text-align: left;
