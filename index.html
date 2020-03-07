@@ -6,6 +6,7 @@
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen and (min-width:448px)">
     <link type="text/css" rel="stylesheet" href="css/main2columns.css" media="screen and (min-width:930px)">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
 
@@ -14,107 +15,143 @@
 
   <body>
     <header>
-        <picture>
-            <!-- TODO Make Responsive -->
-            <img  alt="FA_Logo_white" src="img/Hackerspace_secondary_vertical_logo_white.png" width="50%">
-        </picture>
-      <br>
-        <h1>FORTIS AURIS</h1>
+
+            <img  alt="FA_Logo_white" class="img-fluid" src="img/FA_web_narrow_Optimized.png">
+            <br>
+
 
         <nav id="main_nav_panel">
-          <!-- <a href="#">Pravidla vstupu</a> -->
-          <!-- <a href="Kurzy.html">KURZY</a> -->
-          <!-- <img alt="Kurzy Plagat jan2020" src="/img/webbanner.jpg" /> -->
-          <!-- <a href="#">Tutorialy</a> -->
-
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="Kurzy.html">
+                <button type="button" class="btn btn-secondary">Kurzy</button>
+              </a>
+              <!-- TODO Next Buttons -->
+              <!-- <a href="#">
+                <button type="button" class="btn btn-secondary">Tutorials</button>
+              </a>
+              <button type="button" class="btn btn-secondary">TimeHacking</button>
+              <button type="button" class="btn btn-secondary">O nás</button> -->
+          </div>
         </nav>
+
     </header>
 
 
     <main>
-      <div class="main_wrapper">
 
-        <div id="main_content">
-           <p>Informačné technológie sú dnes všade, kam sa pozrieme. Aj najzarytejší odporcovia
-          podľahli tabletom, smartfónom a sociálnym sieťam. Život bez messengerov, asistentov,
-          appiek či webu je pre nás rovnako nepredstaviteľný ako povinná školská dochádzka
-          pred objavením Ameriky. Kde sa však tieto zázračné veci berú? Ako vznikajú, a ako
-           fungujú?</p>
-          <br>
-
-          <p>Vytvorili sme priestor, ktorý vám poskytne odpovede na všetky vaše zvedavé otázky.
-          Náš HACKERSPACE je určený zvedavcom, ktorí radi rozoberajú veci, aby pochopili,
-          ako fungujú.</p>
-          <br>
-
-          <p>V rámci našich školení pre začiatočníkov sa naučíme ovládať počítač pomocou konzoly,
-            základy populárneho programovacieho jazyka Python či základy webdizajnu.</p>
-          <br>
-
-          <p>Pokiaľ tieto veci už zvládate, je možné HACKERSPACE využívať ako klub alebo co-work
-          inkubátor pre mladých hackerov a developerov. Stretnúť ľudí z rôznych kmeňov a robiť
-            spolu na svojich vlastných projektov.</p>
-          <br>
-
-          <p>Alebo je tu možnosť zapojiť sa do jedného z Open Source projektov, zúčastniť sa
-          hackathonov, verejných diskusií na témy ako Kyberbezpečnosť, Blockchain, stavať
-          cluster či spravovať vzdialené servery či experimentovať s AI. Tí najlepší z vás
-            budú súťažiť za Modru a náš HACKERSPACE v CTF či iných wargamingových scenároch.</p>
-
-        </div>
-
-        <div id="aktivity">
-          <a href="Kurzy.html"><img alt="Kurzy" src="img/webbanner.jpg"></a>
-          <a href="Kurzy.html"><h1>PRE INFO KLIKNI TU</h1></a>
+      <!-- TODO CAROUSEL CODE -->
 
 
-        </div>
+        <div class="container-fluid">
 
-        <div id="Open">
-            <h3>Otváracie hodiny:</h3>
-            <br>
-            <h4>Co-work</h4>
-            <ul>
-                <li> Pondelok az Sobota : 9:00 - 22:00 </li>
-                <li> Nedeľa : ZATVORENÉ</li>
-            </ul>
-            <br>
-            <h3>V prípade neprítomnosti volajte 0911959111
-            </h3>
-            <br>
-            <h4>Kurzy a krúžky</h4>
-            <ul>
-              <li>Pondelok : 13:00 - 17:00</li>
-              <li>Streda : 13:00 - 17:00</li>
-              <li>Piatok : 13:00 - 17:00</li>
-            </ul>
-        </div>
+            <div class="row">
+              <div class="col-sm">
+                <div class="card">
+                  <div id="Open">
+                      <h3>Otváracie hodiny:</h3>
+                      <br>
+                      <h4>Co-work</h4>
+                      <ul>
+                          <li> Pondelok az Sobota : 9:00 - 22:00 </li>
+                          <li> Nedeľa : ZATVORENÉ</li>
+                      </ul>
+                      <br>
+                      <h3>V prípade neprítomnosti volajte 0911959111
+                      </h3>
+                      <br>
+                      <h4>Kurzy a krúžky</h4>
+                      <ul>
+                        <li>Pondelok : 13:00 - 17:00</li>
+                        <li>Streda : 13:00 - 17:00</li>
+                        <li>Piatok : 13:00 - 17:00</li>
+                      </ul>
+                  </div>
+                  <br>
+                  <div id="kontakty">
+                    <h4>Mobil : +421 911 959 111</h4>
+                    <br>
+                    <h4>Email : fortisauris@gmail.com</h4>
+                    <br>
+                    <h4>Adresa : Dolná 24, 90001 Modra, Slovenská Republika</h4>
+                  </div>
 
-        <div id="kontakty">
-          <h4>Mobil : +421 911 959 111</h4>
-          <br>
-          <h4>Email : fortisauris@gmail.com</h4>
-          <br>
-          <h4>Adresa : Dolná 24, 90001 Modra, Slovenská Republika</h4>
-        </div>
+                  </div>
+              </div>
+              <div class="col-sm">
+                <div class="card">
+                  <div id="main_content">
+                     <p>Informačné technológie sú dnes všade, kam sa pozrieme. Aj najzarytejší odporcovia
+                    podľahli tabletom, smartfónom a sociálnym sieťam. Život bez messengerov, asistentov,
+                    appiek či webu je pre nás rovnako nepredstaviteľný ako povinná školská dochádzka
+                    pred objavením Ameriky. Kde sa však tieto zázračné veci berú? Ako vznikajú, a ako
+                     fungujú?</p>
+                    <br>
 
-        <div id="social_panel">
-          <nav>
+                    <p>Vytvorili sme priestor, ktorý vám poskytne odpovede na všetky vaše zvedavé otázky.
+                    Náš HACKERSPACE je určený zvedavcom, ktorí radi rozoberajú veci, aby pochopili,
+                    ako fungujú.</p>
+                    <br>
 
-            <!-- <a href="#"><img alt="reddit_link" src="img/iconfinder_reddit_1608808.svg" height="68" width="68"> -->
-            <!-- </a> -->
-            <a href="https://twitter.com/fortisauris"><img alt="twitter_link" src="img/iconfinder_Social_networks_Twitter_492131.svg" height="68" width="68"></a>
-            <a href="#"><img alt="youtube_link" src="img/iconfinder_Social_networks_Youtube_492081.svg" height="68" width="68"></a>
-            <a href="https://github.com/fortisauris"><img alt="github_link" src="img/iconfinder_mark-github_298822.svg" height="68" width="68"></a>
+                    <p>V rámci našich školení pre začiatočníkov sa naučíme ovládať počítač pomocou konzoly,
+                      základy populárneho programovacieho jazyka Python či základy webdizajnu.</p>
+                    <br>
 
-          </nav>
-        </div>
+                    <p>Pokiaľ tieto veci už zvládate, je možné HACKERSPACE využívať ako klub alebo co-work
+                    inkubátor pre mladých hackerov a developerov. Stretnúť ľudí z rôznych kmeňov a robiť
+                      spolu na svojich vlastných projektov.</p>
+                    <br>
 
-    </div> <!-- main wrapper END -->
+                    <p>Alebo je tu možnosť zapojiť sa do jedného z Open Source projektov, zúčastniť sa
+                    hackathonov, verejných diskusií na témy ako Kyberbezpečnosť, Blockchain, stavať
+                    cluster či spravovať vzdialené servery či experimentovať s AI. Tí najlepší z vás
+                      budú súťažiť za Modru a náš HACKERSPACE v CTF či iných wargamingových scenároch.</p>
+
+                  </div>
+                  </div>
+              </div>
+              <!-- <div class="col-sm">
+                <div class="card" style="width: 19vw;">
+                  <div id="aktivity">
+                    <a href="Kurzy.html"><img alt="Kurzy" src="img/webbanner.jpg"></a>
+                    <a href="Kurzy.html"><h5>PRE INFO KLIKNI TU</h5></a>
+                  </div>
+                </div>
+              </div> -->
+
+              </div>
+              <!-- Second Row --><br>
+              <div class="row">
+                <div class="col-sm">
+                    <div class="card">
+                      <div id="social_panel">
+                        <nav>
+
+                          <!-- <a href="#"><img alt="reddit_link" src="img/iconfinder_reddit_1608808.svg" height="68" width="68"> -->
+                          <!-- </a> -->
+                          <a href="https://twitter.com/fortisauris"><img alt="twitter_link" src="img/iconfinder_Social_networks_Twitter_492131.svg" height="68" width="68"></a>
+                          <a href="#"><img alt="youtube_link" src="img/iconfinder_Social_networks_Youtube_492081.svg" height="68" width="68"></a>
+                          <a href="https://github.com/fortisauris"><img alt="github_link" src="img/iconfinder_mark-github_298822.svg" height="68" width="68"></a>
+
+                        </nav>
+                      </div>
+                      </div>
+                </div>
+              </div>
+                <!-- </div> -->
+              <!-- </div> -->
+
+
+            </div>
+            <!-- End of container -->
     </main>
 
     <footer>
-        <h3>Copyright FORTIS AURIS 2019</h3>
+      <div class="row">
+        <div class="col-sm">
+                  <h3>Copyright FORTIS AURIS 2020</h3>
+        </div>
+      </div>
+
     </footer>
 
 

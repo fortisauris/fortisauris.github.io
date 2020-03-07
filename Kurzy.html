@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="css/main.css">
     <!-- <link type="text/css" rel="stylesheet" href="css/main2columns.css" media="screen and (min-width:720px)"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fjalla+One&display=swap" rel="stylesheet">
 
@@ -12,29 +13,40 @@
 
   <body>
     <header>
-        <picture>
-            <!-- TODO Make Responsive -->
-            <img  alt="FA_Logo_white" src="img/Hackerspace_secondary_vertical_logo_white.png" width="50%">
-        </picture>
-      <br>
-        <h1>FORTIS AURIS</h1>
-        
-        <!-- <nav id="main_nav_panel">
-          <a href="#">Pravidla vstupu</a>
-          <a href="#">Kurzy</a>
-          <a href="#">Tutorialy</a>
 
-        </nav> -->
+            <img  alt="FA_Logo_white" class="img-fluid" src="img/FA_web_narrow_Optimized.png">
+            <br>
+
+
+        <nav id="main_nav_panel">
+          <div class="btn-group" role="group" aria-label="Basic example">
+              <a href="index.html">
+                <button type="button" class="btn btn-secondary">Späť na hlavnú stránku</button>
+              </a>
+              <!-- TODO Next Buttons -->
+              <!-- <a href="#">
+                <button type="button" class="btn btn-secondary">Tutorials</button>
+              </a>
+              <a href="#">
+              <button type="button" class="btn btn-secondary">TimeHacking</button>
+              </a>
+              <a href="#">
+              <button type="button" class="btn btn-secondary">O nás</button>
+            </a> -->
+          </div>
+        </nav>
     </header>
 
 
     <main>
-      <div class="main_wrapper">
+      <div class="container-fluid">
 
-        <div id="main_content">
-            <div class="info_card">
+        <!-- <div id="main_content"> -->
+          <div class="row">
+            <div class="col-sm">
+            <div class="card info_card" style="width: 95%; color: black; background-color: #ff9933;">
            <h1>Basic Linux/Python/Hacking</h1><br>
-           <p>Kurz je určený pre mládež a dospelých od 13 do 99 rokov. 
+           <p>Kurz je určený pre mládež a dospelých od 13 do 99 rokov.
             V prvej časti kurzu sa naučíme ovládať základné funkcie počítača cez terminál v operačnom systéme Linux.
             V druhej časti kurzu sa naučíme základy programovacieho jazyka Python a vytvárať jednoduché skripty.
             V tretej časti sa budeme venovať základným hackerským technikám a nástrojom kybernetickej bezpečnosti.
@@ -88,16 +100,19 @@
                  <li>Hrabeme sa v Pieskovisku (Sandboxoch, kontajneroch, virtualnych mašinách).</li>
 			   <li>Útoky pomocou hardvéru.</li>
                  <li>Útoky pomocou skriptov - keyloggery, jednoduché reverzné shelly</li>
-			  
+
 
            </ul><br>
             <a href="https://drive.google.com/file/d/1Z8hcfw9Pda6zYsF0_jeR8jsSxzoy092p/view?usp=sharing">PRIHLÁŠKA</a>
             </div>
+          </div>
 
-            <div class="info_card">
-            <hr><br>
+
+
+              <div class="col-sm">
+            <div class="card info_card" style="width: 95%; color: black; background-color: #ff9933;">
 				<h1>Basic Scratch/MakeCode/HTML</h1><br>
-            <p>Kurz je určený pre deti od 10 do 13 rokov. 
+            <p>Kurz je určený pre deti od 10 do 13 rokov.
                 V prvej časti kurzu sa prostredníctvom jednoduchých grafických programovacích blokov sa naučíme programovať Hry
                 V druhej sa zoznámime s počítačom Micro:Bit a pomocou grafických programovacích blokov ho využijeme v zaújimavých projektoch
                 V tretej časti sa naučíme písať jednoduché statické webové stránky pomocou jazyka HTML aj s využitím štýlov a responzívneho dizajnu.
@@ -144,51 +159,86 @@
                     <li>Nastavujeme Google Analytics.</li>
                 </ul><br>
                 <a href="https://drive.google.com/file/d/1Z8hcfw9Pda6zYsF0_jeR8jsSxzoy092p/view?usp=sharing">PRIHLÁŠKA</a>
-                <br><hr><br>
-                <a href="index.html">Späť na hlavnú stránku.</a>
+
             </div>
          </div>
- 
+       </div>
 
-        <div id="social_panel">
-          <nav>
+       <div class="row">
+         <div class="col-sm">
+           <div class="card" style="width: 100%">
+             <div id="social_panel">
+               <nav>
 
-            <!-- <a href="#"><img alt="reddit_link" src="img/iconfinder_reddit_1608808.svg" height="68" width="68"> -->
-            <!-- </a> -->
-            <a href="https://twitter.com/fortisauris"><img alt="twitter_link" src="img/iconfinder_Social_networks_Twitter_492131.svg" height="68" width="68"></a>
-            <a href="#"><img alt="youtube_link" src="img/iconfinder_Social_networks_Youtube_492081.svg" height="68" width="68"></a>
-            <a href="https://github.com/fortisauris"><img alt="github_link" src="img/iconfinder_mark-github_298822.svg" height="68" width="68"></a>
+                 <!-- <a href="#"><img alt="reddit_link" src="img/iconfinder_reddit_1608808.svg" height="68" width="68"> -->
+                 <!-- </a> -->
+                 <a href="https://twitter.com/fortisauris"><img alt="twitter_link" src="img/iconfinder_Social_networks_Twitter_492131.svg" height="68" width="68"></a>
+                 <a href="#"><img alt="youtube_link" src="img/iconfinder_Social_networks_Youtube_492081.svg" height="68" width="68"></a>
+                 <a href="https://github.com/fortisauris"><img alt="github_link" src="img/iconfinder_mark-github_298822.svg" height="68" width="68"></a>
 
-          </nav>
-        </div>
+               </nav>
+             </div>
+           </div>
+         </div>
+         <br><br>
+         <div class="col-sm">
+           <div class="card" style="width: 95%">
 
-        <div id="Open">
-            <h3>Otváracie hodiny:</h3>
-            <br>
-            <h4>Co-work</h4>
-            <ul>
-                <li> Pondelok az Sobota : 9:00 - 22:00 </li>
-                <li> Nedela : ZATVORENÉ</li>
-            </ul>
-            <br>
-            <h3>V prípade neprítomnosti volajte 0911959111
-            </h3>
-            <br>
-            <h4>Kurzy a krúžky</h4>
-            <ul>
-              <li>Pondelok : 13:00 - 17:00</li>
-              <li>Streda : 13:00 - 17:00</li>
-              <li>Piatok : 13:00 - 17:00</li>
-            </ul>
-        </div>
+               <div id="Open">
+                   <h3>Otváracie hodiny:</h3>
+                   <br>
+                   <h4>Co-work</h4>
+                   <ul>
+                       <li> Pondelok az Sobota : 9:00 - 22:00 </li>
+                       <li> Nedela : ZATVORENÉ</li>
+                   </ul>
 
-        <div id="kontakty">
-          <h4>Mobil : +421 911 959 111</h4>
-          <br>
-          <h4>Email : fortisauris@gmail.com</h4>
-          <br>
-          <h4>Adresa : Dolná 24, 90001 Modra, Slovenská Republika</h4>
-        </div>
+                   <h4>Kurzy a krúžky</h4>
+                   <ul>
+                     <li>Pondelok : 13:00 - 17:00</li>
+                     <li>Streda : 13:00 - 17:00</li>
+                     <li>Piatok : 13:00 - 17:00</li>
+                   </ul>
+               </div>
+
+           </div>
+         </div>
+         <br><br>
+         <div class="col-sm">
+           <div class="card" style="width: 95%">
+             <div id="kontakty">
+               <h4>Mobil : +421 911 959 111</h4>
+               <br>
+               <h4>Email : fortisauris@gmail.com</h4>
+               <br>
+               <h4>Adresa : Dolná 24, 90001 Modra, Slovenská Republika</h4>
+             </div>
+           </div>
+         </div>
+
+       </div> <!-- END OF ROW -->
+       <br>
+       <div class="row">
+         <div class="col-sm">
+           <div class="alert alert-danger" role="alert">
+               <h4 class="alert-heading">Upozornenie!</h4>
+               <p>V prípade neprítomnosti volajte 0911 959 111</p>
+             </div>
+           </div>
+         </div>
+       </div>  <!-- END OF ROW -->
+
+
+
+
+     </div> <!-- END OF CONTAINER -->
+
+
+
+
+
+
+
 
     </div> <!-- main wrapper END -->
     </main>

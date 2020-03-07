@@ -114,6 +114,7 @@ a {
   margin: 3%;
   /* border: 3px solid orange; */
   border-radius: 5%;
+  background-color: #ff9933 !important;
 }
 
 #social_panel {
@@ -151,4 +152,3 @@ a {
   /* font-size: large; */
   padding: 10%;
 }
-
