@@ -21,7 +21,7 @@
 			<li><h3>Otvorime vim a ulozime subor pomocou :wq</h3></li>
 
       <p>Nový súbor otvoríme pomocou vim text.txt alebo otvoríme vim pomocou VIM.
-         Veď tu sa nedá písať ani opustiť vim. <br>
+         Veď tu sa nedá písať ani opustiť VIM. <br>
         Celé je to nejaké čudné !!! <br>
         Zadaním príkazu <code>:q</code> ukončíme textový editor VIMu. <br>
         Zadaním príkazu <code>:wq</code> uložíme zmeny v súbore a ukončíme VIM. <br>
@@ -34,21 +34,48 @@
       Súbor si uložíme pomocou <code>:w</code> alebo ak nemáme súbor uložený tak <code>"w MENO_SUBORU.txt"</code>
       VIM opäť opustíme pomocou príkazu <code>:q</code>.
       </p>
+
       <li> <h3>Presuvame sa po texte</h3> </li>
       <p>Pokiaľ nie sme v INSERT mode tak sa môžeme presúvať pomocou kurzorových šípok alebo pomocou kláves <code>hjkl</code>, ktoré kedysi nahrádzali kurzorové šípky na klávesnici
         Dokážeme skákať po slovách pomocou kláves w, b,
         Dokážeme skákať na začiatok a koniec riadku pomocou 0, $,
-        Vieme sa pohybovať po vetách po vetach a odstavcoch pomocou {}[]()</p>
-        <!-- A nakoniec vieme aj skočiť na začiatok, stred a koniec dokumentu pomocou -->
-      <li><h3>Rozdelime si obrazovku pomocou :vsp a :sp a budeme sa prepinat medzi nimi Ctrl-W</li>
+        Vieme sa pohybovať po vetách po vetach a odstavcoch pomocou {}[]()
+        A nakoniec vieme aj skočiť na začiatok, stred a koniec dokumentu pomocou kláves H, M, L.</p>
+
+      <li><h3>Rozdelime si obrazovku  Ctrl-W</li>
+        <p>Vo VIMe môžeme editovať viacero dokumentov naraz tým, že si terminálovú obrazovku rozdelíme do okien.
+        Spravíme tak príkazom <code>:sp</code> ak chceme obrazovku rozdeliť horizontálne alebo <code>:vsp</code> ak ju chceme otvoriť vertikálne.
+       Ak zadáme za príkazom meno súboru napríklad <code>:vsp test.txt</code> otvorí nám existujúci alebo vytvorí nový súbor so zadaným názvom. <br>
+       Medzi oknami sa prepíname pomocou kombinácie kláves Ctrl w </p>
 
       <li><h3>Taby - spravime si novy tab pomocou :tabe FILE prepneme sa pomocou gt a gT a zavreme pomocou :tabc</li>
+      <p>Začína to byť trochu neprehľadné. Našťastie je tu možnosť spraviť si TAB ako vo webovom prehliadači.
+      Nový tab si otvoríme pomocou <code>:tabe</code>.
+      Ak za tento píkaz zadáme názov súboru tak nám otvorí existujúci alebo nový súbor.
+    Medzi TABmi sa môžeme prepínať kombináciou kláves gT a gt.
+  Tab zatvoríme obvyklým <code>:q</code> alebo <code>:tabc</code>.</p>
 
       <li><h3>Zadame prikaz do konzoly z VIMU pomocou ! a otvorime iny subor pomocou :e alebo :E</li>
+        <p> To však nie je ani zďaleka všetko čo VIM dokáže zobrazovať. V ktoromkoľvek okne môžeme otvoriť pre editáciu iný súbor pomocou príkazu <code>:e</code> ak k nemu pridáme názov súboru.
+        Dobre, ale čo ak súbor nie je v pracovnom adresári a nepoznám k nemu PATH?
+        Pomocou príkazu <code>:E</code> si otvoríme stromové zobrazenie súborov a pohodlne si ho nájdeme.
+        Čo takto zadať nejaký komplikovaný príkaz z Linux shellu a zobraziť ho v príslušnom okne alebo TABE?
+        Nie je nič jednoduchšie! Stačí zadať za <code>:</code> výkričník. Všetko čo je za výkričníkom vykoná shell a zobrazí ho v okne. Napríklad príkazom <code>:!htop</code> sa spustí program htop.
+        Po ukončení sa vráti opäť do VIMu.
+        </p>
 
-      <li><h3>Prepneme sa do VISUAL modu pomocou v a skopirujeme text pomocou y yank, c cut a p put</li>
+      <li><h3>Prepneme sa do VISUAL módu pomocou v a skopírujeme text pomocou y yank, c cut a p put</li>
+        Čo takto naučiť sa kopírovať text vo VIMe? Bez myši a Ctrl-C ? <br>
+        Najprv sa pomocou klavesy v sa prepneme do VISUAL módu alebo V prepneme do VISUAL LINE módu.
+        Tento nám umožňuje označovať text po písmenách alebo celých riadkoch. Označený text môžeme skopírovať do tzv. Bufferu pomocoy klávesy y čo znamená yank.
+        Môžeme ho aj vystrihnúť pomocou klavesy c ako cut. Uložený buffer môžeme vložiť na vybrané miesto pomocou klávesy p ako put.
+        VISUAL mód opustíme klávesou Esc, ktorá je umiestnená odporne ďaleko.
 
 		</ul>
+
+    <p>Možnosti VIMu sme zďaleka nevyčerpali. Dokáže toho omnoho viac.
+      Od pokročilého vyhľadávania v súboroch, nahrádzania textu, cez nastavenia parametrov v konfiguračných súboroch alebo inštalovanie rôznych Pluginov.
+      Ak si naň nájdete čas bohato sa vám odmení. Happy Hacking !</p>
 		<section>
 
 
