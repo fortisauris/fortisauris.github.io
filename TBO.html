@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Tutorial Board</title>
+<link href="css/flextest.css" rel="stylesheet" type="text/css">
+<link href="css/tut_board.css" rel="stylesheet" type="text/css">
+<!--	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">-->
+<script>
+    function ActualTime() {
+        var now = new Date();
+        var hours = now.getHours();
+        var minutes = now.getMinutes();
+        var seconds = now.getSeconds();
+        var miliseconds = now.getMilliseconds()
+        minutes = actualizeTime(minutes);
+        seconds = actualizeTime(seconds);
+        // miliseconds = actualizeTime(miliseconds);
+        document.getElementById('watch').innerHTML =
+            hours + ":" + minutes + ":" + seconds + ":" + miliseconds;
+        var timer =setTimeout(ActualTime, 1);
+    }
+    function actualizeTime(i) {
+        if (i < 10) {i = "0" + i} return i;
+    }
+</script>
+</head>
+<body onload="ActualTime()">
+
+<div id="watch" ><p></p></div>
+
+<button class="collapsible">LINUX BASICS - How To...</button>
+<div class="content">
+    <div class="vertical-menu">
+    <!--<a href="#" class="active">Home</a>-->
+    <a href="tutorials/L3_Linux_Users_and_Permissions_Basics.html">Lekcia 3 - Users and Permissions basics</a>
+    <a href="tutorials/L4_Linux_Search_Basics.html">Lekcia 4 - Search Basics</a>
+    <a href="tutorials/L5_SSH_Basics.html">Lekcia 5 - Networking Basics</a>
+    <a href="tutorials/L6_VIM_Basics.html">Lekcia 6 - Editing text with VIM Basics</a>
+    <a href="tutorials/L7_TMUX_Basics.html">Lekcia 7 - Using Multiple Terminals in TMUX basics</a>
+    <a href="tutorials/L8_Managing_discs.html">Lekcia 8 - Managing Discs and Storage</a>
+    </div>
+</div>
+
+
+<script>
+var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+    coll[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var content = this.nextElementSibling;
+        if (content.style.display === "block") {
+            content.style.display = "none";
+        } else {
+            content.style.display = "block";
+        }
+    });
+}
+</script>
+
+</body>
+</html>

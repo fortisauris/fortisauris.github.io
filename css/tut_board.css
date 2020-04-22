@@ -1,0 +1,117 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {
+	background-color: black;
+}
+
+* {
+    font: 4vw "Courier New", Courier, monospace;
+	color: lawngreen;
+}
+
+body   {
+	font-family: "Courier New", Courier, monospace;
+	color: lawngreen;
+	font-size: 5vw;
+
+}
+h2 {
+    color: red;
+	font: 5vw "Courier New", Courier, monospace;
+    background-color: black;
+}
+.collapsible {
+    background-color: black;
+    color: lawngreen;
+    cursor: pointer;
+    padding: 1px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 5vw;
+}
+
+
+.active, .collapsible:hover {
+    background-color: #555;
+}
+
+.content {
+    padding: 0 1px;
+    color: lawngreen;
+    display: none;
+    overflow: hidden;
+    background-color: black;
+}
+
+.vertical-menu {
+    width: 100%;
+}
+
+.vertical-menu a {
+    background-color: #010100;
+    border: 1px solid green; /* Green border */
+	font: 5vw "Courier New", Courier, monospace;
+    color: red;
+    display: block;
+    padding: 1px;
+    text-decoration: none;
+}
+
+.vertical-menu a:hover {
+    background-color: #3e8e41;
+}
+
+.vertical-menu a.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.stat {
+    position: absolute ;
+    left: 200px;
+    top: 1px;
+}
+
+#watch {
+	font: "Courier New", Courier, monospace;
+	background-color: #010100; 
+	font-size: 5vw; 
+	color: lawngreen;
+}
+
+.tuts {
+	font: "Courier New", Courier, monospace;
+    position: relative ;
+	font-size: 10vw;
+    right: 1px;
+    top: 1px;
+}
+.btn-group button {
+    background-color: #010100; /* Green background */
+    border: 1px solid green; /* Green border */
+    color: lawngreen;
+    padding:  2px 5px 10px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    width: 155px;
+    height: 25px;
+    display: block; /* Make the buttons appear below each other */
+}
+/**/
+.btn-group button:not(:last-child) {
+    border-bottom: none; /* Prevent double borders */
+}
+/**/
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: #3e8e41;
+}
+#tutorial {
+	width: 100%;
+	min-width: 400px;
+	max-width: 600px;
+	margin: 0 auto;
+	-webkit-box-flex: 1;
+}
