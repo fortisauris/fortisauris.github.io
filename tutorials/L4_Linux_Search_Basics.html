@@ -2,24 +2,34 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>How to connect to remote computer via SSH</title>
+    <title>How to search for files, directories, programs and their content</title>
     <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
-    <link href="css/tut_board.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: black; color: darkorange;">
 	<header>
-<h3>Lekcia 5 - Základy počítačovej siete</h3>
+<h3>Lekcia 4 - Vyhľadávanie v Linuxe</h3>
 	</header>
 	<main>
 		<ul>
     	<li><h3>Jednoduché hľadanie</h3></li>
-      <p>Jednoduché hľadanie vykonáme pomocou príkazu <code>locate</code>. <br>
-      Ak napíšeme <code>locate NAZOV_SUBORU</code> vypíše nám zoznam všetkých
-      súborov v systéme aj s ich umiestnením v adresároch PATH k nim. <br> Toto
-      vyhľadávanie vyhľadáva v internej súborovej databáze, ktorá je často
-      neaktualizovaná a zastaralá. Preto sa na nejaké špecifické vyhľadávanie
-      používa zriedkavo.
+      <p>Jednoduché hľadanie vykonáme pomocou príkazu <code>locate</code>. Ak
+        napríklad zadáme príkaz:
+
+      <br> <br>
+      <code>locate NAZOV_SUBORU</code>
+      <br> <br>
+      vypíše nám zoznam všetkých
+      súborov v systéme aj s ich umiestnením v adresároch PATH k nim.
+      <br>
+
+      <div class="alert alert-warning" role="alert">
+          <p>Toto vyhľadávanie hľadá v internej súborovej databáze, ktorá je často
+          neaktualizovaná a zastaralá.</p>
+        </div>
+       Preto sa na nejaké špecifické vyhľadávanie používa zriedkavo.
    </p>
 
 			<li><h3>Hľadáme nainštalované programy</h3></li>
@@ -27,72 +37,116 @@
       <p>Linux obsahuje špecifické vyhľadávacie nástroje na vyhľadávanie binárneho
          kódu ktorý je spustiteľný na počítači. Slúži to najmä kvôli tomu aby
          sme vedeli rýchlo a efektívne zistiť či ten alebo onen nástroj je
-         nainštalovaný na počítači a kde.  <br>
-         Prvým na toto určeným príkazom je <code>whereis</code>. Vyhodí nám
-         všetky miesta v počítači kde sa nachádza uvedený program aj s cestou PATH.
-         Napríklad <code>whereis python</code> nám vypíše všetky binarne súbory
-         programovacieho jazyka python nainštalované v počítači.
+         nainštalovaný na počítači a kde.
          <br>
-         Druhým príkazom je príkaz <code>which</code>, ktorý nám ukáže iba ten
-         program, ktorý má počítač definovaný ako prednastavený pri spúšťaní
-         z príkazového riadku. To znamená, že napríklad <br>  <code>which python</code>
+         Prvým na toto určeným príkazom je:
+         <br> <br>
+         <code>whereis</code>.
+         <br> <br>
+         Vyhodí nám všetky miesta v počítači kde sa nachádza uvedený program aj s cestou PATH.
+         Napríklad:
+         <br> <br>
+         <code>whereis python</code>
+         <br> <br>
+         Vypíše všetky binárne spustiteľné súbory programovacieho jazyka python nainštalované v počítači.
          <br>
+         Druhým príkazom je príkaz:
+         <br> <br>
+         <code>which</code>
+         <br> <br>
+         Ukáže nám iba ten program, ktorý má počítač definovaný ako prednastavený pri spúšťaní
+         z príkazového riadku. To znamená, že napríklad
+         <br> <br>
+          <code>which python</code>
+         <br> <br>
          nám ukáže umiestnenie programu odkiaľ ho spúšťa.
         </p>
 
 
-			<li><h3>Rafinujeme hľadanie špecifických súborov</h3></li>
+			<li><h3>Ako v Linuxe na hľadanie špecifických súborov.</h3></li>
       <p>Doposiaľ použité príkazy nám moc nepomohli. Povedzme, že hľadáme
-        špecifický typ súboru ako .MP4 v určenom adresári. <br>
-      Použijeme príkaz <code>find</code>, ktorý nám umožní potrebné podrobnosti doplniť.
-    <br> <code>find PATH -type f -name \HelloWorld.mp4</code> nám umožní špecifikovať že
-    hľadáme súbor umiestnený v špecifickom adresári. Čo keď však nevieme presný
+        špecifický typ súboru ako <b>.mp4</b> v určenom adresári. <br>
+      Použijeme príkaz:
+      <br> <br>
+      <code>find</code>
+      <br> <br>
+      tento príkaz nám umožní potrebné podrobnosti doplniť a použiť v nasledovnom syntaxe:
+    <br> <br>
+      <code>find PATH -type f -name \HelloWorld.mp4</code>
+    <br> <br>
+    Toto nám umožní špecifikovať že hľadáme súbor umiestnený v špecifickom adresári. Čo keď však nevieme presný
     názov súboru, alebo chceme nájsť všetky súbory s príponou .mp4?</p>
 
     <li> <h3>Čo je to WILDCARD?</h3> </li>
     <p>Ak nevieme presný názov súboru, alebo nejaké písmenko v názve použijeme
       špecifické znaky, ktoré pomôžu počítaču nájsť čo hľadáme.
-      Ak teda nevieme presne písmeno v názve použijeme znak ?
-      <br>
+      Ak teda nevieme presne písmeno v názve použijeme znak <b>?</b>. Napríklad:
+      <br> <br>
       <code>find PATH -type f -name \Hel???orld.mp4</code>
-      <br>
-      Ak nevieme ani počet za sebou nasledujúcich  písmen použijeme znak * <br>
-      <code>find PATH -type f -name \Hel*orld.mp4</code> <br>
-      A nakoniec pomocou [] môžeme definovať množinu znakov, ktorá by tam mohla byť.
-      <br>
+      <br> <br>
+      Ak nevieme ani počet za sebou nasledujúcich  písmen použijeme znak <b>*</b>.
+      <br> <br>
+      <code>find PATH -type f -name \Hel*orld.mp4</code>
+      <br> <br>
+      A nakoniec pomocou <b>[]</b> môžeme definovať množinu znakov, ktorá by tam mohla byť.
+      <br> <br>
       <code>find PATH -type f -name \Hello[A-Z]orld.mp4</code>
-      <br>
-      Teraz nám počítač spoľahlivo vyhľadá súbory od HelloAorld.mp4 po HelloZorld.mp4.
+      <br> <br>
+      Teraz nám počítač spoľahlivo vyhľadá všetky súbory od HelloAorld.mp4 po HelloZorld.mp4.
 
     </p>
 
       <li> <h3>Prezeráme časti súborov.</h3> </li>
       <p>Našli sme textový súbor kilometer dlhého logu, ale nie sme si istý či
-        je to ten správny súbor. Možeme použiť príkaz <code>cat NAZOV_SUBORU</code>,
-        ísť si uvariť kávu alebo čaj a nechať ho zobraziť celý na obrazovke.
-        Je jednoduchšie zobraziť len časť súboru aby sme zistili či obsah
-        je to čo sme hľadali. Použijeme príkaz <code>head -n 10 NAZOV_SUBORU</code>,
-         ktorý nám zobrazí  prvých desať riadkov súboru. <br>
-       často potrebujeme zistiť posledné operácie, ktoré sú uložené v logu. Použijeme <br>
-     <code>tail -n 10 NAZOV_SUBORU</code>  <br>
-     a zobrazí sa posledných desať riadkov súboru.
-     <br>
-
+        je to ten správny súbor. Možeme použiť príkaz:
+        <br> <br>
+        <code>cat NAZOV_SUBORU</code>
+        <br> <br>
+        Tak a teraz si môžeme ísť uvariť kávu alebo čaj a nechať ho zobraziť celý na obrazovke.
+        Je jednoduchšie zobraziť len časť súboru aby sme zistili či obsah.
+        Po káve zistíme, že to nie je to čo sme hľadali.
+        <br>
+        Použijeme radšej príkaz:
+        <br> <br>
+        <code>head -n 10 NAZOV_SUBORU</code>
+        <br> <br>
+        Zobrazí nám iba prvých desať riadkov súboru a hneď vieme, že to nie je súbor, ktorý hľadáme.
+        <br>
+       Často potrebujeme zistiť posledné operácie, ktoré sú uložené v logu. Použijeme príkaz:
+       <br> <br>
+       <code>tail -n 10 NAZOV_SUBORU</code>
+       <br> <br>
+       a zobrazí sa posledných desať riadkov súboru. Je hotovo!!!
      </p>
 
 
 
       <li><h3>Čo sú PIPES a ako nám pomôžu pri vyhľadávaní</li>
-      <p></p>
+      <p>Linux nám umožňuje do príkazového riadku zadať viacero súvisiacich a
+        nasledujúcich príkazov, ktoré sa spolu vykonajú.
+        Nazývame ich rúry tzv. PIPES a sú prezentované znakom <b>|</b>.
+        Ich využitie v systéme je široké, ale ako si ukážeme v ďalšom bode
+        tutoriálu, používa sa aj pri vyhľadávaní. </p>
 
       <li><h3>Na vyhľadávanie použijeme PIPE s príkazom grep</h3> </li>
-      <p></p>
+      <p>Pomocou príkazu <code>grep</code> môžeme vyhľadávať v akomkoľvek výstupe
+        akéhokoľvek príkazu. Napríklad:
+        <br> <br>
+        <code>ps aux | grep root</code>
+        <br> <br>
+        Výsledkom bude zoznam všetkých bežiacich procesov užívateľa root.
+        Uvedieme si ďalší príklad:
+        <br> <br>
+        <code>nl FILENAME.TXT | grep AUTHOR</code>
+        <br> <br>
+        Nám spoľahlivo vyhľadá všetky očíslované riadky v ktorých sa vyskytuje
+        slovo AUTHOR.
+      </p>
 
 		</ul>
 
-    <p>Gratulujeme, pokiaľ ste sa dostali až sem ste prihlásení na vzdialenom počítači.
-      Teraz je to 30EURové Raspberry Pi no onedlho to môže byť multiprocesorový Xeon
-      server s RAID diskovým poľom a tisícmi registrovaných užívateľov.
+    <p>Gratulujeme, viete vyhľadávať v Linuxovom počítači súbory, programy a
+      dokážete grepovať v súboroch ich obsah. Ako sa hovorí kto hľadá ten nájde.
        Happy Hacking !</p>
 		<section>
 

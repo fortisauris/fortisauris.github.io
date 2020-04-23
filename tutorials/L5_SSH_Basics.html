@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>How to connect to remote computer via SSH</title>
+    <title>How to basic networking and connect to remote computert via SSH</title>
     <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
-    <link href="css/tut_board.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: black; color: darkorange;">
 	<header>
 <h3>Lekcia 5 - Základy počítačovej siete</h3>
 	</header>
@@ -25,24 +25,29 @@ Postupne ich nahradilo riešenie kde jeden centralizovaný bod zabezpečuje sie�
 
 			<li><h3>Aké sú základné sieťové prvky?</h3></li>
 
-      <p>Centrálnym zariadením siete Ethernet je Router tzv. Smerovač.
+      <p>Centrálnym zariadením siete Ethernet je  <b>smerovač-Router.</b>
         Tento zabezpečuje komunikáciu s pripojenými počítačmi pomocou káblov RJ45 alebo bezdrátovo prostredníctvom Wifi. <br>
-      Ďalším sieťovým zariadením je switch - prepínač. Aby bolo možné k routeru pripojiť väčší počet počítačov je tu zariadenie, ktoré prepína komunikáciu medzi Routrom a počítačom do ďalších RJ45 zásuvok. </p>
-      <br>  Pred switchom sa používali huby - pripájače, ktoré replikovali celú komunikáciu z routra a to aj počítačom, ktorému nebola adresovaná. Dnes sa využívajú málokedy.
+      Ďalším sieťovým zariadením je <b>prepínač - switch</b>. Aby bolo možné k routeru pripojiť väčší počet počítačov je tu zariadenie, ktoré prepína komunikáciu medzi Routrom a počítačom do ďalších RJ45 zásuvok. </p>
+      <br>  Pred switchom sa používali <b>prepájače - huby</b>, ktoré replikovali celú komunikáciu z routra a to aj počítačom, ktorému nebola adresovaná. Dnes sa využívajú málokedy.
       <br>
-      Ďalším špecifickým sieťovým prvkom je Firewall - Ohnivá stena. Firewall rôznym spôsobom skúma sieťovú komunikáciu a dokáže jej časť zastaviť a odfiltrovať podľa nastavených parametrov.
+      Ďalším špecifickým sieťovým prvkom je <b>Ohnivá stena -Firewall</b>. Firewall rôznym spôsobom skúma sieťovú komunikáciu a dokáže jej časť zastaviť a odfiltrovať podľa nastavených parametrov.
     </p>
 
 
 			<li><h3>Čo sú packety a čo je to ARP Protokol</h3></li>
-      <p>Dáta po sieti putujú vo forme balíčkov - packetov a ich doručenie sleduje množstvo protokolov a kontrolných výpočtov. Aby však balíčky na sieti nezablúdili musí router vedieť kam ich má poslať. Preto vznikol protokol ARP, ktorý bol mimochodom deduškom dnešného Internetu.
-      ARP Address Resolution Protokol využíva hardérovej adresy zariadenia tzv. MAC adresy. Podľa nej sa dá určiť výrobca aj typ zariadenia a je jedinečná pre každé vyrobené zariadenia. Zariadenie sa ňou identifikuje routru. Ako to funguje?
+      <p>Dáta po sieti putujú vo forme <b>balíčkov - packetov</b>  a ich doručenie sleduje množstvo protokolov a kontrolných výpočtov. Aby však balíčky na sieti nezablúdili musí router vedieť kam ich má poslať. Preto vznikol protokol ARP, ktorý bol mimochodom deduškom dnešného Internetu.
+      <b>ARP Address Resolution Protokol</b>  využíva hardérovej adresy zariadenia tzv.<b>MAC</b>  adresy. Podľa nej sa dá určiť výrobca aj typ zariadenia a je jedinečná pre každé vyrobené zariadenia. Zariadenie sa ňou identifikuje routru. Ako to funguje?
 <br> <br>
-Router: Mám balíček pre MAC? Pozná niekto túto MAC adresu?
-Počítač: Ja mám MAC adresu. Pošli balíček.
-Router si adresu uloží do špeciálneho zoznamu.
-Občas sa na ňu opýta aby vedel či je počítač stále v sieti, alebo nie.
-Existujú aj špeciálne MAC adresy na ktoré keď router pošle balíček dostanú ho všetky pripojené počítače.
+<div class="alert alert-warning" role="alert">
+    <p>Router: Mám balíček pre MAC? Pozná niekto túto MAC adresu? <br>
+    Počítač: Ja mám MAC adresu. Pošli balíček. <br>
+    Router si adresu uloží do špeciálneho zoznamu. <br>
+
+</p>
+  </div>
+  Občas sa na ňu opýta aby vedel či je počítač stále v sieti, alebo nie.
+  Existujú aj špeciálne MAC adresy na ktoré keď router pošle balíček dostanú ho všetky pripojené počítače.
+
     </p>
 
       <li> <h3>Čo je to IP adresa a ako sa k nej dostaneme?</h3> </li>
@@ -52,8 +57,10 @@ Existujú aj špeciálne MAC adresy na ktoré keď router pošle balíček dosta
     Fixne nastavená adresa na Internete rozumej WAN je tzv. Statická adresa, ktorá sa nemení a môže byť kontaktovaná z ktoréhokoľvek kútu Internetu.
   Väčšina počítačov má však prideľovanú IP adresu dynamicky. Ak by sme chceli aby bol tento počítač prístupný z Internetu, musíme využiť špeciálnu službu DDNS
 <br> <br>
+<b>
 IPv4 sú zložené zo štyroch decimálnych čísel oddelených čiarkami napr: 255.255.255.255 <br>
 IPv6 sú zložené zo 8 hexadecimálnych čísle oddelených dvojbodkami napr ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+</b>
 <br> <br>
 Zatiaľ čo IPv4 adries na internete nezostáva veľa, kapacita IPv6 je mnohonásobne väčšia. Postupne sa prejde na prideľovanie IPv6.
 <br>
@@ -65,53 +72,83 @@ Stačí zaplatiť za ročný prenájom domény a nastaviť si smerovanie na svoj
 </p>
 
 
-      <li><h3>Aký je rozdiel medzi TCP a UDP protokolom?</li>
+      <li><h3>Aký je rozdiel medzi TCP a UDP protokolom? </h3> </li>
       <p>Ako už vieme tak packety dát si razia cestu internetom po kábli aj vzduchom. Ako však vieme, že počítač na druhej strane je ten, ktorému chceme poslať naše balíčky?
+<br>
       Protokol TCP sa na cieľový počítač pripojí, potrasie si s ním rukou a oznámi mu, že mu ide posielať balíčky dát. Po prijatí balíčkov protokol TCP formálne ukončí prenos, slušne poďakuje a rozlúči sa.
       Tento protokol sa využíva všade tam kde vyžadujeme bezpečné autentifikované spojenie s kontrolou kompletnosti dát.
 <br>
-To je SUPER. Ale aj napriek prešpekulovanosti opravných a kontrolných mechanizmov sa môže stať, že zopár balíčkov sa cestou stratí a spojenie nám spadne. Predsa len nejde o textový súbor o veľkosti pár kilobytov.
+<div class="alert alert-warning" role="alert">
+    <p>To je SUPER. Ale aj napriek prešpekulovanosti opravných a kontrolných mechanizmov sa môže stať, že zopár balíčkov sa cestou stratí a spojenie nám spadne. Predsa len nejde o textový súbor o veľkosti pár kilobytov.</p>
+  </div>
+
 <br>
-Protokolu UDP je jednoducho fuk či ste to naozaj vy čo balíčky preberá a či sa nejaké skutočne stratia. Sype to tam bez kadejakých formalít. Ak sa nejaké stratia tak jednoducho sa stratili. Je preto mimoriadne vhodný na dátové streamy,
-dáta počítačových hier, či dáta kde nevyžadujeme formálnu autentifikáciu a kompletné dáta.
+Protokolu UDP je jedno či ste to naozaj vy čo balíčky preberá a či sa nejaké skutočne stratia. Sype to tam bez kadejakých formalít. Ak sa nejaké stratia tak jednoducho sa stratili. Je preto mimoriadne vhodný na dátové streamy,
+dáta počítačových hier, či dáta kde nevyžadujeme formálnu autentifikáciu a kompletné dáta.napríklad pri streamovaní videa či dát počítačovej hry.
     </p>
 
       <li><h3>Ako zistím či som na sieti?</h3> </li>
       <p>Práve ste prišli k počítaču a chcete rýchlo zistiť či sieťové pripojenie funguje.
-        Najjednoduchší spôsob je využiť príkaz <code>ping</code>. Keď zadáte do shellu <code>ping 8.8.8.8</code> počítač vám začne vypisovať časy pripojenia k google.com.
+        Najjednoduchší spôsob je využiť príkaz <code>ping</code>. Keď zadáte do príkazového riadku
+        <br> <br>
+        <code>ping 8.8.8.8</code>
+        <br> <br>
+        Počítač vám začne vypisovať časovú vzdialenosť k najbližšiemu serveru google.com v milisekundách.
         <br>
         Predsa len by sme chceli vedieť viac informácii o sieťovom rozhraní a jeho funkčnosti.
-        Príkazom <code>ip addr</code> alebo <code>ifconfig</code> zobrazíte v Linuxe všetky dostupné sieťové rozhrania.
-        Zobrazia sa vám aj dáta o funkčnosti... priradené IP a MAC adresy, počet packetov prijatých RX a vyslaných TX a množstvo ďalších užitočných informácii.
-        Moderné počítače majú viacero sieťových rozhraní napr en01 je pripojenie Ethernet cez kábel, wlan je wifi a lo je lokálne interné sieťové rozhranie využívané v rámci počítača.
+        Príkazom:
+        <br> <br>
+        <code>ip addr</code> alebo <code>ifconfig</code>
+        <br> <br>
+        <div class="alert alert-warning" role="alert">
+            <h3>P O Z O R !!!</h3>
+            <p>Niektoré distribúcie Linuxu nepodporujú ifconfig a majú vlastné programy, ktoré ho nahradzujú.</p>
+          </div>
+
+        mali by sa vám zobrazíť všetky dostupné sieťové rozhrania.
+        Zobrazia sa vám aj dáta o ich aktuálnej činnosti... priradené IP a MAC adresy, počet packetov prijatých RX a vyslaných TX a množstvo ďalších užitočných informácii.
+        Moderné počítače majú viacero sieťových rozhraní napr <b>en01</b>   je pripojenie Ethernet cez kábel,
+        <br>
+        <b>wlan01</b>  je väťčinou wifi a
+        <br>
+        <b>lo</b> je lokálne interné sieťové rozhranie využívané v rámci počítača.
       </p>
 
       <li><h3>Prečo ssh nahradil telnet?</h3> </li>
-        <p>Telnet bol jedným z protokolov, ktorý umožňoval pripojenie k vzdialenému počítaču v rámci siete.
-          Jeho najväčším problémom bola bezpečnosť.
-          Analýzou obsahu balíčkov bolo možné získať celú komunikáciu medzi počítačmi vrátane mien užívateľov a hesiel.
+        <p> <b>Telnet</b> bol jedným z prvých protokolov, ktorý umožňoval pripojenie k vzdialenému počítaču v rámci siete.
+          Jeho najväčším problémom však bola bezpečnosť. Nepoužíval žiadne šifrovanie. Čo bolo na obrazovke cestovalo v balíčkoch po sieti.
+          Preto analýzou obsahu balíčkov bolo možné získať celú komunikáciu medzi počítačmi vrátane mien užívateľov a hesiel.
           V dobách minulých to samozrejme nebol až taký problém, ale v súčasnosti je riziko vysoké a preto sa telnet využíva aj v rámci LAN zriedka.
           <br>
           SSH Secure Shell vytvorí šifrovaný tunel medzi vami a vzdialeným počítačom.
           Všetky dáta tečúce týmto tunelom sú šifrované industriálnou kryptografiou využívajúcim verejné a privátne kľúče.
-          Ak chcete vedieť či máte na počítači nainštalovaný ssh zadajte <br> <code>ssh</code> <br> a malo by vám to vypísať štandardný výstup príkazu a jeho možností.
+          Ak chcete vedieť či máte na počítači nainštalovaný ssh zadajte do príkazového riadku:
+          <br> <br>
+          <code>ssh</code>
+          <br> <br>
+          Malo by vám to vypísať štandardný výstup príkazu a jeho možností.
           <br>
-          Ak chcete zistiť či je možné sa na váš počítač pomocou ssh pripojiť zadajte príkaz <code>sudo service sshd status</code>. Ak Vám vypíše, že sshd servis beží,
-           máte pravdepodobne otvorený port pre ssh.
+          Ak chcete zistiť či je možné sa na váš počítač pomocou ssh pripojiť z iného počítača zadajte príkaz
+          <br> <br>
+          <code>sudo service sshd status</code>
+          <br> <br>
+          Ak Vám vypíše, že sshd servis beží, máte pravdepodobne otvorený port pre ssh. <b>VIETE O TOM?</b>
         </p>
 
       <li><h3>Čo je to socket?</h3> </li>
-        <p>Na to aby ste sa mohli pripojiť na vzdialený počítač potrebujete vedieť meno užívateľa na cieľovom počítači, IP adresu a port. Počítač interne definuje porty,
+        <p>Na to aby ste sa mohli pripojiť na vzdialený počítač potrebujete vedieť meno užívateľa HOSTNAME na cieľovom počítači, IP adresu a port. Počítač interne definuje porty,
           ktoré potom priraďuje jednotlivým servisom a otvára ich pre komunikáciu so svojim okolím.
-          Štandardne je pre komunikáciu ssh určený 22 port. <br> <br>
+           <b>Štandardne je pre komunikáciu ssh určený 22 port.</b>
 
-          NETWORK SOCKET = ADRESA a PORT <br> <br>
+          <br> <br>
+          <b>NETWORK SOCKET = ADRESA a PORT</b>
+          <br> <br>
 
           Ak tieto informácie máme skúsime sa pripojiť na vzdialené Raspberry Pi:
           <br> <br>
           <code>  ssh pi@IP_ADRESA </code> <br> <br>
           Počítač sa opýta či sa má k RPi pripojiť a či má uložiť jeho verejný kľúč do zoznamu poznaných počítačov.
-          Ak dáme yes vypýta si prihlasovacie heslo. Nakoniec vám vyhodí Prompt Linux shellu.
+          Ak dáme <b>yes</b>  vypýta si prihlasovacie heslo. Nakoniec vám vyhodí príkazový riadok Linuxu na vzdialenom počítači.
           <br>
         </p>
 

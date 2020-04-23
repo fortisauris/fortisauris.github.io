@@ -2,64 +2,173 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>How to connect to remote computer via SSH</title>
+    <title>Lekcia 3 - Linux Users, Groups and Permissions</title>
     <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
-    <link href="css/tut_board.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: black; color: darkorange;">
 	<header>
 <h3>Lekcia 3 - Užívatelia, Skupiny a Právomoci</h3>
 	</header>
 	<main>
+    <div class="collapsible">
+
+
 		<ul>
     	<li><h3>Užívatelia a skupiny</h3></li>
       <p>Linux umožňuje diferencovať prístup k počítaču pomocou systému užívateľov a skupín. <br>
-      Najvyšší užívateľ, ktorý môže voľne spravovať systém je <code>root</code>.
+      Najvyšší užívateľ, ktorý môže voľne spravovať systém je:
+      <br> <br>
+        <code>root</code>
+      <br> <br>
       V praxi sa však ukázalo, že je potrebné aby malo tieto právomoci viacero
-      užívateľov, ktorí spravujú počítač Admini. Aby nemali rootovské heslo napísané na papieriku na monitore je možnosť priradiť potrebnému počtu Adminov tieto právomoci pomocou skupiny a príkazu <code>sudo</code>.
-     Väčšinou iba títo užívatelia majú možnosť pridávať skupiny a užívateľov do
-     systému a meniť právomoci PERMISSIONS.</p>
+      užívateľov, ktorí spravujú počítač Administrátori.
+      <br>
+
+      Hlavne aby nemali rootovské heslo napísané na papieriku na monitore je
+      možnosť priradiť potrebnému počtu Adminov tieto právomoci pomocou skupiny a príkazu:
+
+      <br> <br>
+      <code>sudo PRIKAZ</code>
+      <br> <br>
+
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">Upozornenie!</h4>
+          <p>Niektoré Linuxové distribúcie ako Debian, CentOS, Fedora sudo
+            defaultne nedovolujú najmä z dôvodu bezpečnosti.
+           </p>
+        </div>
+
+    Väčšinou iba títo užívatelia majú možnosť pridávať skupiny a užívateľov do
+     systému a meniť práva k súborom a programom tzv. PERMISSIONS.  </p>
 
 			<li><h3>Vytvoríme nového užívateľa.</h3></li>
 
-      <p>Admin pridá nového užívateľa príkazom <code>adduser</code>. ň
+      <p>Admin pridá nového užívateľa príkazom:
+
+        <br> <br>
+        <code>adduser USERNAME</code>
+        <br> <br>
+
         Može nastaviť rôzne parametre užívateľa ako jeho kontaktné údaje či
         vytvoriť mu adresáre v domovskom adresári.Spravidla mu vytvorí aj prístupové
-        heslo slúžiace aby sa užívateľ mohol na počítač prihlásiť lokálne alebo vzdialene a používať ho.</p>
+        heslo slúžiace aby sa užívateľ mohol na počítač prihlásiť lokálne alebo vzdialene
+        a používať ho.</p>
 
 
 			<li><h3>Vytvoríme novú skupinu</h3></li>
-      <p></p>
+      <p>Teraz nový užívateľ môže vytvárať, kopírovať s spúšťať programy, ktoré
+        nevyžadujú Administrátorský prístup. Ale my potrebujeme, aby aj
+        iný užívateľ zároveň mohol pristupovať k dátam alebo programu. Musíme
+        preto vytvoriť skupinu kde budú obaja spoločne. Spravíme to príkazom:
+
+        <br> <br>
+        <code>addgroup SKUPINA</code>
+        <br> <br>
+      </p>
+      <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading"></h4>
+          <p>Vytvorená skupina je prázdna a nemá žiadne práva k žiadnemu súboru, adresáru či spustiteľnému programu !!!
+           </p>
+        </div>
 
     <li> <h3>Pridáme užívateľa do skupiny</h3> </li>
-    <p></p>
+    <p>Do vytvorenej skupiny pridáme užívateľa pomocou príkazu:
+      <br> <br>
+      <code>usermod USERNAME -g SKUPINA</code>
+      <br> <br>
+      Teraz je užívateľ USERNAME člen skupiny SKUPINA.
+      Ak by sme chceli zobraziť v akých skupinách je aktuálne prihlásený úžívateľ členom použijeme príkaz:
+      <br> <br>
+      <code>groups</code>
+      <br> <br>
+    </p>
 
-      <li> <h3>Prezeráme časti súborov.</h3> </li>
-      <p>Zmeníme vlastníka súboru.</p>
+      <li> <h3>Zmeníme vlastníka súboru.</h3> </li>
+      <p>Užívateľ USERNAME si vytvoril súbor FILENAME.TXT do ktorého vložil
+        bližšie nešpecifikovaný text. Užívateľ USERNAME2 tento text potrebuje na
+        dokončenie reportu. Súbor mu však nejde otvoriť.
+        <br>
+        Jednou z možností je zmeniť vlastníka súboru z USERNAME na USERNAME2 pomocou príkazu:
 
+        <br> <br>
+        <code>chown USERNAME2 FILENAME.TXT</code>
+        <br> <br>
+        Druhou možnosťou je dať prístup SKUPINE v ktorej je členom aj USERNAME
+        aj USERNAME2 pomocou príkazu:
+        <br> <br>
+        <code>chgrp SKUPINA FILENAME.TXT</code>
+        <br> <br>
+        Teraz je súbor prístupný všetkým členom skupiny SKUPINA.
+       </p>
 
+       <li><h3>Čo sú užívateľské práva tzv. PERMISSIONS k súborom, adresárom a spustiteľným programom.</h3> </li>
+       <p>Užívateľ môže mať práva súbor alebo adresár:
+         <br> <br>
+         čítať = READ <br>
+         písať = WRITE <br>
+         spúšťať = EXECUTE
+         <br> <br>
+         Práva sa pri podrobnom listingu súborov pomocou <code>ls -al</code>
+         označujú prvými znakmi týchto práv <b>rwx</b>.
+         <div class="alert alert-warning" role="alert">
+             <p>Je ich tam však oveľa viac za sebou aj s nejakými divnými pomlčkami !!!</p>
+           </div>
+           Ak je prvé písmeno pri súbore <b>d</b> znamená že ide o adresár, ktorý
+           môže ale nemusí obsahovať ďalšie súbory a adresáre.
+           <br>
+           Ak je na mieste <b>-</b> to znamená, že aktuálny užívateľ nemá právo.
+           <br>
+           Systémov pre zmenu a pochopenie práv k súborom je viacero. V tomto tutoriále sa budeme venovať systému známej ako UGO.
+           Prvá skupina práv <b>rwx</b> určuje práva užívateľa <b>U</b>SERA.
+           <br>
+           Druhá skupina práv <b>rwx</b> určuje práva skupiny <b>G</b>ROUP.
+           <br>
+           Tretia skupina práv <b>rwx</b> určuje práva ostatných <b>O</b>THERS.
+           <br>
+
+       </p>
 
       <li><h3>Zmeníme prístup skupine k súboru</li>
-      <p></p>
+      <p>Chceme aby skupina SKUPINA, ktorá je nastavená ako disponuje právami
+        <b>rw</b> k súboru FILENAME.TXT nemohla do súboru zapisovať, ale iba čítať.
+        Ideme jej teda odobrať právo <b>w</b> z FILENAME.TXT. Urobíme to príkazom:
+        <br> <br>
+        <code>chmod g-w FILENAME.TXT</code>
+        <br> <br>
+        Pri kontrolnom výpise <code>ls -al</code> vidíme, že skupina už nemá
+        práva na zapisovanie do súboru FILENAME.TXT a pri pokuse o jeho
+        modifikovanie v editore im to systém neumožní.
 
-      <li><h3>Čo sú PERMISSIONS</h3> </li>
-      <p></p>
+      </p>
+
+
 
       <li><h3>Nastavujeme PERMISSION súboru pomocou UGO</h3> </li>
-      <p></p>
+      <p>Tak ako sme použili <b>g-w</b> môžeme použiť <b>o+r</b>  a pridať právo čítania
+        ostatným užívateľom alebo umožniť užívateľovi spúšťať programovací jazyk
+        python pomocou u+x</p>
 
 		</ul>
 
-    <p>Gratulujeme, pokiaľ ste sa dostali až sem ste prihlásení na vzdialenom počítači.
-      Teraz je to 30EURové Raspberry Pi no onedlho to môže byť multiprocesorový Xeon
-      server s RAID diskovým poľom a tisícmi registrovaných užívateľov.
+    <p>Užívatelia a ich práva sú v každom operačnom systéme jedným zo základných
+      pilierov bezpečnosti. Umožňujú prispôsobovať počítač alebo server pre prácu
+      rôznych užívateľov a chrániť tak jeho obsah. Nezabudnite, že reťaz je len
+      taká silná ako je najslabšie ohnivko.
+
+      <div class="alert alert-warning" role="alert">
+          <p>Každý užívateľ vašeho systému by mal
+          svoj prístup a práva chrániť PRAVIDELNE MENENÝM SILNÝM HESLOM !!!! </p>
+        </div>
+
+
        Happy Hacking !</p>
 		<section>
 
 
 		</section>
-
+    </div>
 	</main>
 
 	<footer>
