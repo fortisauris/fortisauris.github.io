@@ -18,32 +18,56 @@
     	<li><h3>Zobrazenie pripojených zariadení</h3></li>
 
       <p>Pripojené zariadenia zobrazíme pomocou troch rozličných príkazov: <br>
-      Môžeme ich zobraziť pomocou príkazov <code>lsusb</code> alebo <code>lspci</code>.
-      Najpoužívanejším je však program fdisk, ktorým je možné celú diskovú jednotku
-      vymazať a nanovo naformátovať. Preto s ním treba pracovať veľmi opatrne.<br>
-    Pomocou <code>fdisk -l</code> si zobrazíme všetky pripojené disky a to HDD
-    ako aj USB. Napríklad sda je logická disková jednotka a sda1, sda2 sú jej
-    jednotlivé partície. Každá z týchto partícií môže byť inak naformátovaná a
-    má iný účel využitia. <br>
-  To že sa naám disky a partície zobrazujú neznamená, že s nimi m§žeme už pracovať. </p>
+      Môžeme ich zobraziť pomocou príkazov:
+      <br> <br>
+      <code>lsusb</code> alebo <code>lspci</code>.
+      <br> <br>
+      Najpoužívanejším a najmocnejším je však program <code>fdisk</code>, ktorým je možné celú diskovú jednotku
+      vymazať a nanovo naformátovať. <b>Preto s ním treba pracovať veľmi opatrne.</b>
+      <br> <br>
+    <code>fdisk -l</code>
+    <br> <br>
+    si zobrazíme všetky pripojené disky a to pevné disky HDD ako aj flash disky USB.
+    Spravidla <b>sda</b> je logická disková jednotka a <b>sda1</b>,<b>sda2</b> sú jej
+    jednotlivé oddiely - PARTITION. Každý z týchto oddielov môže byť inak naformátovaný a
+    mať iný účel využitia. <br>
+
+  To že sa nám disky a partície zobrazujú neznamená, že s nimi mǒžeme už pracovať. </p>
 
     <li><h3>Pripojenie diskov v súborovej štruktúre Linuxu</h3></li>
-      <p>Štandardne sa pripojené diskové jednotky zobrazujú v systémovom adresári <code>/dev/</code> </p>
+      <p>Štandardne sa pripojené diskové jednotky zobrazujú v systémovom adresári
+        <br> <br>
+        <code>/dev/</code>
+        <br> <br>
+      </p>
 
 			<li><h3>Pripojenie USB kľúča</h3></li>
       <p>Aby sme mohli s pripojeným diskom alebo USB kľúčom pracovať, musíme ho najpr pripojiť pomocou príkazu <code>mount</code> <br>
         Treba si uvedomiť, že sa nedá pripojiť logická jednotka, ale iba jej čitateľná particia. <br>
-        Preto použijeme príkaz <code>mount /dev/PARTITION /mnt/USBDISK</code>.
-        Tento príkaz nám pripojí partíciu do pripraveného adresára USBDISK v adresári mnt.
-        Cez tento adresár sa dostaneme potom k súborom na USB disku.
+        Preto použijeme príkaz
+        <br> <br>
+        <code>mount /dev/PARTITION /mnt/USBDISK</code>.
+        <br> <br>
+        Tento príkaz nám pripojí oddiel -PARTITION do pripraveného adresára USBDISK v adresári mnt.
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Upozornenie!</h4>
+            <p>Tento adresár zatiaľ neexistuje. Musíte ho vytvoriť pomocou
+              <br> <br>
+              <code>mkdir /mnt/USBDISK</code>
+              <br> <br>
+              Pokiaľ vám to systém neumožňuje buď budete potrebovať administrátorské právomoci prepožičané pomocou príkazu <code>sudo</code>
+             </p>
+          </div>
+        Cez tento adresár sa dostaneme potom k súborom na USB disku. Viď Lekcia 1....
       </p>
 
       <li> <h3>Odpojenie disku</h3> </li>
       <p>Tak ako Linux bez okienok disky nepripája automaticky tak ich ani neodpája.
         Vytiahnutie disku s ktorým sa pracuje ho môže poškodiť !!! <br>
-        Je preto potrebné ho odpojiť pomocou príkazu
-        <code>unmount /mnt/USBDISK </code>  </p>
-
+        Je preto potrebné ho odpojiť pomocou príkazu:
+        <br> <br>
+        <code>umount /mnt/USBDISK </code>  </p>
+        <br> <br>
       <li> <h3>Ale kde je moja MicroSD kartička </h3> </li>
         <p>Technicky je SD alebo MicroSD iný druh pamäte a preto sa v Linuxe
           štandardne pripája do adresára <code>/media/</code> </p>
@@ -53,21 +77,43 @@
 		</ul>
 
     <li> <h3>Vzdialené kopírovanie súborov pomocou sftp</h3> </li>
-      <p> Pripojime sa na vzdialeny pocitac <code>sftp USER@HOST</code> pripajame
-         sa standardne cez 22 port v ramci SSH. <br> Sme v sftp mode,
-         ktory je urceny IBA na kopirovanie a presuvanie suborov!! Napovedu zobrazime pomocou prikazu <code>help</code>.
+      <p> Pripojime sa na vzdialeny pocitac pomocou príkazu
+        <br> <br>
+        <code>sftp USERNAME@HOSTIP</code>
+        <br> <br>
+        K počítaču sa pripájame  štandardne cez 22 port v ramci SSH. <br>
+
+        <div class="alert alert-success" role="alert">
+            <p>Sme v sftp móde, ktorý je určený IBA na kopírovanie a presúvanie súborov!! Nápovedu zobrazíme pomocou príkazu <code>help</code>
+             </p>
+          </div>
+
        Základom tohoto módu sú príkazy <code>get</code> Potiahni(PULL) a <code>put</code> Vlož (PUSH).
        Treba tiež vedieť, že ak chcete urobiť nejakú operáciu na lokálnej mašine
-       napríklad zobraziť obsah adresáru musíte použiť pred príkazom ls výkričník
-      <code>!ls</code> inak vám vykoná príkaz na vzdialenom počítači. <br>
-    Pomocou príkazu <code>get REMOTE_NAZOV_SUBORU CIEL_NA_LOKAL</code> <br>
-  a opačne  <code>put LOKALNY_NAZOV_SUBORU CIEL_NA_REMOTE </code> <br>
-sftp využíva už existujúci kanál medzi počítačmi tak nie je potrebné opäť definovať HOST IP adresy a užívateľa. </p>
+       napríklad zobraziť obsah adresára musíte použiť pred príkazom ls výkričník takto:
+      <br> <br>
+      <code>!ls</code>
+      <br> <br>
+      inak vám vykoná príkaz na vzdialenom počítači. <br>
+    Súbor alebo adresár zo vzdialeného počítača stiahneme PULL pomocou príkazu:
+    <br> <br>
+    <code>get REMOTE_NAZOV_SUBORU CIEL_NA_LOKAL</code>
+    <br> <br>
+  a opačne ak chceme nahrať súbor na vzdialený počítač PUSH, spravíme to pomocou príkazu:
+  <code>put LOKALNY_NAZOV_SUBORU CIEL_NA_REMOTE </code> <br>
+sftp využíva už existujúci šifrovaný kanál medzi počítačmi tak nie je potrebné opäť definovať HOST IP adresy a užívateľa v príkaze. </p>
 
   </ul>
+  <div class="alert alert-success" role="alert">
+      <p>Programy ako fdisk sú väčšinou limitované na root alebo superusera !!! POSTUPUJ S NIMI OBOZRETNE</p>
+    </div>
+    <p>
+      </p>
 
-    <p>Programy ako fdisk sú väčšinou limitované na superusera.
-      Kopírovanie umožňuje aj množstvo iných programov a servisov ako ftp, rsync atd.</p>
+    <p>Gratulujeme! Akurát si stiahol zo vzdialeného počítača svoj prvý súbor.
+      Toto sú len základy práce s diskami a vzdialeným prístupom k nim. Kopírovanie
+      umožňuje aj množstvo iných programov a servisov ako ftp, smb, git, rsync atd.
+      Happy Hacking!!!</p>
 		<section>
 
 

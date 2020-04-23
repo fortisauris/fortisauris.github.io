@@ -4,7 +4,7 @@
 
 
 * {
-  font: 1vw "Courier New", Courier, monospace;
+  font: 1em "Courier New", Courier, monospace;
 	color: lawngreen;
 	margin: 0px;
 	padding: 0px;
@@ -17,12 +17,12 @@ body {
 body   {
 	font-family: "Courier New", Courier, monospace;
 	color: lawngreen;
-	font-size: 1vw;
+	font-size: 1em;
 }
 
 h2 {
     color: red;
-	font: 1vw "Courier New", Courier, monospace;
+	font: 2em "Courier New", Courier, monospace;
     background-color: black;
 }
 
@@ -35,7 +35,7 @@ h2 {
     border: none;
     text-align: left;
     outline: none;
-    font-size: 1vw;
+    font-size: 2em;
 }
 
 
@@ -58,7 +58,7 @@ h2 {
 .vertical-menu a {
     background-color: #010100;
     border: 1px solid green; /* Green border */
-	font: 1vw "Courier New", Courier, monospace;
+	font: 2em "Courier New", Courier, monospace;
     color: red;
     display: block;
     padding: 1px;
@@ -83,14 +83,14 @@ h2 {
 #watch {
 	font: "Courier New", Courier, monospace;
 	background-color: #010100;
-	font-size: 5vw;
+	font-size: 2em;
 	color: lawngreen;
 }
 
 .tuts {
 	font: "Courier New", Courier, monospace;
     position: relative ;
-	font-size: 1vw;
+	font-size: 2em;
     right: 1px;
     top: 1px;
 }
