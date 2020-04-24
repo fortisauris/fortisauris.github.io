@@ -3,8 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Tutorial Board</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <link href="css/flextest.css" rel="stylesheet" type="text/css">
 <link href="css/tut_board.css" rel="stylesheet" type="text/css">
+<link type="text/css" rel="stylesheet" href="css/main.css">
 <!--	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">-->
 <script>
     function ActualTime() {
@@ -25,24 +27,37 @@
     }
 </script>
 </head>
-<body onload="ActualTime()">
+<body onload="ActualTime()" >
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm">
 
 <div id="watch" ><p></p></div>
 <p>MGRS: 33UXP7132855769</p>
-
-<button class="collapsible">LINUX ZÁKLADNÝ KURZ TUTORIÁL</button>
+<h1>LINUX ZÁKLADNÝ KURZ alebo ÚVOD DO REČI TUČNIAKOV</h1>
+<p>V 21 storočí môže mať každý doma tučniaka. Je úplne zadarmo. Je nenáročný a
+  bude fungovať aj na počítačoch spred roku 2000 alebo na 30EURovom Raspberry Pi.
+  Je stabilný a ani pri upgrade jadra nebude nevyžadovať reštart. Je prispôsobivý a môže
+  sa meniť podľa vašich potrieb. Tieto učebné texty majú pomôcť zvedavcom urobiť
+  prvé nesmelé krôčky a nakŕmiť tučniaka výživnými príkazmi a donútiť ho poslúchať.
+  A keďže na otváranie okien netreba učebné texty tak my sa smelo vrhneme do hlbín
+  príkazového riadku Linuxového shellu. Happy Hacking !!!</p>
+<button class="collapsible">UČEBNÉ TEXTY</button>
 <div class="content">
     <div class="vertical-menu">
-    <!--<a href="#" class="active">Home</a>-->
-    <a href="tutorials/L3_Linux_Users_and_Permissions_Basics.html">Lekcia 3 - Užívatelia, Skupiny a prístupové práva</a>
-    <a href="tutorials/L4_Linux_Search_Basics.html">Lekcia 4 - Hľadanie súborov v Linuxe</a>
-    <a href="tutorials/L5_SSH_Basics.html">Lekcia 5 - Základy sietí</a>
-    <a href="tutorials/L6_VIM_Basics.html">Lekcia 6 - Základné funkcie editoru VIM</a>
-    <a href="tutorials/L7_TMUX_Basics.html">Lekcia 7 - Základné funkcie programu TMUX</a>
-    <a href="tutorials/L8_Managing_discs.html">Lekcia 8 - Základy spravovania diskov a pamäťových médií</a>
-    </div>
-</div>
+          <!--<a href="#" class="active">Home</a>-->
+          <a href="tutorials/L3_Linux_Users_and_Permissions_Basics.html">Lekcia 3 - Užívatelia, Skupiny a prístupové práva</a>
+          <a href="tutorials/L4_Linux_Search_Basics.html">Lekcia 4 - Hľadanie súborov v Linuxe</a>
+          <a href="tutorials/L5_SSH_Basics.html">Lekcia 5 - Základy sietí</a>
+          <a href="tutorials/L6_VIM_Basics.html">Lekcia 6 - Základné funkcie editoru VIM</a>
+          <a href="tutorials/L7_TMUX_Basics.html">Lekcia 7 - Základné funkcie programu TMUX</a>
+          <a href="tutorials/L8_Managing_discs.html">Lekcia 8 - Základy spravovania diskov a pamäťových médií</a>
+        </div>
+      </div>
 
+    </div>
+  </div>
+</div>  <!-- End of Container -->
 
 <script>
 var coll = document.getElementsByClassName("collapsible");

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 2 - Procesy a úlohy v Linuxe</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 2 -Procesy a úlohy v Linuxe</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+    	<li><h3>Procesy</h3></li>
+      <p>Výkonný procesor počítača <b>CPU</b> dokáže vykonať milióny strojových
+        inštrukcií za sekundu. Slúžia mu na to jeho <b>jadrá - CORES</b> a <b>
+          vlákna - THREADS.</b>
+        Nie je preto divu, že v jeho neviditeľnom vzduchom či vodou chladenom
+        mozgu vykonáva súčasne množstvo paralelne bežiacich programov, ktoré
+        nazývame <b>procesy</b>. naše aktuálne bežiace procesy zobrazíme príkazom:
+
+        <br> <br>
+        <code>ps</code>
+        <br> <br>
+        Na obrazovke sa zobrazí <b>PID</b> čo je niečo ako rodné číslo procesu,
+        <b>TTY</b> názov terminálu v ktorom beží, čas trvania a <b>CMD</b> príkaz,
+        ktorý sa vykonáva. Zdalo by sa, že náš počítač zaháľa no skutočnosť je iná.
+        Ak chceme zobraziť naozaj všetky bežiace procesy na našom počítači musíme
+        zadať príkaz:
+
+        <br> <br>
+        <code>ps aux</code>
+        <br> <br>
+        Počítač nás okamžite presvedčí o tom, že vykonáva množstvo dôležitých
+        úloh o ktorých sme nevedeli.
+      </p>
+
+			<li><h3>Programy na správu procesov.</h3></li>
+
+      <p>Teraz nám obrazovka s množstvom informácií moc nepovie, ale čo keby
+        existoval program, ktorý nám  procesy neustále aktualizuje a zobrazuje na obrazovke.
+        To by sme časom mohli pochopiť čo sa v počítači deje alebo dokonca sledovať
+        vykonávanie jednotlivých úloh. Jednoduchšia verzia tohoto programu sa zobrazí príkazom:
+
+        <br> <br>
+        <code>top</code>
+        <br> <br>
+
+        K základnému zoznamu nám pridáva množstvo užitočných informácií o
+        spotrebe výkonu <b>CPU</b> alebo pamäte <b>MEM</b> jednotlivého procesu.
+        Zobrazí nám aj jeho majiteľa <b>USER</b>.
+        <br>
+        Bolo by pekné keby existoval jednoduchý program, ktorý by nám ukazoval
+        skoro všetko čo sa deje v počítači a pomocou kláves nám umožňoval filtrovať
+        a triediť zobrazujúce sa procesy. To nie je všetko... robil by to farebne:
+
+        <br> <br>
+        <code>htop</code>
+        <br> <br>
+
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading"></h4>
+            <p>Ak príkaz <code>htop</code> nie je nainštalovaný na počítači
+              nainštalujeme ho pomocou <b>Packet Managera</b> príkazom:
+            <br> <br>
+            <code>sudo apt-get install htop</code>
+            <br> <br>
+             </p>
+          </div>
+        <br> <br>
+        Pozorovaním tohoto programu máte skoro dokonalý prehľad o jeho činnosti
+        čo sa týka <b>CPU</b>, pamäte <b>MEMORY</b> a Procesov. Je to ako
+        pozorovanie akvária a onedlho už začnete rozoznávať, ktorý proces patrí
+        ktorému programu a či sa vykonáva ako má.
+      </p>
+
+
+			<li><h3>Násilne ukončíme proces</h3></li>
+      <p> Niekedy sa stane, že spustený proces zostane visieť a neposlúcha
+        pokyny z klávesnice, príkazového riadku ani na zúrivé klikanie myši
+        v okienkach <b>GUI - Graphic User Interface</b>. Nech robíme čo robíme
+        proces si robí čo chce. Budeme sa musieť znížiť a použijeme proti nemu
+        nevyhnutnú mieru násilia - ZABIJEME ho pomocou príkazu:
+
+        <br> <br>
+        <code>kill PID</code>
+        <br> <br>
+      </p>
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">O P A T R N E ! ! !</h4>
+          <p> Použitie príkazu <code>kill</code> predpokladá, že viete koho idete zabiť.
+            Aj keď je tučniak relatívne odolný a tolerantný, môže neopatrné
+            použitie tohoto príkazu narušť jeho Zen rovnováhu a spôsobiť nestabilitu, alebo pád systému.
+           </p>
+        </div>
+
+    <li> <h3>Úlohy na pozadí</h3> </li>
+    <p> V príkazovom riadku Linuxového shellu vládne iba jedna farba a desivo
+      vyzerajúci <b>PROMPT</b>. Nie sú tu okná a myš zostáva chladná a bezmocná.
+      Napriek tomu sa dá v Linuxe otvoriť a využívať viacero programov naraz.
+      Pomocou znaku <code>&</code> za PRÍKAZOM spustíme úlohu na pozadí. Aha takto:
+      <br> <br>
+      <code>htop &</code>
+      <br> <br>
+      Zdanlivo to nespravilo nič a my môžeme pokračovať v práci ďalším zadávaním príkazov.
+      K programu spustenému na pozadí sa dostaneme pomocou príkazu:
+      <br> <br>
+      <code>fg</code>
+      <br> <br>
+      Pomocou kombinácie kláves <b>Ctrl-z</b> ho opäť dáme do pozadia.
+      <br>
+      Ak chceme vidieť aké úlohy nám bežia na pozadí použijeme príkaz:
+      <br> <br>
+      <code>jobs</code>
+      <br> <br>
+      Počítač nám vypíše zoznam na pozadí bežiacich programov aj s ich číslom
+      uvedeným v zátvorke. Nazvime si ho ID a použime ho na prepnutie úlohy
+      do popredia príkazom:
+      <br> <br>
+      <code>fg ID</code>
+      <br> <br>
+      Rýchly náhľad na poslednú úlohu, ktorá je v pozadí vyvoláme príkazom:
+      <br> <br>
+      <code>bg</code>
+      <br> <br>
+      <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading"></h4>
+          <p>Programy sú na pozadí pozastavené STOPPED a nepracujú. čakajú kým ich opäť vyvoláme do popredia
+           </p>
+        </div>
+    </p>
+
+      <li> <h3>Spustíme program v určený čas</h3> </li>
+      <p>Niekedy vznikne potreba pustiť nejaký program presne v určitý čas.
+        V Linuxe je viacero spôsobov ako to urobiť. Najčastejšie využívaným je program
+        <code>cron</code>, ktorý vykonáva programy pomocou <b>démona <code>crond</code> </b>, ktoré sú uložené v špeciálnej tabuľke.
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">DÉMON</h4>
+            <p> Je program, ktorý beží celý čas rezistentne v pamäti na pozadí a vykonáva svoju
+              činnosť. Väčšina serverových aplikácií, alebo služieb beží na
+              pozadí vo forme démonov. Aby sme vedeli, že ide o démona spravidla
+              je názov programu ukončený písmenom <b>d</b>.
+             </p>
+          </div>
+          Pre účely tohoto učebného textu použijeme jednoduchší program <code>at</code>.
+          Program vyvoláme zadaním príkazu <code>at</code> a určením času kedy sa má vykonať. Napríklad:
+          <br> <br>
+          <code>at now + 5 minutes</code>
+          <br> <br>
+          Zobrazí sa režim <b>at></b>, kde je možné zadať príkazy, ktoré treba
+          vykonať. Tento režim opustíme pomocou kombinácie kláves Ctrl-d a
+          vrátime sa do príkazového riadku.
+
+
+       </p>
+
+       <li><h3></h3> </li>
+       <p></p>
+
+      <li><h3>Zmeníme prístup skupine k súboru</li>
+      <p></p>
+
+
+
+      <li><h3>Nastavujeme PERMISSION súboru pomocou UGO</h3> </li>
+      <p></p>
+
+		</ul>
+
+    <p>Užívatelia a ich práva sú v každom operačnom systéme jedným zo základných
+      pilierov bezpečnosti. Umožňujú prispôsobovať počítač alebo server pre prácu
+      rôznych užívateľov a chrániť tak jeho obsah. Nezabudnite, že reťaz je len
+      taká silná ako je najslabšie ohnivko.
+
+      <div class="alert alert-warning" role="alert">
+          <p>Každý užívateľ vašeho systému by mal
+          svoj prístup a práva chrániť PRAVIDELNE MENENÝM SILNÝM HESLOM !!!! </p>
+        </div>
+
+
+       Happy Hacking !</p>
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>

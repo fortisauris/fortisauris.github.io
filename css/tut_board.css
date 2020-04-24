@@ -5,13 +5,13 @@
 
 * {
   font: 1em "Courier New", Courier, monospace;
-	color: lawngreen;
+	/* color: lawngreen; */
 	margin: 0px;
 	padding: 0px;
 }
 
 body {
-	background-color: black;
+	background-color: #00314f !important;
 }
 
 body   {
@@ -20,15 +20,25 @@ body   {
 	font-size: 1em;
 }
 
+p {
+    color: darkorange;
+	font: 1em "Courier New", Courier, monospace;
+}
+
+
+h1 {
+    color: darkorange;
+	font: 2em "Courier New", Courier, monospace;
+}
+
 h2 {
     color: red;
 	font: 2em "Courier New", Courier, monospace;
-    background-color: black;
 }
 
 .collapsible {
-    background-color: black;
     color: lawngreen;
+    background-color: #00314f !important;
     cursor: pointer;
     padding: 1px;
     width: 100%;
@@ -48,18 +58,18 @@ h2 {
     color: lawngreen;
     display: none;
     overflow: hidden;
-    background-color: black;
+    background-color: #00314f !important;;
 }
 
 .vertical-menu {
-    width: 100%;
+    width: 117.5%;  /* Vertical menu width */
 }
 
 .vertical-menu a {
-    background-color: #010100;
+    background-color: #00314f;
     border: 1px solid green; /* Green border */
 	font: 2em "Courier New", Courier, monospace;
-    color: red;
+    color: darkorange;
     display: block;
     padding: 1px;
     text-decoration: none;
@@ -82,9 +92,10 @@ h2 {
 
 #watch {
 	font: "Courier New", Courier, monospace;
-	background-color: #010100;
+	background-color: #00314f;
 	font-size: 2em;
 	color: lawngreen;
+  align-items: flex-end;
 }
 
 .tuts {
