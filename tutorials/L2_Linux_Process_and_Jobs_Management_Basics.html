@@ -159,37 +159,44 @@
           <code>at now + 5 minutes</code>
           <br> <br>
           Zobrazí sa režim <b>at></b>, kde je možné zadať príkazy, ktoré treba
-          vykonať. Tento režim opustíme pomocou kombinácie kláves Ctrl-d a
+          vykonať. Tento režim opustíme pomocou kombinácie kláves <b>Ctrl-d</b>  a
           vrátime sa do príkazového riadku.
 
+          Ak sa nič nestalo je všetko v poriadku. Zoznam úloh, ktoré má program <code>at</code>
+          vykonať zobrazíme príkazom:
+          <br> <br>
+          <code>atq</code>
+          <br> <br>
+          Všimnite si, že pri každej úlohe je uvedené identifikačné číslo úlohy
+          podobne ako pri príkaze <code>jobs</code>. Pre jednoduchosť ju nazvime ID.
+          Ak sa rozhodneme úlohu vymazať použijeme jednoducho ID v kombinácií s príkazom:
+          <br> <br>
+          <code>atrm ID</code>
+          <br> <br>
+          Program <code>at</code> rozoznáva množstvo obvyklých časových údajov
+          ako napríklad <b>now, minutes, hours, days, weeks, months</b> ako aj
+          neobvyklých ako <b>teatime</b> čo je v Anglicku 16:00.
+          <br>
+          Aj keď sa to nezdá, <code>at</code> dokáže toho veľa. Dokáže spúšťať
+          nielen jednotlivé programy ale aj <b>skripty</b> a plniť tak bez vašej
+          prítomnosti automaticky relatívne komplikované úlohy.
 
+          <div class="alert alert-warning" role="alert">
+              <h4 class="alert-heading">SKRIPT</h4>
+              <p> Je čitateľný program, spustiteľný priamo z príkazového riadku Linux shellu
+                pomocou programu <b>prekladača - INTERPRETERU</b> a vykonať aj najnáročnejšiu
+                úlohu. Najčastejšie používaný je skriptovací jazyk BASH,
+                alebo obľúbený Python.
+               </p>
+            </div>
        </p>
-
-       <li><h3></h3> </li>
-       <p></p>
-
-      <li><h3>Zmeníme prístup skupine k súboru</li>
-      <p></p>
-
-
-
-      <li><h3>Nastavujeme PERMISSION súboru pomocou UGO</h3> </li>
-      <p></p>
 
 		</ul>
 
-    <p>Užívatelia a ich práva sú v každom operačnom systéme jedným zo základných
-      pilierov bezpečnosti. Umožňujú prispôsobovať počítač alebo server pre prácu
-      rôznych užívateľov a chrániť tak jeho obsah. Nezabudnite, že reťaz je len
-      taká silná ako je najslabšie ohnivko.
-
-      <div class="alert alert-warning" role="alert">
-          <p>Každý užívateľ vašeho systému by mal
-          svoj prístup a práva chrániť PRAVIDELNE MENENÝM SILNÝM HESLOM !!!! </p>
-        </div>
-
-
-       Happy Hacking !</p>
+    <p>Gratulujeme! Teraz by ste mali vedieť skontrolovať čo sa vlastne deje vo
+      vašom počítači. Dokážete nájsť bežiace procesy a viete spustiť program na
+      pozadí a kedykoľvek sa doň vrátiť. Ak trochu potrénujete tieto schopnosti
+      budete už čoskoro spúšťať programy a skripty v určené časy. Happy Hacking !</p>
 		<section>
 
 
