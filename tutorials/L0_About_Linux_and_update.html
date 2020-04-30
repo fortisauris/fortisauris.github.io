@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 2 - Procesy a úlohy v Linuxe</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 2 -Procesy a úlohy v Linuxe</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+    	<li><h3>Úvod</h3></li>
+      <p>Nebojte sa, nebudeme sa prekúsavať celou históriou počítačov o Babbageovho
+        počítacieho stroja, cez Colossus Alana Turinga až po IBM PC. Podstatné je
+        aby ste pochopili, že v minulosti boli počítače extrémne drahou a nedostupnou
+        technológiou. Iba malé percento špičkových vedcov a inžinierov malo k nim
+        prístup a vedelo ich ovládať.
+        <br>
+        Postupným rozšírením 8-bitových počítačov ako Sinclair, Commodore a Atari
+        došlo k popularizácií počítačov a k ich domácemu využitiu. Aj najmodernejšie
+        počítače v tej dobe mali primitívny operačný systém, ktorý nerátal s
+        viacerými užívateľmi ani vykonávaním viac ako jednej úlohy. Systémy ako
+        SCO UNIX, SOLARIS boli extrémne drahé a neprístupné pre počítačovú verejnosť.
+        <br>
+        S príchodom tučniaka sa všetko zmenilo. Jeho kód bol zadarmo a prístupný
+        všetkým nadšencom. Poskytoval na svoju dobu nevídané veci a dobyl svet
+        počítačov. Ehm teda nie svet koncových užívateľov, alebo užívateľov, ktorí
+        považujú počítač za nutné zlo.
+        <br>
+        Získal si srdcia Hackerov, SysAdminov, Developerov a nadšených hobistov.
+        Dnes vďaka tomu beží veľká časť IT infraštruktúry na Linuxe. Pokiaľ chcete
+        objaviť jeho čaro a postaviť základný kameň svojich znalostí pokračujte
+        v čítaní ďalej...
+      </p>
+
+      <li><h3>Linuxový terminál</h3></li>
+      <p>Po spustení počítača prebieha štartovacia sekvencia a počítač kontroluje
+        všetok dostupný hardvér a softvér. Nahráva jadro Linuxu <b>KERNEL</b> a
+        všetky rezidentné programy a ovládače. po úspešnej štartovacej sekvencií
+        sa buď spustí grafické rozhranie alebo Linux zostane v textovom móde
+        terminálu a vypýta si meno užívateľa <b>USERNAME</b> a heslo <b>PASSWORD</b>.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">RASPBERRY PI</h4>
+            <p>Ak používate Raspberry Pi defaultne nastavené užívateľské meno je
+              <b>pi</b> a heslo je <b>raspberry</b></p>
+          </div>
+        <br>
+        Ak ste zadali správne meno užívateľa a heslo tak počítač zastavil a
+        vypísal Vám niečo podobného ako:
+
+        <br><br>
+        <code>pi@raspberry</code>
+        <br><br>
+        Toto je začiatok príkazového riadku tzv. <b>PROMPT</b>. Počítač si pýta
+        príkaz, ktorý by mohol vykonať.
+       </p>
+
+
+			<li><h3>Updatujeme Linux = Tučniak vždy s čistým perím.</h3></li>
+      <p>Skôr ako sa pustíme do práce, je potrebné aspoň raz za pár dní spustiť
+        updatovanie systému aby sme mali vždy systém s najnovšími vynoveniami
+        UPDATE a záplatami PATCH. Tým sa vyhneme tomu, že na počítači bude
+        nainštalovaný zastaralý softvér s neopravenými chybami a aj pre hackerov
+        známymi zraniteľnosťami.
+        <br>
+        Použijeme na to <b>PACKET MANAGER</b>, ktorý má na starosti inštalovanie
+        programových balíčkov do počítača. Raspberry Pi používa štandardne
+        <code>apt-get</code> zatiaľ čo iné distribúcie ako ArchLinux alebo Fedora
+        používajú iné balíčkovače.
+        <br> <br>
+        <code>sudo apt-get update</code>
+        <br> <br>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">U P O Z O R N E N I E !!!</h4>
+            <p>Ak vám tento príkaz na vašom Linuxe nefunguje, je možné že je
+              potrebné mať administrátorské právomoci alebo byť prihlásený ako root.
+              Tieto právomoci môžeme získať aj dočasne použitím príkazu <code>sudo</code>.</p>
+          </div>
+      </p>
+
+		</ul>
+
+    <p>Gratulujeme! Váš počítač je pripravený na prácu. Čiernočierna obrazovka
+      vyzerá nevábne až hrozivo avšak naša cesta povedie týmto smerom. Ak by ste
+      sa kedykoľvek potrebovali nadýchnuť farebných okienok tak na Raspberry Pi v štandardnej inštalácií Raspbianu dajte počítaču príkaz:
+      <br> <br>
+      <code>startx</code>
+      <br> <br>
+       Ak sa nasýtite farieb a efektov úžasných grafických rozhraní ako Mate,
+       Gnome, KDE, LXDE, ktoré sa ovládaním moc neodlišujú od Windows alebo MacOS
+        a vrátite sa späť k príkazovému riadku môžete pokračovať v ďalšej lekcii.</p>
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>

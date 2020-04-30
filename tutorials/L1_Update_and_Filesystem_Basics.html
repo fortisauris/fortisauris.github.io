@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 1 - Súborový systém v Linuxe</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 1 - Súborový systém v Linuxe.</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+    	<li><h3></h3></li>
+      <p> </p>
+
+			<li><h3>Úvod do súborového systému Linuxu.</h3></li>
+
+      <p>Linux ako väčšina operačných systémov <b>OS</b> disponuje súborovým
+        systémom, ktorý sa skladá zo súborov FILES a adresárov DIRECTORIES.
+        Tieto sú umiestnené v stromovej štruktúre a dá sa nimi prechádzať pomocou
+        jednoduchých príkazov. <b>PROMPT</b> príkazového riadku nám ukazuje
+        zároveň aj adresár v ktorom sa nachádzame. Ale neukazuje nám obsah tohoto
+        adresára, ktorý teraz zobrazíme príkazom <b>LIST</b> :
+        <br> <br>
+        <code>ls</code>
+        <br> <br>
+        Adresár v ktorom sa nachádzame neobsahuje súbor, ktorý hľadáme. Chceme zobraziť obsah adresára Documents a
+        keďže nevieme kde sa presne nachádza napíšeme celú cestu vedúcu k nemu. Túto cestu voláme <b>PATH</b>. Spravíme to pomocou príkazu:
+
+        <br> <br>
+        <code>ls Documents/</code>
+        <br> <br>
+        Zobrazí sa obsah adresára <b>Documents</b> ale <b>PROMPT</b> na príkazovom
+        riadku nám ukazuje, že sa v ňom nenachádzame. Ak sa do neho chceme presunúť
+        musíme použiť príkaz zmeň adresár - <b>CHANGE DIRECTORY</b>. Takto:
+        <br> <br>
+        <code>cd Documents/</code>
+        <br> <br>
+        <b>PROMPT</b> nám ukazuje, že sa nachádzame v tomto adresári. Teraz si
+        opäť môžeme nechať zobraziť zoznam súborov a adresárov v adresári Documents:
+        <br> <br>
+        <code>ls</code>
+        <br> <br>
+        Ak chceme opäť vyskočiť o úroveň vyššie musíme použiť príkaz:
+        <br> <br>
+        <code>cd ..</code>
+        <br> <br>
+        Ak by sme po sebe viackrát zadali príkaz <code>cd ..</code> tak by sme
+        sa dostali do najvrchnejšieho adresára. Tento obsahuje kmeň súborového
+        systému a obsahuje adresáre ako <b>/bin /dev /mnt /etc</b> a ďalšie.
+        Tieto adresáre patria systému a obsahujú dáta potrebné pre chod počítača.
+
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading"></h4>
+            <p> Pre jednoduchosť systému Linux mapuje a ukladá všetko do textových
+              súborov. Takto pristupuje aj k pamäti, diskom a zariadeniam.
+              Ukladá tiež každú vykonanú operáciu do špeciálnych súborov v
+              systémových adresároch nazývaných <b>logy</b> .
+             </p>
+          </div>
+        V tejto časti kurzu nás však bude zaújimať iba adresár <b>/home</b> v
+        ktorom linux štandardne ukladá adresáre a súbory užívateľov. Pre tento
+        adresár si preto zobrazíme výpis adresárov a súborov.
+        <br> <br>
+        <code>ls /home/</code>
+        <br> <br>
+        Dostaneme zoznam užívateľov pre ktorých systém vytvoril vlastný adresár.
+        Ak sme nalogovaný ako <b>pi</b> tak prejdeme do svojho domovského adresára príkazom:
+        <br> <br>
+        <code>cd /home/pi</code>
+        <br> <br>
+        a zobrazíme jeho zoznam súborov pomocou príkazu <code>ls</code>.
+      </p>
+
+
+			<li><h3>Vytvoríme prázdny súbor a zobrazíme jeho obsah.</h3></li>
+      <p> Chceme vytvoriť nový súbor, ktorý sa bude volať <code>test.txt</code>.
+        Vytvoríme ho pomocou príkazu:
+        <br> <br>
+        <code>touch test.txt</code>
+        <br> <br>
+        a heď si aj zobrazíme jeho obsah pomocou príkazu CONCATENATE:
+        <br> <br>
+        <code>cat test.txt</code>
+        <br> <br>
+        Neobsahuje nič takže sa nám ani nič nemôže zobraziť. Ale to za zmení za
+        malú chvíľu.
+      </p>
+
+
+    <li> <h3>Vytvárame nový adresár a kopírujeme do neho náš súbor</h3> </li>
+    <p> Vytvorili sme prvý súbor <code>test.txt</code> a skôr ako ho budeme
+      upravovať ho chceme presunúť do vlastného adresára. Prázdny adresár
+      vytvoríme príkazom:
+      <br> <br>
+      <code>mkdir NAZOV_ADRESARA</code>
+      <br> <br>
+      Pri kontrolnom zozname vypisanom pomocou príkazu <code>ls</code> sa objaviv
+      náš nový adresár. na kopírovanie súboru musíme zadať príkaz <code>cp</code>,
+      ktorý znamená COPY a potrebuje údaje NAZOV_SUBORU a MIESTO_KOPIROVANIA t.j. miesto kde má súbor uložiť
+      <br> <br>
+      <code>cp NAZOV_SUBORU MIESTO_KOPIROVANIA</code>
+      <br> <br>
+      V tomto prípade bude miestom súboru náš adresár. Pomocou známeho príkazu
+      <code>cd</code> sa presunieme do adresára a použijeme <code>ls</code> aby
+      sme sa presvedčili či tam naozaj je.
+
+      <div class="alert alert-secondary" role="alert">
+          <h4 class="alert-heading">DOBRÁ SPRÁVA PRE LENIVCOV</h4>
+          <p> Vždy keď zadáte prvé písmená príkazu, súboru alebo adresára -
+            stlačte klávesu <b>Tab</b>. Linux sa bude snažiť doplniť chýbajúce
+            písmená názvu. Ušetríte trochu času a klávesnicu.
+           </p>
+        </div>
+    </p>
+
+      <li> <h3>Kopírujeme a presúvame adresár</h3> </li>
+      <p> Teraz sa pokúsime skopírovať celý náš adresár aj so súborom <code>test.txt</code>
+        Pomocou príkazu <code>cd ..</code> vyjdeme z nami vytvoreného adresára.
+        Ak je to možné chceme ho skopírovať do adresára <b>/Documents</b>  a
+        preto použijeme príkaz:
+        <br> <br>
+        <code>cp -r NAZOV_ADRESARA MIESTO_KOPIROVANIA</code>
+        <br> <br>
+        Príkaz <code>cp</code> je štandardne určený na kopírovanie súborov.
+        Akonáhle sa pokúsime skopírovať adresár, upozorní nás na to a príkaz
+        odmietne vykonať. <code>-r</code> však znamená, že na tomto úkone
+        trváme a preto ho neodmietne vykonať.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">ARGUMENTY LINUXOVÝCH PRÍKAZOV</h4>
+            <p> V Linuxe špecifikujeme príkazu alebo programu podrobnosti ako
+              sa má vykonať pomocou ARGUMENTOV umiestnených za samotným príkazom.
+              Nasledujú ARGUMENTY, ktoré fungujú ako prepínače napríklad <code>-r</code>
+              alebo <code>-l</code> a určujú akým spôsobom sa má príkaz vykonať.
+              Nasledujú argumenty ako PATH, NAZOV_SUBORU, MIESTO_KOPIROVANIA,
+              HOSTNAME, IP_ADRESA a podobne.
+             </p>
+          </div>
+        ak by sme chceli adresár alebo súbor presunúť použijeme príkaz <code>mv</code>.
+        Aby sme nepresuvali existujúci adresár do adresára kde už existuje presunieme
+        ho do adresára <b>Downloads</b> príkazom:
+        <br> <br>
+        <code>mv NAZOV_ADRESARA MIESTO_PRESUNUTIA</code>
+        <br> <br>
+        Pomocou tohoto príkazu je možné súbor aj premenovať. Stačí keď argument
+        <b>MIESTO_PRESUNUTIA</b> nahradíme <b>NOVYM_NAZVOM_SUBORU</b>.
+      </p>
+
+      <li> <h3>Vymazávame súbory a adresár</h3> </li>
+      <p>Súbor vymažeme príkazom <code>rm</code>, ktorý funguje podobne ako príkaz
+        <code>cp</code>. Použijeme ho v tomto tvare:
+        <br> <br>
+        <code>rm NAZOV_SUBORU</code>
+        <br> <br>
+        alebo ak chceme vymazať adresár:
+        <br> <br>
+        <code>rm -r NAZOV_ADRESARA</code>
+        <br> <br>
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">VYMAZANIE ADRESARA</h4>
+            <p> Linux okrem príkazu <code>rm</code> má aj vlastný príkaz na
+              vymazanie adresára, ktorý je možné tiež použiť <code>rmdir</code>
+             </p>
+          </div>
+
+      </p>
+
+		</ul>
+
+    <p>Gratulujeme! Teraz by ste mali vedieť skontrolovať čo sa vlastne deje vo
+      vašom počítači. Dokážete nájsť bežiace procesy a viete spustiť program na
+      pozadí a kedykoľvek sa doň vrátiť. Ak trochu potrénujete tieto schopnosti
+      budete už čoskoro spúšťať programy a skripty v určené časy. Happy Hacking !</p>
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
