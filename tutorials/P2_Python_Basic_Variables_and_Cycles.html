@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 2 -Základné premenné a cykly v Pythone</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 2 -Základné premenné a cykly v Pythone</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+    	<li><h3>Premenná s celým číslom INTEGER</h3></li>
+      <p>Ako prvé si spravíme premennú, ktorá bude obsahovať jedno celé číslo
+        bez desatinných miest. V Pythone túto premennú nazývame <b>INTEGER</b>.
+        Zadefinujeme prázdnu premennú <b>cele_cislo</b>, ktorá má defaultne
+        hodnotu <b>0</b> v interaktívnej konzole príkazom:
+        <br> <br>
+          <code>cele_cislo = int()</code>
+        <br> <br>
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">Pomenovanie premenných</h4>
+            <p>Je dobrým zvykom pomenovať si premenné malými písmenami a v ľudskej reči
+              najlepšie Anglicky).
+              Ak si pomenujete premennú <code>b</code> prípadne <code>b3</code>
+              nebudete si pamätať čo obsahuje. Na druhej strane ak si ju povedzme
+              <code>lifes_of_player1</code> je pomerne jasné čo obsahuje.
+          </p>
+          </div>
+      Python vytvorí objekt triedy INT v pamäti a priradí mu hodnotu <b>0</b>.
+      Potrebujeme mu priradiť nejakú inú číselnú hodnotu napríklad <b>45</b>.
+      Spravíme to takto jednoducho:
+      <br> <br>
+        <code>cele_cislo = 45</code>
+      <br> <br>
+      Definovanie premennej pomocou <code>int()</code> sme mohli kľudne preskočiť,
+      ale je pre budúcnosť pre vás dôležité aby ste vedeli definovať prázdne
+      premenné.
+      <br>
+      Premennú <b>cele_cislo</b> môže v ktoromkoľvek bode našeho programu
+      prepísať na inú hodnotu, alebo modifikovať pomocou akýchkoľvek matematických
+      operácií <b></b>. Napríklad takto:
+      <br> <br>
+        <code>cele_cislo = cele_cislo * 2 </code>
+      <br> <br>
+      Ak zadáme do interaktívnej konzoly <code>cele_cislo</code> malo by nám
+      vypísať hodnotu <b>90</b>.
+      <br>
+      Python pozná aj skrátenú formu pri sa <code>cele_cislo *= 2</code>
+      v ktorej sa dajú použiť aj ďalšie matematické operácie. Je to užitočné ak
+      potrebujeme premennú modifikovať v nejakom cykle.
+    </p>
+
+    <li><h3>Premenná s číslom s desatinnou čiarkou FLOAT</h3></li>
+    <p>Ako druhé si spravíme premennú, ktorá bude obsahovať jedno číslo
+      s desatinnou čiarkou. V Pythone túto premennú nazývame <b>FLOAT</b>.
+      Zadefinujeme prázdnu premennú <b>cislo_s_desatinnou_ciarkou</b>, ktorá má
+      opäť defaultne hodnotu <b>0</b> v interaktívnej konzole príkazom:
+      <br> <br>
+        <code>cislo_s_desatinnou_ciarkou = float()</code>
+      <br> <br>
+    Python vytvorí objekt triedy FLOAT v pamäti a priradí mu hodnotu <b>0</b>.
+    Potrebujeme mu priradiť nejakú inú číselnú hodnotu napríklad <b>45.546</b>.
+    Spravíme to takto jednoducho:
+    <br> <br>
+      <code>cislo_s_desatinnou_ciarkou = 45.546</code>
+    <br> <br>
+    S touto premennou môžeme robiť všetky matematické operácie, ktoré potrebujeme
+    a pomocou príkazu:
+    <br> <br>
+      <code>int(cislo_s_desatinnou_ciarkou)</code>
+    <br> <br>
+    ho vieme zmeniť na celé číslo - INTEGER a to zase pomocou:
+    <br> <br>
+      <code>float(cele_cislo)</code>
+    <br> <br>
+    na cislo s desatinnou ciarkou - FLOAT. POZOR týmto prevodom sa stratia vsetky
+    desatinné miesta. Python nezaokruhľuje automaticky !!!
+  </p>
+
+  <li><h3>Textový reťazec - STRING</h3></li>
+  <p>Tretiu premennú, ktorú si spravíme bude obsahovať textový reťazec, teda
+    reťazec zložený z alfanumerických znakov.  Hovoríme jej <b>STRING</b>.
+    Zadefinujeme prázdnu premennú <b>textovy_reťazec</b> v interaktívnej konzole
+    príkazom:
+    <br> <br>
+      <code>textovy_retazec = str()</code>
+    <br> <br>
+    a vložíme do nej text:
+    <br> <br>
+      <code>textovy_retazec = "Hello World!!"</code>
+    <br> <br>
+    ak zadáme do interaktívnej konzoly <code>textovy_retazec</code> vypíše nám
+    jeho obsah. Teraz na nemo môžeme aplikovať jednak iné príkazy jazyka Python,
+    ale aj vnútorné metódy triedy <b>str()</b>, ktorej je naš reťazec objektom.
+    Ak chceme napríklad zistiť či náš reťazec obsahuje slovo <b>World</b> napíšeme
+    do interaktívnej konzoly:
+    <br> <br>
+      <code>"World" in textovy_retazec</code>
+    <br> <br>
+    Python skontroluje obsah premennej a oznámi nám hodnotu <b>True</b> čo znamená,
+    že je to pravda. Ak by sa slovo nenachádzalo v reťazci vypísal by nám slovo
+    <b>False</b> čo znamená nepravda. <br>
+    Na náš <b>STRING</b> použijeme ešte jeden príkaz jazyka Python:
+    <br> <br>
+      <code>len(textovy_retazec)</code>
+    <br> <br>
+    Príkaz <code>len()</code> znamená <b>LENGTH</b> a vypíše nám číselnú hodnotu
+    dĺžky reťazca.
+    <br>
+    To však nie je ani zďaleka všetko. Na STRING možno aplikovať celý rad metód
+    triedy <b>str()</b> ako napríklad:
+    <br> <br>
+      <code>textovy_retazec.upper()    # zobrazí reťazec s veľkými písmenami <br>
+      textovy_retazec.lower()   # zobrazí reťazec s malými písmenami <br>
+      textovy_retazec.count("l")   # zráta počet obsahujúcich písmen "l" <br>
+      textovy_retazec.split(" ")   #  rozdelí reťazec do slov v premennej <code>list()</code> <br>
+      </code>
+    <br> <br>
+    <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">Poznámky alebo COMMENTS</h4>
+        <p>Text za znakom <code>#</code> Python nevykoná a automaticky rozoznáva,
+          že ide o poznámku. Ani vy ju v tomto prípade nemusíte vypisovať do konzoly.
+          Na druhú stranu pri písaní programu v jazyku Python vám doporučujeme
+          písať poznámky ku každému kódu. Ak sa k tomuto kódu vrátite ľahšie
+          pochopíte čo vykonáva. Dobré COMMENTS sú na NEZAPLATENIE a ušetria
+          veľa času a energie.
+      </p>
+      </div>
+
+</p>
+
+<li><h3>Spajanie a rozpajanie STRINGU</h3></li>
+<p>
+Premenné typu STRING je možné reťaziť pomocou matematických operácí napríklad takto:
+<br> <br>
+  <code>textovy_retazec = textovy_retazec + textovy_retazec + "Hello"</code>
+<br> <br>
+<div class="alert alert-secondary" role="alert">
+    <h4 class="alert-heading">Š P E C I A L N E   Z N A K Y</h4>
+    <p>V rámci reťazenia môžeme do textu vkladať aj špeciálne znaky, ktoré
+      Pythonu povedia kde má spraviť <b>Tab</b> alebo <b>Enter</b>:
+      <br> <br>
+        <code>\n = nový riadok <br>
+        \t = Tab</code>
+      <br> <br>
+      Špeciálnych znakov je viac a môžete si ich vyhľadať na internete.
+  </p>
+  </div>
+
+Rozpájanie stringu pomocou <b>minus</b> a <b>deleno</b> nie je možné. Robí sa to
+pomocou ukrajovania tzv. SLICING a to takto :
+<br> <br>
+  <code>
+  textovy_retazec[0] - Napíše prvý znak zo STRINGu<br>
+  textovy_retazec[0:1] - Napíše prvý znak zo STRINGu<br>
+  textovy_retazec[0:2] - Napíše prvé dva zznaky o STRINGu<br>
+  textovy_retazec[2:] - Napíše znaky od druhého po koniec STRINGu<br>
+  textovy_retazec[-1] - Napíše posledný znak zo STRINGU<br>
+  textovy_retazec[-2] - Napíše posledné dva znaky zo STRINGu<br>
+  textovy_retazec[-3] - Napíše posledné tri znaky zo STRINGu<br>
+  </code>
+<br> <br>
+</p>
+
+      <li><h3>Logické hodnoty v premennej - BOOL</h3></li>
+      <p>Premenná typu BOOL môže obsahovať iba logické hodnoty pravda <b>True</b>
+        a nepravda <b>False</b>. Vytvoríme si ju takto:
+        <br> <br>
+          <code>  e = bool() <br>
+            e = True</code>
+        <br> <br>
+    </p>
+
+
+      <li><h3>Jednoduchý cyklus - FOR</h3></li>
+      <p>V tomto jednoduchom cykle treba zadefinovať koľkokrát sa má cyklus opakovať
+        buď príkazom <code>range(od,do) alebo premennou, ktorou možno prechádzať
+          napr STRING, LIST a pod.</code>.
+
+        <br> <br>
+          <code>for i in range(0,5): <br>
+            &emsp; print(i)</p></code>
+        <br> <br>
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">P O Z O R ! ! !</h4>
+            <p>Nezabudnite dať dvojbodku na začiatku
+            cyklu a pre každý riadok cyklu buď +1x Tab alebo 4x MEDZERU aby Python
+            vedel, že uvedený príkaz sa má vykonať v cykle.
+            </p>
+          </div>
+
+
+
+      <li><h3>Jednoduchý nekonečný cyklus - WHILE</h3></li>
+      <p> Ďalším často používaným typom cyklu je nekonečný cyklus pomocou príkazu
+        <code>while</code>. Spravíme si ho jednoducho takto:
+
+        <br> <br>
+          <code>while True: <br>
+            &emsp;print(b) <br>
+            &emsp;break</code>
+        <br> <br>
+        Nekonečný cyklus ukončíme príkazom <code>break</code> ak z neho chceme
+        úplne vyskočiť a pokračovať v programe alebo <code>quit()</code> ak
+        chceme celý program ukončiť.
+
+
+      <li><h3>Jednoduchý program Ozubené koliesko - METAL GEAR</h3></li>
+      <p>Na záver si spravíme jednoduchý program, ktorý si zjednodušene môžeme
+        predstaviť ako ozubené koliesto: <br>
+        <code>counter = 1 # zadefinujeme si premennú typu INTEGER so začiatočnou
+          hodnotou 1<br>
+        for i in range(1, 32): #Zadefinujeme si cyklus for pričom číslo 32 je
+        počet opakovaní<br>
+            &emsp;print("UROB VOLACO", counter)  # vypíš STRING a premennú counter <br>
+            &emsp;counter += 1  # modifikuj premennú counter o + 1
+          </code>
+      </p>
+
+</p>
+
+
+		</ul>
+
+    <p>Gratulujeme! Spravili ste prvé ozubené koliesko v jazyku Python3. Ešte
+      toho veľa nevieme ale oproti "Hello World" je to pokrok</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
