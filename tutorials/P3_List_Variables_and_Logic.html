@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 3 -Zoznamy a Logika</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 3 -Zoznamy a Logika</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+
+      <li><h3>Flexibilný zoznam - premenná LIST </h3></li>
+      <p>Python3 dokáže pomocou premenných uchovať aj viacero hodnôt v zozname.
+        Túto premennú nazývame LIST a môžeme ju flexibilne modifikovať a meniť.
+        Vytvoríme si ju príkazom:
+        <br> <br>
+        <code>
+          zoznam_potravin = list() <br>
+          zoznam_potravin = []
+        </code>
+        <br> <br>
+        Ak máme vytvorený zoznam môžeme k nemu pridať na koniec nejaký obsah.
+        Napríklad takto:
+        <br> <br>
+        <code>zoznam_potravin.append("maslo")</code>
+          zoznam_potravin.append("maslo")
+        <br> <br>
+        alebo vložiť prvok na určené miesto ako do poličky v chladničke:
+        <br> <br>
+        <code>zoznam_potravin.append("maslo")</code>
+          zoznam_potravin.insert(1, "jogurt")
+          zoznam_potravin.insert(2, "maslo")
+        <br> <br>
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Indexovanie LISTU</h4>
+            <p>Nezabudnite, že tak ako u STRINGU prvý člen LISTU má index 0. Ak
+              chceme z LISTU vytiahnuť 3 člena musíme požiadať o člena s indexom 2.
+          </p>
+          </div>
+          Chceme vedieť koľko máme v chladničke masla tak použijeme metódu
+          triedy list <code>count</code> takto:
+          <br> <br>
+          <code>zoznam_potravin.count("maslo")</code>
+          <br> <br>
+          Python nám napíše, že v našej chladničke máme 2 maslá. To je správne.
+          V LISTE sa môžu jednotlivé členy opakovať. Naša chladnička je nafukovacia,
+          môže mať toľko členov koľko chce a nemusia to byť len potraviny ale aj
+          iné premenné ako <b>STRING, INTEGER, FLOAT, BOOLEAN, LIST</b>.
+          Áno náš zoznam môže ako člena obsahovať aj ďalší zoznam. <br>
+          Ak chceme z našeho zoznamu vytiahnuť jeho časť alebo len jedného člena
+          použijeme podobne ako u <b>STRINGU</b> odkrajovanie <b>SLICING</b>:
+
+          <br> <br>
+          <code>
+            zoznam_potravin[1]
+            zoznam_potravin[1:]
+            zoznam_potravin[:1]
+            zoznam_potravin[-1]
+            zoznam_potravin[1,3]
+          </code>
+          <br> <br>
+          Člena LISTU vymažeme pomocou internej metódy <code>remove</code> takto:
+          <br> <br>
+          <code>zoznam_potravin.remove("maslo")</code>
+          <br> <br>
+          Pomocou tohoto príkazu sa nám odstráni jedno maslo zo zoznamu LIST.
+          Na list vieme aplikovať aj príkazy ako <code>len()</code>, ktorý nám
+          ukáže aktuálnu dĺžku našeho zoznamu.
+      </p>
+
+
+			<li><h3>Nemeniteľný zoznam - TUPLE</h3></li>
+      <p> Niekedy je potrebné zadefinovať zoznam z ktorého bude program čerpať,
+        ale nebude ho dynamicky meniť. Ušetrí sa čosi aj na pamäti, lebo TUPLE
+        nezaberá v pamäti toľko miesta. Vytvoríme ho takto:
+        <br> <br>
+        <code>konstanty = tuple() <br>
+        konstanty = ("maslo", "chlieb")
+      </code>
+        <br> <br>
+        Na vyberanie členov môžeme použiť <b>SLICING</b> a vyhľadávať členov
+        podľa indexu:
+        <br> <br>
+        <code>
+          print(konstanty.index("chlieb"))
+      </code>
+        <br> <br>
+        Príkaz nám ukáže číslo na indexu na ktorom sa prvok nachádza.
+        Ak by sme však hľadali neexistujúci prvok vyhodí chybu - ERROR
+      </p>
+
+      <li><h3>Premenná s neopakovanými členmi - SET</h3></li>
+      <p>Python nám pomáha kde sa dá a pozná aj premennú kde nie je indexácia a
+        zároveň sa jej prvky nemôžu opakovať. Vytvoríme ho:
+        <br> <br>
+        <code>
+          final_set = set() <br>
+          final_set = {1,2,3,4,5,6}
+      </code>
+      <br> <br>
+        Ak by sme do SETu zadali opakovane tú istú hodnotu jednoducho sa nevloží.
+        Na SET nie je možné aplikovať ani SLICING. Je však možné do SETU pridať
+        člena pomocou internej metódy <code>add</code> a postupne členov vyberať
+      pomocou internej metódy <code>pop</code>. Napríklad:
+      <br> <br>
+      <code>final_set.add("maslo") <br>
+      print(final_set.pop())</code>
+      <br> <br>
+      Ak si dáme zobraziť <code>final_set</code> zistíme, že nám pribudol prvok
+      <b>""maslo</b> a prvok, ktorý sme metódou <code>pop</code> zo SETu vytiahli
+      zmizol. <br>
+      Interná metóda <code>pop</code> nám umožňuje vyťahovať jednotlivé prvky ako
+      to robí kúzelník z klobúka. <br>
+
+      Užitočnou internenou metódou SETU je možnosť porovnať dva SETY a vypísať
+      spoločných členov. Spravíme to príkazom:
+      <br> <br>
+      <code>second_set =  {"maslo","chlieb","pomaranče"}<br>
+      final_set.intersection(second_set)</code>
+      <br> <br>
+      Vytvorili sme si druhý set <code>second_set</code> a porovnali ho s
+      <code>final_set</code>. Výsledkom by malo byť <b>"maslo"</b>
+     </p>
+
+     <li><h3>Počítač sa pýta - príkaz INPUT</h3></li>
+     <p>V našej prvej lekcií sme pomocou príkazu <code>print("Hello World!!!")
+     </code> zobrazili STRING. Ale Python umožňuje počítaču pýtať sa na niečo
+     užívateľa programu. Používame na to príkaz <code>input()</code>.
+     STRING, ktorý napíšeme do zátvorky sa užívateľovi zobrazí ako OTÁZKA alebo NÁVOD.
+     Použijeme ho napríklad takto:
+     <br> <br>
+     <code>input("Chceš zobraziť obsah chladničky? (A/N)")</code>
+     <br> <br>
+     <div class="alert alert-secondary" role="alert">
+         <h4 class="alert-heading">VÝSTUP príkazu <code>input()</code> </h4>
+         <p>Nezabudnite, že výstupom príkazu <code>input()</code> je vždy <b>STRING</b>.
+           Pokiaľ potrebujete ako výstup číslo musíte výstup skonvertovať pomocou príkazu
+           <code>eval("3423")</code>.
+           <br> POZOR ak nebude STRING obsahovať iba číselné
+           hodnoty s desatinnou čiarkou Python vyhodí chybu!
+       </p>
+       </div>
+     </p>
+
+     <li><h3>Jednoduchá logika pomocou IF, ELIF a ELSE</h3></li>
+     <p>Iste si pamätáte ako sme spravili jednoduchý nekonečný cyklus pomocou
+    <code>while True:</code> v minulej lekcií. Tento program sme ukončili
+    kombináciou kláves <b>Ctrl-C</b>  inak by bežal do nekonečna. <br>
+    Riešením je naprogramovanie jednoduchej logiky, ktorá nám ukončí prebeh
+    nekonečného cyklu prostredníctvom príkazu <code>break</code>.
+    Prvým prvkom logiky je podmienka ak - <b>IF</b>, ktorú použijeme nasledovne:
+    <br> <br>
+    <code>
+    a = False <br>
+    if a is True: <br>
+        &emsp;# DO <br>
+        &emsp;print(a)
+      </code>
+        <br><br>
+      Kód v podmienke sa vykoná ak je splené, že premenná <b>Boolean</b> a je ň
+      <code>True</code>.
+    Ďalším prvkom našej logiky bude príkaz inak - <b>ELSE</b>, ktorý znamená, že
+    ak podmienka <b>IF</b> nebola splnená vo všetkých ostatmných prípadoch vykonaj
+    inštrukcie pod <b>ELSE</b>. Takto:
+    <br> <br>
+    <code>
+    a = True <br>
+    if a is True: <br>
+        &emsp;print(a) <br>
+    else:
+        &emsp;print("NEPRAVDA")
+      </code>
+        <br><br>
+      Tretím členom našej logiky je príkaz <b>ELIF</b> . V zjednodušenom preklade ide o
+      Inak ak a dopĺňa podmienku <b>IF</b> o ďalšie možnosti takto:
+      <br> <br>
+      <code>
+      a = True <br>
+      if a is True: <br>
+          &emsp;print(a) <br>
+      elif a is False:
+          &emsp;print("FALSE!!!")
+      else:
+          &emsp;print("NEPRAVDA")
+        </code>
+          <br><br>
+      <div class="alert alert-primary" role="alert">
+              <h4 class="alert-heading">REŤAZENIE PODMIENOK <code>input()</code> </h4>
+              <p>Podmienky <b>IF</b> a <b>ELIF</b> je možno reťaziť pomocou príkazov
+              a = <code>and</code>, alebo = <code>or</code>, nie= <code>not</code>
+              Napríklad:
+              <br> <br>
+              <code>
+              if a is True or a is False: <br>
+                  &emsp;# DO <br>
+                  &emsp;print(a)
+                </code>
+                  <br><br>
+            </p>
+            </div>
+        Pri práci s inými ako logickými premennými <b>BOOLEAN</b> používame okrem
+        <code><</code> a <code>></code> špeciálnu sadu porovnávacích znakov.
+        <br> <br>
+        <code>
+          if a == 0: <br>
+              &emsp;# UROB... <br>
+              if a == 5345:
+                &emsp;  print("PERFECT") <br>
+              if a <= 5345:
+                &emsp;  print("MALO") <br>
+              if a >= 5345: <br>
+                &emsp;  print("VELA")
+                      </code>
+            <br><br>
+            <div class="alert alert-secondary" role="alert">
+                    <h4 class="alert-heading">POROVNÁVACIE ZNAKY <code>input()</code> </h4>
+                    <p>je rovné je: &emsp; <code>==</code> <br>
+                      nie je rovné je: &emsp; <code>!=</code> <br>
+                      je väčšie alebo rovné je: &emsp; <code>>=</code> <br>
+                      je menšie alebo rovné je: &emsp; <code><=</code> <br>
+                  </p>
+                  </div>
+  </p>
+
+		</ul>
+
+    <p>Gratulujeme! Ponárame sa hlbšie a hlbšie do tajov programovacieho jazyka PYTHON
+    Blíži sa moment, keď budete schopný spraviť jednoduchý program zložený z premenných
+    , cyklov a jednoduchej logiky.</p>
+
+		<section>
+
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
