@@ -22,20 +22,114 @@
 
 
 		<ul>
-    	<li><h3>Úvod</h3></li>
-      <p></p>
+    	<li><h3>Čo je to Python?</h3></li>
+      <p>Python je interpretovaný skriptovací vysokoúrovňový objektovo-orientovaný jazyk s čitateľným syntaxom a
+        je ľahko naučiteľný. Takže pekne po poriadku:
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">INTERPRETOVANÝ</h4>
+            <p>To znamená, že v počítači je spustený INTERPRETER jazyka Python,
+              ktorý každý príkaz alebo riadok kódu prekladá do strojového jazyka.
+            </p>
+          </div>
+          <div class="alert alert-secondary" role="alert">
+              <h4 class="alert-heading">SKRIPTOVACÍ</h4>
+              <p>Programy sa písané vo forme skriptov... textových súborov s príponou
+                <code>.py</code>, ktoré je možné spustiť z príkazového riadku.
+              </p>
+            </div>
+            <div class="alert alert-primary" role="alert">
+                <h4 class="alert-heading">VYSOKOÚROVŇOVÝ</h4>
+                <p>To znamená, že jeho syntax je bližšie ľudskej reči. Používa
+                  bežné slová z anglického jazyka ako PRINT, IMPORT, CLASS, IF, TRUE, ELSE a pod.
+                  Časom zistíte, že naozaj dobre napísaný kód v Pythone obohatený poznámkami a dokážete
+                  čítať ako text.
+                </p>
+              </div>
+            <div class="alert alert-secondary" role="alert">
+                <h4 class="alert-heading">OBJEKTOVO-ORIENTOVANÝ</h4>
+                <p>Zjednodušene to znamená, že Python vytvára samostatné objekty v pamäti
+                  počítača a interakciou medzi nimi vykonáva zverenú úlohu. Každá
+                  premenná, funkcia či inštancia triedy je samostatným objektom,
+                  obsahujúcim data alebo inštrukcie,
+                  ktoré sa v prípade iniciacie objektu vykonajú. Tento moderný a
+                  flexibilný prístup umožňuje programátorovi jednoducho
+                  vytvoriť objekt z externého modulu a použiť ho vo vlastnom kóde.
+                </p>
+              </div>
+              V tomto kurze sa budeme zaoberať iba základnými modulmi, ktoré sú
+              súčasťou jazyka Python tzv. <b>VANILLA PYTHON</b>.
+      </p>
 
-      <li><h3>Prečo sa naučiť Python3</h3></li>
-      <p></p>
 
 
-			<li><h3>Updatujeme Linux = Tučniak vždy s čistým perím.</h3></li>
-      <p></p>
+
+			<li><h3>Interaktívna konzola</h3></li>
+      <p>Prvý spôsob ako zadávať Pythonu príkazy je spustiť s príkazového riadku
+      <b>Interaktívnu konzolu</b> príkazom <code>python</code> alebo
+      <code>python3</code> a ohlási sa nám ako Python 3.xx a <b>PROMPT</b> sa
+      zmení na:
+      <br> <br>
+      <code>
+        >>>
+      </code>
+      <br> <br>
+      Tieto tri "zobáčiky" znamenajú, že Python3 teraz poslúcha vaše príkazy.
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">AK SA PYTHON NEPRIHÁSIL ALEBO SA PRIHLÁSIL Python 2.7</h4>
+          <p>Ak sa na Vašom počítači python ešte nenachádza nainštalujete ho pomocou už známeho Packet Manegera na Linuxe,
+            alebo ho stiahnete zo stránky <code>https://www.python.org/</code>. <br>
+            Ak sa Vám spustil Python2 opustite interaktívnu konzolu príkazom <code>exit()</code> a spustite Python3.
+          </p>
+        </div>
+        Interaktívna konzola umožňuje priamo zadávať Pythonu príkazy.
+    </p>
+
+    <li><h3>Náš prvý program Hello World !!!</h3></li>
+    <p>Ak máte spustenú interaktívnu konzolu, môžeme spraviť prvý vykonateľný
+      program v jazyku Python. Nepôjde o nič komplikované. Necháme na obrazovke
+      zobraziť pozdrav. Tento program je apropó prvý, ktorý by ste mali urobiť
+      keď začínate s nejakým programovacím jazykom. Okrem toho, že je to užitočné
+      tak je to aj zvykom. Poďme na to:
+      <br> <br>
+      <code>
+        print("Hello World !!!")
+      </code>
+      <br> <br>
+      Stlačením klávesy <b>ENTER</b> sa príkaz hneď vykoná. Naučili sme sa príkaz
+      <code>print()</code>, ktorý nám vypíše na obrazovku obsah zátvoriek.
+    </p>
+
+    <li><h3>ČITATEĽNOSŤ KÓDU - porovnanie</h3></li>
+    <p>Pre porovnanie si môžeme povedať, že v jazyku ASSEMBLER pre procesory
+      Intel x86 je program "Hello World!!!" dlhý približne 20 riadkov kódu, <br> v
+      jazyku C# je to 7 riadkov <br> v Javascripte 3riadky a <br> v Pythone 1 riadok !</p>
+
+      <li><h3>Programy uložené v spboroch s koncovkou <code>.py</code>  </h3></li>
+      <p>Druhým spôsobom ako spustiť program uložený do textového súboru s
+        koncovkou <code>.py</code> pomocou príkazového riadku v Linuxe. Vytvoríme
+        si teda v ľubovoľnom editore súbor <code>HelloWorld.py</code>, otvoríme
+        ho a do prvého riadku napíšeme:
+        <br> <br>
+        <code>
+          print("Hello World !!!")
+        </code>
+        <br> <br>
+        Súbor uložíme, prejdeme do príkazového riadku a napíšeme:
+        <br> <br>
+        <code>
+          python3 HelloWorld.py
+        </code>
+        <br> <br>
+        Na obrazovke sa vypíše známy pozdrav.
+      </p>
 
 		</ul>
 
-    <p>Gratulujeme!</p>
-    
+    <p>Gratulujeme! Nielen, že sme sa dozvedeli ako použiť python z príkazového
+      riadku, ale vieme ho používať aj interaktívne. Spravili sme si prvý
+      jednoduchý program, ktorý je síce jednoduchý, ale funguje. Je to taký základný
+      kameň na ktorom môžeme stavať.</p>
+
 		<section>
 
 

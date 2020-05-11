@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 3 -Zoznamy a Logika</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 3 -Zoznamy a Logika</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+
+      <li><h3>Preferovaná premenná - Slovník DICTIONARY </h3></li>
+      <p>Zoznamy, sety a tuples nám dávajú vcelku slušné možnosti ukladať si do
+        pamäti počítača rôzne údaje a hodnoty. V Pythone však existuje ešte
+        komplexnejšia premenná na ukladanie dát - Slovník. Tento nám umožňuje
+        údajom priradiť kľúčové slovo a kedykoľvek ich podľa tohoto kľúčového
+        slova nájsť a použiť. Vytvoríme si ho príkazom:
+        <br> <br>
+        <code>chladnicka = dict() <br>
+        chladnicka["dvere"] = "maslo"
+      </code>
+        <br> <br>
+        V prvom riadku sme si vytvorili prázdny slovník a v druhom sme vlozili
+        do slovníka prvú hodnotu s kľúčovým slovom <b>dvere</b>. Aby sme pochopili
+        ako slovník funguje doplníme ďalšie údaje:
+        <br> <br>
+        <code>chladnicka["policka1"] = ["slanina", "horcica", "slanina"] <br>
+        chladnicka["aktualna_teplota"] = 7
+      </code>
+        <br> <br>
+        Ako vidíme komplexnost Slovníka pozostáva v tom, že podobne ako u zoznamov, tuples a setov,
+        môže byť členom slovníka akákoľvek premenná. Vypíšeme si jeho obsah na
+        obrazovku pomocou príkazu <code>print(chladicka)</code>
+        <br>
+        Na slovník môžeme aplikovať interné metódy napríklad:
+        <br> <br>
+        <code>print(a.keys())  # interna metoda vypise vsetky kluce DICTIONARY
+          <br>
+        print(a.get("aktualna_teplota"))  # vytiahne hodnotu z dictu
+      </code>
+        <br> <br>
+        Hodnoty vieme aktualizovať napríklad aj spojením s iným slovníkom:
+        <br> <br>
+        <code>b = dict() <br>
+        b["aktualna_teplota"] = 7.3 <br>
+        a.update(b) <br>
+        print(a.pop("aktualna_teplota"))  # vytiahne hodnotu z dictu <br>
+        print(a.values()) # vypíše hodnoty
+      </code>
+        <br> <br>
+      </p>
+
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">Ú L O H A</h4>
+          <p>Spravte v Pythone jednoduchý program, ktorý bude obsahovať jeden cyklus,
+            dve ľubovoľné premenné a aspoň jednu logickú podmienku.
+          </p>
+        </div>
+
+			<li><h3>Definovanie funkcii pomocou <code>def</code> </h3></li>
+      <p> Jednoduchý program sme zvládli, ale ako by sme v Pythone dokázali
+        napísať niečo omnoho zložitejšie ? Jednoducho, Python nám totiž umožňuje
+        definovať vlastné funkcie, ktoré sú vlastne podprogramy, ktoré si hlavný
+        program dokáže kedykoľvek zavolať a použiť ich. Napríklad takto:
+        <br> <br>
+        <code>chladnicka = { <br>
+          &emsp;          "policka1":["salama", "sunka", "slanina"], <br>
+          &emsp;          "policka2":["jogurt", "mlieko", "maslo"], <br>
+          &emsp;          "policka3":["mrkva", "zeler", "zemiaky"] <br>
+        } <br>
+        print(chladnicka) <br> <br>
+
+        def vypis_policku(chladnicka: dict, cislo_policky: str): <br>
+          &emsp;  """ <br>
+          &emsp;  Tento maly program sa vola funkcia a jeho ulohou je vypisat cislo cislo_policky <br>
+          &emsp;  z DICTIONARY chladnička. <br>
+          &emsp;  """ <br>
+          &emsp;  nakupovane_potraviny = set()  # definujeme prazdnu premennu SET <br>
+          &emsp;  for i in range(0, len(chladnicka[cislo_policky])):  # Definujeme cyklus podla mnozstva v policke <br>
+          &emsp;&emsp;      potravina = chladnicka[cislo_policky][i]  # definujeme potravinu ako obsah <br>
+          &emsp;&emsp;      print(potravina) # vypiseme ziskanu potravinu <br>
+          &emsp;&emsp;      nakupovane_potraviny.add(potravina)  # pridame do setu hodnotu potraviny <br>
+            &emsp;print(nakupovane_potraviny) <br>
+            &emsp;return nakupovane_potraviny <br>
+
+        print(vypis_policku(chladnicka, "policka1")) # zavolame a pouzijeme vytvorenu funkciu
+      </code>
+        <br> <br>
+        Kazdá funkcia je malý samostatný program uložený ako objekt v pamäti.
+        Naša fukcia má dva vstupné údaje tzv. argumenty <b>ARGS</b>. Tieto použije
+        vo svojom vnútri a pomocou príkazu vráť <code>return</code> vrátime výsledok
+        do programu, ktorý funkciu zavolal. Nemusí to byť hlavný program. Môže to
+        byť kľudne iná funkcia, ktorá potrebuje výpočet.
+        Týmto spôsobom sa kód jazyka Python nielen sprehľadní pri spätnej analýze kódu
+        - CODEREVIEW, ale pri ďalšom vývoji - DEVELOPMENTE , prepracovaní tzv. REFACTORINGU možno pridávať, zlepšovať,
+        prepisovať kód funkcie bez zmien v hlavnom programe.
+      </p>
+
+
+
+		</ul>
+
+    <p>Gratulujeme! Ponárame sa hlbšie a hlbšie do tajov programovacieho jazyka PYTHON
+    Blíži sa moment, keď budete schopný spraviť jednoduchý program zložený z premenných
+    , cyklov a jednoduchej logiky.</p>
+
+		<section>
+
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
