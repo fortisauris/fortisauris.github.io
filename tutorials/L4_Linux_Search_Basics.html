@@ -60,22 +60,19 @@
          <code>which</code>
          <br> <br>
          Ukáže nám iba ten program, ktorý má počítač definovaný ako prednastavený pri spúšťaní
-         z príkazového riadku. To znamená, že napríklad
+         z príkazového riadku. To znamená, že napríklad:
          <br> <br>
           <code>which python</code>
          <br> <br>
-         nám ukáže umiestnenie programu odkiaľ ho spúšťa.
+         Nám ukáže umiestnenie programu odkiaľ ho spúšťa.
         </p>
 
 
 			<li><h3>Ako v Linuxe na hľadanie špecifických súborov.</h3></li>
       <p>Doposiaľ použité príkazy nám moc nepomohli. Povedzme, že hľadáme
         špecifický typ súboru ako <b>.mp4</b> v určenom adresári. <br>
-      Použijeme príkaz:
-      <br> <br>
-      <code>find</code>
-      <br> <br>
-      tento príkaz nám umožní potrebné podrobnosti doplniť a použiť v nasledovnom syntaxe:
+      Použijeme na to príkaz <code>find</code>. Tento príkaz nám umožní potrebné
+      podrobnosti doplniť a použiť v nasledovnom syntaxe:
     <br> <br>
       <code>find PATH -type f -name \HelloWorld.mp4</code>
     <br> <br>
@@ -108,16 +105,19 @@
         <code>cat NAZOV_SUBORU</code>
         <br> <br>
         Tak a teraz si môžeme ísť uvariť kávu alebo čaj a nechať ho zobraziť celý na obrazovke.
-        Je jednoduchšie zobraziť len časť súboru aby sme zistili či obsah.
-        Po káve zistíme, že to nie je to čo sme hľadali.
+        Bolo by preto jednoduchšie zobraziť len časť súboru aby sme zistili či
+        obsah súboru zodpovedá tomu čo hľadáme.
+        Takto pravdepodobne po káve zistíme, že to nie je to čo sme hľadali.
         <br>
         Použijeme radšej príkaz:
         <br> <br>
         <code>head -n 10 NAZOV_SUBORU</code>
         <br> <br>
-        Zobrazí nám iba prvých desať riadkov súboru a hneď vieme, že to nie je súbor, ktorý hľadáme.
+        Zobrazí nám iba prvých desať riadkov súboru a hneď vieme, že to nie je
+        súbor, ktorý hľadáme.
         <br>
-       Často potrebujeme zistiť posledné operácie, ktoré sú uložené v logu. Použijeme príkaz:
+       Často potrebujeme zistiť posledné operácie, ktoré sú uložené v logu.
+       Použijeme príkaz:
        <br> <br>
        <code>tail -n 10 NAZOV_SUBORU</code>
        <br> <br>
