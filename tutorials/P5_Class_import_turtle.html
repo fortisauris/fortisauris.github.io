@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 5 - Korytnačia grafika, import a triedy</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 5 - Korytnačia grafika, import a triedy</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+
+
+		<ul>
+
+      <li><h3>Korytnačia grafika</h3></li>
+      <p>Základných príkazov v Pythone nie je veľa. Predmetom tohoto krátkeho
+        tutoriálu nie je prejsť ich všetky, ale naučiť sa spôsob ako fungujú a
+        kde ich hľadať. Napriek tomu by sme zo sadou základných príkazov asi
+        nevystačili. Preto sú tu takzvané <b>MODULY</b>, balíčky <b>PACKAGES</b>
+        knižnice <b>LIBRARY</b>. <br>
+        Ich použitie a využitie v našom vlastnom kóde nám umožní pridať
+        špecifické príkazy do Pythonu príkazom <code>import</code>. Napríklad ak
+        chceme pridať k základným príkazom pythonu príkazy korytnačej grafiky
+        dáme pythonu príkaz:
+        <br> <br>
+        <code>
+          import turtle
+        </code>
+        <br> <br>
+        K pythonu sa nám teraz pridali príkazy korytnačej grafiky, ktoré použijeme
+        nasledovne:
+        <br> <br>
+        <code>
+          import turtle
+        </code>
+        <br> <br>
+        Teraz môžeme napísať jednoduchý program s použitím príkazov korytnačej grafiky:
+        <br> <br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">turtle</span> <span style="color: #776e71"># naimportujeme si príkazy korytnačej grafiky</span>
+
+<span style="color: #e7e9db">t</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">turtle</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">Turtle()</span> <span style="color: #776e71"># vytvoríme inštanciu korytnačieho objektu t</span>
+
+<span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">penup()</span> <span style="color: #776e71"># objektu t dáme príkaz aby zvihol pero</span>
+<span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">color(</span><span style="color: #48b685">"red"</span><span style="color: #e7e9db">,</span><span style="color: #48b685">"blue"</span><span style="color: #e7e9db">)</span> <span style="color: #776e71"># objektu t dáme príkaz aby zmenil farbu na červenú</span>
+<span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">goto(</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">)</span> <span style="color: #776e71"># x, # objektu t dáme príkaz aby sa presunul na x=5, y=5</span>
+<span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">pendown()</span> <span style="color: #776e71"># objektu t dáme príkaz aby položil pero na papier</span>
+<span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range</span> <span style="color: #e7e9db">(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">):</span> <span style="color: #776e71"># cyklus, ktorý sa zopakuje 4 krát</span>
+    <span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">forward(</span><span style="color: #f99b15">100</span><span style="color: #e7e9db">)</span> <span style="color: #776e71"># objektu t dáme príkaz aby išiel 100 bodov dopredu</span>
+    <span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">circle(</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">)</span> <span style="color: #776e71"># objektu t dáme príkaz aby spravil krúžok s priemerom 3 body</span>
+    <span style="color: #e7e9db">t</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">left(</span><span style="color: #f99b15">90</span><span style="color: #e7e9db">)</span> <span style="color: #776e71"># objektu t dáme príkaz aby sa otočil o 90 stupňov doľava</span>
+
+<span style="color: #e7e9db">input()</span> <span style="color: #776e71"># čakaj na ENTER a potom skonči. Finta ako nechať korytnačku zobrazenú.</span>
+</pre></div>
+        <br> <br>
+      </p>
+
+      <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading">IMPORT INAK</h4>
+          <p>Ak nepotrebujeme všetky príkazy z modulu, môžeme ich naimportovať môžeme selektívne:
+            <br> <br>
+            <code>
+              from turtle import Turtle
+            </code> <br>
+            <b>alebo všetko</b> <br>
+            <code>
+              from turtle import *
+            </code>
+            <br> <br>
+            potom riadok 2 našeho programu treba pozmeniť na<code>t = Turtle()</code>,
+            pretože trieda Turtle sa akoby pridala k základným príkazom Pythonu.
+          </p>
+        </div>
+
+			<li><h3>Iné moduly a ich dokumentácia</h3></li>
+      <p> Ak chceme vedieť aké moduly máme nainštalované v našom Pythone spustíme
+        Interaktívnu konzolu a napíšeme do nej <code>help()</code>. Python sa
+        okamžite prepne do môdu pomoci z ktorého sa dostaneme k informáciám o
+        moduloch keď napíšeme <code>modules</code>. Pripravte sa na to, že výpis
+        bude poriadne dlhý. <br>
+        Ak napíšeme do help konzoly názov modulu napr <code>turtle</code> vypíše
+        nám množstvo užitočných vecí o module. <b>PgDwn</b> listujeme a nalistujeme
+        zoznam príkazov korytnačej grafiky aj s príkladmi ako ju použiť.
+        Ak chceme <b>Python help</b> opustiť stačí nám zadať písmenko <b>q</b> a
+        <b>ENTER</b>. Z Interaktívnej konzoly opäť odídeme cez príkaz <code>exit()</code>
+      </p>
+
+      <li><h3>Triedy a ich metódy</h3></li>
+      <p> Pri písaní našeho programu časom narazíme na to, že postupným pridávaním
+        funkcí sa stáva program neprehľadný. Funkcie nám tiež umožňujú využívať
+        premenné, ale samy uchovávať data nevedia. Aby v tom bol poriadok existujú
+        v Pythone triedy <b>CLASS</b>. Môžu obsahovať funkcie ako časti programu
+        ale aj samotné dáta, ktoré môžu meniť a poskytovať iným častiam programu.
+        <br>
+        Triedu preto možno zjednodušene opísať ako plánik, alebo náčrtok. Aby sa
+        tento plán stal skutočnosťou treba ho iniciovať a vytvoriť jeho tzv. inštanciu <b>INSTANCE</b>.
+
+        Napíšeme si jednoduchú dátovú triedu aj so základnými metódami:
+        <br> <br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #815ba4">class</span> <span style="color: #fec418">NasaTrieda</span><span style="color: #e7e9db">(object):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Dátová trieda obsahujúca dáta o našej triede na ZS</span>
+<span style="color: #776e71">    """</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">__init__</span><span style="color: #e7e9db">(self):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Magicka metoda __init__ nastavuje kod, ktory sa ma vykonat pri iniciacii</span>
+<span style="color: #776e71">        Triedy. Definuje aj premenne triedy.</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">menny_zoznam_ziakov</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">list()</span>  <span style="color: #776e71"># definuj premennu triedy ako prazdny list</span>
+        <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">set()</span>  <span style="color: #776e71"># definuj vyucovacie predmety ako prazdny set.</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">pocet_ziakov</span><span style="color: #e7e9db">(self):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda triedy NasaTrieda pouzije menny zoznam na vypocet poctu ziakov v zozname</span>
+
+<span style="color: #776e71">        """</span>
+        <span style="color: #815ba4">return</span> <span style="color: #e7e9db">len(self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">menny_zoznam_ziakov)</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">predmety_getter</span><span style="color: #e7e9db">(self):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda triedy NasaTrieda ziskava (get) informacie z premennej triedy a</span>
+<span style="color: #776e71">        prezentuje ich v pozadovanom tvare.</span>
+<span style="color: #776e71">        param :: none</span>
+<span style="color: #776e71">        return:: none</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety:</span>  <span style="color: #776e71"># cyklus prechadza vsetkych clenov self.predmety</span>
+            <span style="color: #e7e9db">print(i)</span>  <span style="color: #776e71"># tlaci jednotlive predmety do riadkov pod seba</span>
+        <span style="color: #815ba4">return</span>  <span style="color: #776e71"># vracia sa do hlavneho programu. ZIADNA HODNOTA</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">predmety_setter</span><span style="color: #e7e9db">(self,</span> <span style="color: #e7e9db">value:</span> <span style="color: #e7e9db">str):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda triedy NasaTrieda umoznuje pridat value do setu self.predmety</span>
+<span style="color: #776e71">        parameter:: value - string nazov predmetu</span>
+<span style="color: #776e71">        return:: none</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">add(str(value))</span>  <span style="color: #776e71"># prida string value do premennej self.predmety</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">predmety_deleter</span><span style="color: #e7e9db">(self,</span> <span style="color: #e7e9db">value:</span> <span style="color: #e7e9db">str):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda triedy NasaTrieda umoznuje odstranit zaznam z premennej self.predmety</span>
+<span style="color: #776e71">        parameter:: value - string nazov predmetu, ktory sa vymaze</span>
+<span style="color: #776e71">        return:: none</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #815ba4">while</span> <span style="color: #e7e9db">value</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety:</span>  <span style="color: #776e71"># zacni cykls ak sa value nachadza v self.predmety</span>
+            <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">remove(value)</span>  <span style="color: #776e71"># odstran hodnotu z self.predmety</span>
+            <span style="color: #815ba4">return</span>  <span style="color: #776e71"># vracia sa do hlavneho programu ZIADNA HODNOTA</span>
+
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">je_ziak_clenom_triedy</span><span style="color: #e7e9db">(self,</span> <span style="color: #e7e9db">meno_ziaka:</span> <span style="color: #e7e9db">str):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda zistuje ci je ziak clenom Triedy</span>
+<span style="color: #776e71">        parameter:: meno_ziaka STRING</span>
+<span style="color: #776e71">        return:: Odpoved Pravda alebo Nepravda  BOOL</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">meno_ziaka</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">self</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">menny_zoznam_ziakov</span>  <span style="color: #776e71"># nachadza sa meno ziaka v mennom zozname triedy ?</span>
+        <span style="color: #776e71"># print(result)</span>
+        <span style="color: #815ba4">return</span> <span style="color: #e7e9db">result</span>  <span style="color: #776e71"># vrati hodnotu True alebo False do hlavneho programu</span>
+
+
+<span style="color: #815ba4">if</span> <span style="color: #ef6155">__name__</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">"__main__"</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Ak je program spusteny ako hlavny tak UROB:</span>
+    <span style="color: #e7e9db">tretia_b</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">NasaTrieda()</span>  <span style="color: #776e71"># Inicializacia objektu instancie triedy NasaTrieda</span>
+
+    <span style="color: #776e71"># Pouzijeme priamy pristup k atributom</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">menny_zoznam_ziakov</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">[</span> <span style="color: #48b685">"Anton Abraham"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Boris Bezko"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Cecilia Cintava"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Dusan Dlaho"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Eugen Ezachias"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Fridrich Frano"</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># definovanie ziakov do zoznamu</span>
+    <span style="color: #e7e9db">print(tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">menny_zoznam_ziakov)</span>  <span style="color: #776e71"># vytlac menny zoznam ziakov</span>
+    <span style="color: #e7e9db">print(tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">pocet_ziakov())</span> <span style="color: #776e71"># pomocou metody triedy NasaTrieda zrataj kolko ziakov ma</span>
+    <span style="color: #e7e9db">print(tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety)</span>  <span style="color: #776e71"># Vypis ake predmeny ma nasa trieda</span>
+
+    <span style="color: #776e71"># pouzijeme prikazy getattr() a setattr() na zmenu atributov triedy</span>
+    <span style="color: #e7e9db">prvy_ziak</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">getattr(tretia_b,</span><span style="color: #48b685">"menny_zoznam_ziakov"</span><span style="color: #e7e9db">)[</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># pouzijeme SLICING na zoznam LIST ziakov</span>
+    <span style="color: #e7e9db">print(prvy_ziak)</span>  <span style="color: #776e71"># vytlac premennu na obrazovku</span>
+    <span style="color: #e7e9db">posledny_ziak</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">getattr(tretia_b,</span><span style="color: #48b685">"menny_zoznam_ziakov"</span><span style="color: #e7e9db">)[</span><span style="color: #5bc4bf">-</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># pouzijeme SLICING na zoznam LIST ziakov</span>
+    <span style="color: #e7e9db">print(posledny_ziak)</span> <span style="color: #776e71"># vytlac premennu na obrazovku</span>
+    <span style="color: #776e71"># Pridame dalsieho ziaka do zoznamu pomocou prikazu setattr()</span>
+    <span style="color: #e7e9db">setattr(tretia_b,</span><span style="color: #48b685">"menny_zoznam_ziakov"</span><span style="color: #e7e9db">,[</span> <span style="color: #48b685">"Anton Abraham"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Boris Bezko"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Cecilia Cintava"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Dusan Dlaho"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Eugen Ezachias"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Fridrich Frano"</span><span style="color: #e7e9db">,</span>
+                                <span style="color: #48b685">"Gregor Grgul"</span><span style="color: #e7e9db">])</span>
+    <span style="color: #e7e9db">print(tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">pocet_ziakov())</span>  <span style="color: #776e71"># pomocou metody triedy NasaTrieda zrataj kolko ziakov ma</span>
+
+
+    <span style="color: #776e71"># Pouzijeme metody triedy aby sme zmenili obsah jej atributov</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_getter()</span>  <span style="color: #776e71"># pouzi metodu triedy na ziskanie predmetov</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_setter(</span><span style="color: #48b685">"geografia"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># pouzi metodu triedy na pridanie predmetu</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_setter(</span><span style="color: #48b685">"matematika"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># pouzi metodu triedy na pridanie predmetu</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_setter(</span><span style="color: #48b685">"anglicky jazyk"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># pouzi metodu triedy na pridanie predmetu</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_getter()</span>  <span style="color: #776e71"># pouzi metodu triedy na ziskanie predmetov</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_deleter(</span><span style="color: #48b685">"geografia"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># pouzi metodu triedy na vymazanie predmetu zo zoznamu predmetov</span>
+    <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">predmety_getter()</span>
+
+    <span style="color: #776e71"># Pomocou metody triedy NasaTrieda zistime ci ziak je clenom nasej triedy</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"je Anton Abraham clenom triedy"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">je_ziak_clenom_triedy(</span><span style="color: #48b685">"Anton Abraham"</span><span style="color: #e7e9db">))</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"je Zofia Zilinska clenom triedy"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">tretia_b</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">je_ziak_clenom_triedy(</span><span style="color: #48b685">"Zofia Zilinska"</span><span style="color: #e7e9db">))</span>
+
+    <span style="color: #776e71"># Zistime ci je tretia_b naozaj instanciou triedy NasaTrieda</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"Je tretia_b naozaj instanciou triedy NasaTrieda"</span><span style="color: #e7e9db">,isinstance(tretia_b,</span> <span style="color: #e7e9db">NasaTrieda))</span>
+    <span style="color: #815ba4">del</span> <span style="color: #e7e9db">tretia_b</span>  <span style="color: #776e71"># vymaze objekt tretia b z pamate</span>
+</pre></div>
+
+        <br> <br>
+
+Metódy, ktoré nevyužívajú premenné triedy CLASS VARIABLES sa delia na statické
+STATICMETHOD a triedne CLASSMETHOD. Oba tieto druhy metód môžeme využiť aj bez
+iniciacie triedy. To nám umožňuje napísať triedy, ktoré budú plné užitočných
+nástrojov ana pomocné operácie a prístupné pre ktorúkoľvek časť programu. Aha takto: <br>
+<br> <br>
+<div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #815ba4">class</span> <span style="color: #fec418">FileTools</span><span style="color: #e7e9db">(object):</span>
+
+    <span style="color: #5bc4bf">@staticmethod</span>
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">file_load</span><span style="color: #e7e9db">(filename_w_path:</span> <span style="color: #e7e9db">str):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda triedy FileTools otvori subor na citanie v mode READ a kodovanim</span>
+<span style="color: #776e71">        textu utf8. Pomocou prikazu read() nacita cely jeho obsah a ulozi ho</span>
+<span style="color: #776e71">        do premennej result. Na konci metody tuto premennu vrati do hlavneho</span>
+<span style="color: #776e71">        programu.</span>
+<span style="color: #776e71">        parameter ::  filename_w_path STRING meno suboru aj s cestou k nemu</span>
+<span style="color: #776e71">        return :: result STRING obsah nacitaneho suboru</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str()</span>
+        <span style="color: #e7e9db">f</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">open(file</span><span style="color: #5bc4bf">=</span><span style="color: #e7e9db">filename_w_path,</span> <span style="color: #e7e9db">mode</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">'r'</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"utf8"</span><span style="color: #e7e9db">)</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">f</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">read()</span>
+        <span style="color: #e7e9db">print(</span><span style="color: #48b685">"SUBOR SA NACITAL"</span><span style="color: #e7e9db">)</span>
+        <span style="color: #815ba4">return</span> <span style="color: #e7e9db">result</span>
+
+    <span style="color: #5bc4bf">@classmethod</span>
+    <span style="color: #815ba4">def</span> <span style="color: #06b6ef">file_save</span><span style="color: #e7e9db">(cls,</span> <span style="color: #e7e9db">filename_w_path,</span> <span style="color: #e7e9db">plaintext):</span>
+        <span style="color: #776e71">"""</span>
+<span style="color: #776e71">        Metoda otvori subor na pisanie v mode WRITE a kodovanim textu v utf8.</span>
+<span style="color: #776e71">        Pomocou prikazu write ulozi text dodany v STRINGU plaintext. Na konci</span>
+<span style="color: #776e71">        vrati hodnotu True, ktora pre hlavny program znamena, ze sa subor uspesne</span>
+<span style="color: #776e71">        ulozil.</span>
+<span style="color: #776e71">        """</span>
+        <span style="color: #e7e9db">f</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">open(file</span><span style="color: #5bc4bf">=</span><span style="color: #e7e9db">filename_w_path,</span> <span style="color: #e7e9db">mode</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">'w'</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"utf8"</span><span style="color: #e7e9db">)</span>
+        <span style="color: #e7e9db">f</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">write(plaintext)</span>
+        <span style="color: #e7e9db">print(</span><span style="color: #48b685">"SUBOR SA ULOZIL"</span><span style="color: #e7e9db">)</span>
+        <span style="color: #815ba4">return</span> <span style="color: #815ba4">True</span>
+
+<span style="color: #776e71"># Vyuzijeme staticku a triednu metodu</span>
+<span style="color: #e7e9db">FileTools</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">file_save(</span><span style="color: #48b685">"test.txt"</span><span style="color: #e7e9db">,</span> <span style="color: #48b685">"Hello from Program!!!"</span><span style="color: #e7e9db">)</span>
+<span style="color: #e7e9db">nacitany_text</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">FileTools</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">file_load(</span><span style="color: #48b685">"test.txt"</span><span style="color: #e7e9db">)</span>
+<span style="color: #e7e9db">print(nacitany_text)</span>
+</pre></div>
+
+
+<br> <br>
+Všimnite si, ze zmizlo <code>self</code> u <b>STATICKEJ</b> metódy nakoľko sa
+neodvoláva na svoju inštanciu a u <b>TRIEDOVEJ</b> metódy sa objavilo <code>cls</code>
+v zátvorke to znamená, že sa odvoláva nie na ištanciu triedy ale iba na jej plánik CLASS.
+<br>
+V programe sme si predstavili príkaz <code>open</code>, ktorý má na starosti vstupy
+a výstupy do súborov. Módy <b>r</b>READ a <b>w</b>WRITE znamenajú, že bude zapisovať
+text. Ak by sme chceli zapisovať binárne dáta (jednotky a nuly)museli by sme dáta najprv previest
+do <code>bytes()</code> a uložiť v móde <b>wb</b> WRITE BINARY alebo <b>rb</b>
+READ BINARY.
+      </p>
+      <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading">ČUDNÉ OZNAČENIE <b>@staticmethod</b> a <b>@classmethod</b> </h4>
+          <p>Iste ste si všimli divné označenie metód v triede FileTools. Ide o
+            tzv. <b>dekorátori - DECORATORS</b>. Sú to funkcie, ktoré dokážu ako
+            argument prijať ďalšiu funkciu a modifikovať jej priebeh. Zatiaľ Vám
+            stačí vedieť, že existujú no čoskoro už napíšete vlastný dekorátor v Pythone.
+          </p>
+        </div>
+
+
+
+		</ul>
+
+    <p>Gratulujeme! Zvládli ste fantastickú Korytnačiu grafiku, dokážete povedať
+      čo je trieda a viete, že sa skladá z metód a dát. Viete tiež, že triedy
+      možno napísať aj tak aby vašemu programu poskytovali nejaké nástroje.</p>
+		<section>
+
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
