@@ -93,7 +93,7 @@
               umožňuje spustiť inštanciu MySQL servera a vyskúšať SQL Injection
               priamo cez konzolu DB Servera: <br>
               <code>
-              CREATE TABLE test (meno,heslo); <br>
+              CREATE TABLE test (meno varchar(255),heslo varchar(255)); <br>
               INSERT INTO test (meno,heslo) VALUES ("jozef", "243"); <br>
               SELECT * FROM test WHERE username = "hacker" OR 1=1; <br>
               </code>
