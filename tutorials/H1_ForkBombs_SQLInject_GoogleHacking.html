@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 6 - Základné moduly Pythonu - time, random a re a odchytávanie chýb</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Hacking 1 - Vidličkové Bomby, SQL Injection a Hackujeme Google</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>FORK BOMB</h3></li>
+      <p>Klasickým jednoduchým Hackom počítača je tzv. Vidličková bomba. Je to zadanie kódu,
+        ktorý v nekonečnom cykle replikuje procesy až sa z toho počítač zblázni
+        a zamrzne. Klasický model tejto bomby vyzeral asi takto:
+        <br><br>
+        <code>:(){ :|:& };:</code>
+        <br><br>
+        Vo väčšine distribúcií Linuxu už nefunguje. To čo však funguje je jednoduchá
+        vidličková bomba v jazyku PYTHON:
+        <br><br>
+        <code>
+          import os  <br>
+          while True: <br>
+          &emsp;&emsp;os.fork()  <br>
+        </code>
+        <br><br>
+        Kedy použiť vidličkovú bombu. Povedzme, že RED TEAM - tým nepriateľských
+        hackerov prenikol do Vašeho počítača a vykonáva na ňom nejakú činnosť.
+        Kopírovanie súborov, zmeny v nastaveniach a pod. Náš obranný softvér, zistil
+        podozrivú aktivitu. Zväčša posledným krokom je ničenie stôp hackerského
+        útoku vymazávaním logov = záznamov počítača o aktivite. Ak odpálime
+        FORK BOMB skôr ako sa podarí vymazať stopy. Máme zamrznutý počítač a nie je
+        možné ho ovládať ani lokálne ani na diaľku.
+        Počítač odpojíme a môžeme po reštarte začať smelo prehľadávať a analyzovať
+        LOGy.
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">P O Z O R !!!</h4>
+            <p>Nikdy neodpalujte FORK BOMB na počítači o ktorom neviete čo robí.
+              Môže to byť produkčný server alebo súčasť nejakej priemyselnej
+              prevádzky, ktorého vypadnutie môže spôsobiť veľké škody.
+              <br>
+              Po reštarte musí byť počítač odpojený od Wifi a Ethernetu aby hackeri
+              nemohli svoju prácu na ňom dokončiť.
+            </p>
+          </div>
+        Vidličkovú bombu môžete vytvoriť v ktoromkoľvek programovacom jazyku.
+
+      </p>
+
+      <li><h3>SQL Injection</h3></li>
+      <p>Druhý jednoduchý hack je postavený na fakte, že väčšina webových formulárov
+        je spojená s databázovým serverom v pozadí. SQL je obľúbený jazyk Pomocou
+        ktorého užívateľ komunikuje s databázou. Ako každý vužíva v syntaxe rôzne
+        META znaky podobne ako <b>WILDCARD</b> alebo <b>REGULAR EXPRESSIONS</b>.
+        Najjednoduchším útokom je vloženie do formulára:
+        <br><br>
+        <code>" OR "1"="1</code>
+        <br><br>
+        SQL ho preloží databázovému serveru do jemu zrozumiteľnému formátu:
+        <br><br>
+        <code>SELECT * FROM table WHERE variable ="hocico" OR "1"="1</code>
+        <br><br>
+        Tento krátky reťazec oklame SQL databázu a pokiaľ nie je pozmenený skriptom
+        a pošle ho priamo databáze táto nám zobrazí celý obsah príslušnej tabuľky.
+        často je to tabuľka s užívateľmi a ich heslami. <br>
+        Ak tento reťazec funguje, môžeme ho použiť na následnú injektáž priamo <!DOCTYPE html>
+        SQL Databázy :
+        <br><br>
+        <code>" OR "1"="1; INSERT INTO 'table'.'user'('username', 'password') VALUES ('hacker','heslo'); SELECT * FROM user WHERE '1' = '1</code>
+        <br><br>
+        Týmto škodlivým kódom sme pridali do databázy užívateľa <b>hacker</b> s HESLOM
+        <b>heslo</b>. Podobne môžeme aj vymazať celú tabuľku z databázy:
+        " OR "1"="1; DROP TABLE 'user'; SELECT * FROM user WHERE '1' = '1
+        alebo dokonca celú databázu. <br>
+        Obranou proti tomuto útoku je pri komunikácií medzi formulárom a databázou
+        použiť skript ktorý tzv.SANITIZUJE vstupné dáta a upravuje ich tak aby
+        nebolo možné použiť SQL Injection.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">VYSKÚŠAJTE TO !!!</h4>
+            <p>Nemusíte inštalovať SQL Server aby ste to mohli vyskúšať. https:www.PythonAnywhere.com
+              umožňuje spustiť inštanciu MySQL servera a vyskúšať SQL Injection
+              priamo cez konzolu DB Servera: <br>
+              <code>
+              CREATE TABLE test (meno,heslo); <br>
+              INSERT INTO test (meno,heslo) VALUES ("jozef", "243"); <br>
+              SELECT * FROM test WHERE username = "hacker" OR 1=1; <br>
+              </code>
+            </p>
+          </div>
+          Čo sa vlastne stalo? Oklamali sme SQL server a pomocou logickej pravdy
+          sme mu nanútili podmienku <code>1=1</code> čo je vždy <code>True</code>.
+          Takže ak <b>username</b> je <code>False </code> alebo <code>OR</code>
+          je <code>True</code>. Čiže aj aj... zobraz celú tabuľku databázy :)
+      </p>
+
+
+			<li><h3>Hackujeme vyhľadávač Google</h3></li>
+      <p>Každý z nás už použil Internetový vyhľadávač Google. Zadali ste hľadaný
+        reťazec STRING a google vám poslšne poskytol odpoveď na Vašu otázku v podobe
+        linkov. <br>
+        No Hackeri sa tomuto pozreli na zúbok a prišli na to, že pomocou nastavenia
+        jednoduchých atribútov a filtrov môžu svoje vyhľadávanie špecifikovať tak, že Google
+        ako poslušný psík nájde množstvo užitočných údajov. <br>
+        Stačí ak do vyhľadávača zadáte nasledujúce príkazy:
+        <br><br>
+        <code>
+          allinanchor  - vyhľadá iba tie stránky, ktoré majú všetky vyhľadávané slová zakotvené na stránke. <br>
+          allintext - vyhľadá iba tie stránky, ktoré majú všetky vyhľadávané slová v texte. <br>
+          allintitle - vyhľadá iba tie stránky, ktoré majú všetky vyhľadávané slová v titulke stránky. <br>
+          allinurl - vyhľadá iba tie stránky, ktoré majú všetky vyhľadávané slová v URL adrese stránky. <br>
+          filetype - vyhľadá iba určité druhy súborov, .pdf, .xls, .jpg atď. <br>
+          inanchor - vyhľadá iba tie stránky, ktoré majú určité slovo v kotve stránky. <br>
+          intext - vyhľadá iba tie stránky, ktoré majú vyhľadávané slová v texte. <br>
+          intitle - vyhľadá iba tie, ktoré majú hľadané slovo v titulke stránky. <br>
+          inurl - vyhľadá iba tie stránky, ktoré majú slovo v URL adrese.
+          link - vyhľadá všetky stránky, ktoré majú link na url adresu.
+          site - vyhľadá iba stránky v určitej doméne alebo url adrese.
+        </code>
+        <br> <br>
+        Ako príklad si uvedieme:
+        <br> <br>
+        <code>site:fortisauris.com intext:Kurzy</code>
+        <br> <br>
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">VYSKÚŠAJTE TO !!!</h4>
+            <p>Aj keď používanie Google Hacks nie je prehrešok. Aby Google zabránil
+              automatizovanému prehľadávaniu Internetu po chvíli ho začne zaujímať
+              či nie ste ROBOT.
+            </p>
+          </div>
+      </p>
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme si ukázali jednoduchú vidličkovú bombu v jazyku Python,
+      vytvorili sme si SQL databázu a nainjektovali sme ju škodlivým kódom.
+      Nakoniec sme sa naučili z vyhľadávača Google spraviť silný hackerský nástroj
+      na vyhľadávanie v Internete. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>

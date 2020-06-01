@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 8 - DEBUGGER a TESTOVANIE kódu</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Základné moduly Pythonu - time, random a re a odchytávanie chýb</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>Modul <code>random</code> </h3></li>
+      <p>Prvý modul na ktorý sa pozrieme je modul  <b>random</b>, ktorý má na starosti
+        generovať náhodné čísla. V programovaní hrá veľmi významnú roľu. Modul
+        naimportujeme príkazom:
+        <br><br>
+        <code>import random</code>
+        <br><br>
+        Teraz Python pozná príkazy modulu a môžeme ich použiť v našom kóde:
+        <br><br>
+        <code>random.random()</code>
+        <br><br>
+        Tento príkaz vygeneruje náhodné číslo medzi 0 a 1, ktoré môžeme prispôsobiť
+        našim potrebám. častejšie používaný príkaz modulu je:
+        <br><br>
+        <code>random.randint(1, 50)</code>
+        <br><br>
+        Toto nám vygeneruje celé číslo <b>INTEGER</b> od 1 do 50. No tento modul
+        dokáže oveľa viac. Dokáže vybrať jednu hodnotu z listu.
+        <br><br>
+        <code>random.choice([1,2,3,4,5])</code>
+        <br><br>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">P O Z O R !!!</h4>
+            <p>Modul <b>random</b> síce generuje náhodné čísla ale tieto čísla
+              nie sú vhodné na kryptografiu. Generovanie náhodných čísel v
+              kryptografii je kľúčové.
+            </p>
+          </div>
+      </p>
+
+      <li><h3>Modul <code>time</code> </h3></li>
+      <p>Druhý modul na ktorý sa pozrieme je modul <b>time</b> ktorý Pythonu
+        umožňuje pracovať s časom zobrazovať ho v rôznych formátoch. Nezabudnite
+        si naimportovať modul príkazom:
+        <br><br>
+        <code>import time</code>
+        <br><br>
+        Prvým príkazom, ktorý si ukážeme je:
+        <br><br>
+        <code>time.time()</code>
+        <br><br>
+        Tento príkaz nám vypíše tzv. systémový čas, ktorý v Linuxe začal
+        o polnoci 1.januára 1970 ako začiatok Unixového systémového času.
+        Tento pre človeka relatívne nepodstatný časový údaj sa hojne vyskytuje
+        pri ukladaní udalostí a času v Linuxe. Na zobrazenie zrozumiteľnejšieho
+        času použijeme príkaz:
+        <br><br>
+        <code>time.localtime()</code>
+        <br><br>
+        Tento príkaz nám zobrazí štruktúrovaný čas, ktorý môžeme pomocou krájania
+        <b>SLICING</b> vyťiahnuť podstatné údaje. Ak by sme chceli od Pythonu čas
+         v požadovanom formáte použijeme príkaz:
+         <br><br>
+         <code>time.strftime("%H-%M-%S")</code>
+         <br><br>
+         Tento čas je už bližšie tomu čo potrebujeme a dokážeme rýchlo vyprodukovať
+         v potrebnom programe pre náš program. <br>
+         Užitočnou funkciou sú rôzne časovače, ktoré nám sledujú rýchlosť našeho
+         programu. V tomto nám pomôže príkaz:
+         <br><br>
+         <code>time.clock()</code>
+         <br><br>
+         Tento nám ukazuje čas od spustenia aktuálneho procesu čo môže byť veľmi
+         užitočné. Najčastejšie používanou funkciou modulu je však príkaz:
+         <br><br>
+         <code>time.sleep(1)</code>
+         <br><br>
+         Ktorý dá Pythonu príkaz aby zaspal na 1 sekundu. To môže byť veľmi užitočné.
+      </p>
+
+
+			<li><h3>Modul <code>re</code> </h3></li>
+      <p>Tento modul implementuje do Pythonu veľmi komplexný systém známy tiež ako
+        <b>Regular Expressions</b>. Zjednodušene, keď si spomínate na systém <b>Wildcard</b>,
+        ktorý nám umožňoval hľadať súbory podľa pár špecifických znakov tak <b>Regular
+        Expressions</b> ide ešte ďalej. Dokáže špecifikovať množiny znakov, dĺžku
+        reťazca a množstvo ďalších nastavení. Napríklad <code>'\d+'</code> nám
+        nájde v reťazci decimálne čísla. <code>\w+</code> nájde všetky slová.
+        <br>
+        <b>Regular Expressions</b> poznajú veľa METAznakov, ktoré dokážu pokryť
+        potrebu aj toho najnáročnejšieho programátora. Zatiaľ stačí keď budete vedieť
+        ako použiť základné príkazy a špecifikovať <b>REGULAR EXPRESSION</b>
+        vyhľadávanie podľa svojich potrieb keď bude treba. Naimportijeme si modul
+        príkazom:
+        <br><br>
+        <code>import re <br>
+          text = "Isiel Macek do Malaciek k doktorovi"  # STRING na skusanie modulu
+        </code>
+        <br><br>
+        Prvý príkaz, ktorý si predstavíle je:
+        <br><br>
+        <code>re.findall("do", text)</code>
+        <br><br>
+        Tento príkaz nám nájde všetky výskyty "do" a umiestni ich do ZOZNAMU.
+        Ak by sme použili <b>METAZNAKY</b> "\w+" Python by našiel všetky slovách
+        a umiestnil ich do ZOZNAMU.Ďalším príkazom je:
+        <br><br>
+        <code>print(re.search(pattern="Malaciek", string=text))  # Najde prvy vyskyt a ulozi do specialneho objektu</code>
+        <br><br>
+        Tento špeciálny objekt môžeme rozobrať a získať z neho informácie kde sa
+         v texte slovo nachádza. ďalším používaným príkazom je:
+         <br> <br>
+         <code>re.match(pattern="Malaciek", string=text)  # Porovna ci text je zhodny <br>
+         re.match(pattern=text, string=text)  #  Ak je zhodny ulozi do specialneho objektu
+         </code>
+         <br> <br>
+         Posledným príkazom, ktorý si ukážeme je:
+         <br> <br>
+         <code>
+         re.fullmatch(pattern="Malaciek", string=text)  # Porovna a vyhodnocuje uplnu zhodu
+         re.fullmatch(pattern="Malaciek", string=text[18:26])
+        </code>
+         <br> <br>
+         Špeciálne objekty možno rozobrať na <code>group</code>  nájdený text a
+         <code>span</code> pozíciu v texte. Napríklad:
+         <br> <br>
+         <code>a=re.search("Malaciek", text) <br>
+         print(a)
+       print(a.group()) <br>
+     print(a.span())
+   </code>
+   <br> <br>
+   <div class="alert alert-warning" role="alert">
+       <h4 class="alert-heading">P O Z O R !!!</h4>
+       <p>Modul <b>re</b> ak nenájde zhodu nechá výsledok s hodnotou <code>None</code>.
+        Pri pokuse rozobrať objekt automaticky vyhodí chybu a program skončí. Pri
+        dlhšom programe nám to bude vadiť. Rieši sa to zachytávaním chýb.
+       </p>
+     </div>
+      </p>
+
+      <li><h3>Zachytávanie chýb v Pythone</h3></li>
+      <p>Python dokáže v ktoromkoľvek momente progremu umelo vyvolať chybu pomocou
+        príkazu <code>raise</code> takto:
+        <br> <br>
+        <code>raise ValueError</code>
+        <br> <br>
+        V predchádzajúcej časti sme sa venovali modulu <code>re</code>, ktorý pri
+        úspešnom hľadaní vytvorí špeciálny objekt v pamäti, ktorý obsahuje
+        podrobnosti o výsledkoch hľadania. Pri neúspešnom hľadaní však vypľuje
+        <code>None</code>. Ak sa ho pokúsime využiť  okamžite ukončí program a vyhodí <code>AttributeError</code>.
+        <br>
+        Mohli by sme pomocou logiky odfiltrovať túto udalosť a pokračovať, ale
+        my si ukážeme ako sa to dá jednoducho v Pythone táto situácia vyriešiť:
+        <br> <br>
+
+
+<div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">re</span>
+
+<span style="color: #e7e9db">text</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">"Alaska is Cold as Hell"</span>
+
+<span style="color: #815ba4">try</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">re</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">match(</span><span style="color: #48b685">"Cold"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">text)</span>
+    <span style="color: #e7e9db">print(result</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">group())</span>
+    <span style="color: #e7e9db">print(result</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">span())</span>
+<span style="color: #815ba4">except</span> <span style="color: #ef6155">AttributeError</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"RESULT IS NONE"</span><span style="color: #e7e9db">)</span>
+<span style="color: #815ba4">finally</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"DONE"</span><span style="color: #e7e9db">)</span>
+</pre></div>
+
+        <br> <br>
+      Pomocou príkazu <b>VYSKÚŠAJ</b> <code>try</code> zadáme Pythonu kód, ktorý
+      by mohol skončiť chybou. Ak tento prípad nastane zadáme pomocou príkazu
+      <code>except</code> a špecifikujeme chybu, alebo množinu chýb, ktoré chceme
+      odchytiť. Ak chyba nastane tak sa vykoná kód v tomto bloku. <br>
+      Nakoniec <code>finally</code> blok vykoná posledné kroky a pokračuje v
+      programe ďalej.
+
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">P O Z O R !!!</h4>
+          <p>Python umožňuje zadefinovať množinu chýb relatívne široko cez
+            <code>BaseException</code>. Chyby treba čo najspresnejšie vyšpecifikovať
+            aby omylom nezachytávali aj veci, ktoré nemajú.
+          </p>
+        </div>
+      </p>
+
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme prešli tri základné moduly jazyka Python a naučili
+      sme sa odchytávať chyby v kóde a transformovať ich na žiadaný výsledok.
+      Už čoskoro prejdeme na komplikovanejšie moduly. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>

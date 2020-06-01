@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 7 - Základné moduly Pythonu 2- os, sys, hashlib a lambda funkcie</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Základné moduly Pythonu 2- os, sys, hashlib a lambda funkcie</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>Modul <code>sys</code> </h3></li>
+      <p>Prvý modul na ktorý sa pozrieme je modul  <b>sys</b>, ktorý má za úlohu
+         Sprostredkovať našemu programu dôležité údaje o systéme. Modul si naimportujeme
+         príkazom:
+        <br><br>
+        <code>import sys</code>
+        <br><br>
+        Ak chceme vedieť na akom druhu operačného systému program beží získame
+        tento údaj pomocou premennej:
+        br><br>
+        <code>sys.platform</code>
+        <br><br>
+
+        Rozlišnosti v syntaxe jednotlivých verzií Pythonu môžu spôsobiť, že kód
+        napísaný pre Python 3.8 nebude korektne pracovať na verzií Python 3.6 a
+        preto je potrebné získať informáciu o Python Interpreteri na ktorom
+        program beží, ktorá je uložená v premennej:
+        <br><br>
+        <code>sys.version_info</code>
+        <br><br>
+        Modul tiež umožňuje získavať informácie o aktuálne nainštalovaných moduloch
+        jazyka Python a o cestách k nim. Napríklad pomocou premenných:
+        <br><br>
+        <code>sys.modules.keys()<br>
+        sys.path</code>
+        <br><br>
+        Často využívanou premennou je:
+        <br><br>
+        <code>sys.argv</code>
+        <br><br>
+        Informácia pokiaľ ju spustíte z interkatívnej konzoly bue obsahovať
+        <code>[]</code> čo znamená prázdny <b>zoznam - LIST</b>. Ale pokiaľ skript
+        spustíte pomocou príkazu z príkazového riadku Linuxu alebo Powershellu:
+        <br><br>
+        <code>python3 program.py ARGUMENT1 ARGUMENT1</code>
+        <br><br>
+        poskytne Vám zoznam, ktorý bude obsahovať ako prvý argument:
+        <code>sys.argv[0]</code>názov spusteného programu <br>
+        <code>sys.argv[1]</code>ARGUMENT1 <br>
+        <code>sys.argv[2]</code>ARGUMENT2 <br>
+        Toto nám umožní spúšťať pythonovský program aj so zadaním vstupných
+        PARAMETROV a ARGUMENTOV priamo z príkazového riadku !!! Rovnako ako pri
+        Linuxových a Powershellových príkazoch.
+      </p>
+
+      <li><h3>Modul <code>os</code> </h3></li>
+      <p>Modul slúži na manipuláciu Operačného systému a poskytuje mocné nástroje
+        pre prácu s terminálom, súbormi, adresármi, PERMISSIONS atď. Naimportujeme si ho:
+        <br><br>
+        <code>import os</code>
+        <br><br>
+        Hneď ako prvý si vyskúšame najmocnejšiu z jeho metód, pomocou ktorej vieme
+        Linuxu alebo Powershellu zadať akýkoľvvek príkaz OS na vykonanie:
+        <br><br>
+        <code>os.sys("ls -al")</code>
+        <br><br>
+        Napríklad vypísanie podrobností adresára v ktorom sa nachádzame. Príkaz
+        sa vykoná a program pokračuje ďalej.
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">P O Z O R !!!</h4>
+            <p>Príkaz nepovie Pythonu či sa vykonal korektne a je preto potrebné
+              to skontrolovať nejakou inou funkciou.
+            </p>
+          </div>
+        Touto metódou by napríklad mohla byť metóda:
+        <br><br>
+        <code>os.listdir(path="/home/")</code>
+        <br><br>
+        Táto vráti obsah adresára podľa príslušnej cesty PATH v podobe zoznamu LIST.
+        Môžeme ho pomocou príkazu Pythonu spracovať, prehľadať, porovnať atď.
+        Môžeme si zobraziť aktuálny pracovný adresár CURRENT WORKING DIRECTORY
+        pomocou metódy:
+        <br><br>
+        <code>os.getcwd()</code>
+        <br><br>
+      Modul <code>os</code> však ide omnoho ďalej, disponuje množstvom metód,
+      ktoré umožňujú Pythonu kontrolovane presúvať súbory, meniť nastavenia a pod.
+      Užitočným je tiež prehliadanie stromovej štruktúry adresárov a súborov pomocou
+      metódy:
+      <br><br>
+      <code>os.walk(top="PATH")</code>
+      <br><br>
+        Ak si ho dáme zobraziť pomocou príkazu <code>print</code> zobrazí nám
+        informáciu o existujúcom GENERATOR objekte a jeho umiestnení v pamäti
+        počítača.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">GENERÁTORY</h4>
+            <p>Python podporuje vytváranie generátorov, ktoré majú oproti ukladaniu
+              do premenných množstvo výhod. As najväčšou je to, že nezaberejú
+              toľko miesta v pamäti a sú AdHoc generované pre potreby programu.
+              GENERÁTORY vytvoríme jednoducho ak miesto <code>return</code> na
+              konci funkcie alebo metódy použijeme <code>yield</code>. To znamená,
+              že Python vygeneruje hodnotu a poskytne ju programu v podobe
+              GENERATOR objektu v pamäti. POZOR ak chcete jeho obsah zobraziť
+              musíte ho zobraziť ako <code>list(GENERATOR)</code>.
+            </p>
+          </div>
+          Tento krátky kód Pythonu nám pomôže zobraziť obsah:
+          <br><br>
+          <code>content = os.walk(top="/home/andrejli/Projects/PythonScratch") <br>
+          for dirs,files,roots in content: <br>
+          &emsp;&emsp;    print(dirs,files,roots)</code>
+          <br><br>
+          S výstupom možno pracovať podľa potrieb ho prispôsobovať a všemožne ho
+          použiť.
+      </p>
+
+
+			<li><h3>Modul <code>hashlib</code> </h3></li>
+      <p>Posledným modulom, ktorý si v tejto lekcií predstavíme je modul
+        <code>hashlib</code>, ktorý budeme potrebovať pri vypočítavaní HASHSTRINGOV
+        keď budeme programovať náš vlastný lúskač kódov v ďalšej časti kurzu.
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">ČO JE TO HASHSTRING</h4>
+            <p>HASHSTRING je výsledok kryptografického algorytmu, ktorý vypočítava jedinečný
+              reťazec pre akékoľvek dáta. Výsledok je jedinečný a unikátny a
+              preto prezentuje niečo ako digitálny odtlačok prsta dát. <br>
+              Tieto algorytmy majú široké uplatnenia pri ukladaní hesiel, kontroly zmeny dát
+              a ich anonymizácií.
+            </p>
+          </div>
+          <div class="alert alert-warning" role="alert">
+              <h4 class="alert-heading">P O Z O R ! ! !</h4>
+              <p>Hashovací algorytmus SHA1 bol prelomený a podarilo sa spätne
+                vypočítať dáta, ktoré boli použité na jeho výpočet. Používajte
+                iba spoľahlivé neprelomené hashovacie algorytmy!!!
+              </p>
+            </div>
+        Modul si naimportujeme do Pythonu príkazom:
+        <br> <br>
+        <code>import hashlibr</code>
+        <br> <br>
+        Ako prvé musíme vytvoriť inštanciu hashovacieho algorytmu:
+        <br> <br>
+        <code>h = haslib.md5()</code>
+        <br> <br>
+        Pre tento prípad použijeme algorytmus MD5. Algorytmus požaduje ako
+        vstupné dáta nie v premennej STRING ale BYTES, ktoré sú zjednodušene
+        hexadecimálnymi alebo binárnymi hodnotami dát alebo STRINGU. Získame ich
+        pomocou zmenou STRINGU na BYTES s doplnením KÓDOVANIA znakov. Pre tento
+        prípad použijeme kódovanie znakov <code>utf8</code>:
+        <br> <br>
+        <code>pripraveny_text = bytes("HELLO WORLD !!!", encoding="utf8")</code>
+        <br> <br>
+        Pripravený text vložíme do algorytmu, ktorý doposiaľ nemal čo počítať.
+        Použijeme pritom objekt <code>h</code>, ktorý je inštanciou triedy
+        <code>hashlib.md5</code>. Pomocou metódy <code>update</code> pridáme
+        našu premennú <code>pripraveny_text</code>:
+        <br> <br>
+        <code>h.update(pripraveny_text) </code>
+        <br> <br>
+        Nakoniec si necháme zobraziť vypočítaný HASHSTRING v hexadecimálnej podobe:
+        <br> <br>
+        <code>print(h.hexdigest())</code>
+        <br> <br>
+        Tento reťazec je unkátnou prezentáciou reťazca <b>HELLO WORLD !!!</b> a
+        kdekoľvek a kedykoľvek ho opäť vypočítame bude ZHODNÝ.
+      </p>
+
+      <li><h3>Funkcie LAMBDA</h3></li>
+      <p>
+      V lekcií 4 sme sa naučili vytvárať vlastné funkcie pomocou príkazu <code>def</code>.
+      Python v prípade jednoduchších funkcií umožňuje použiť tzv. <code>lambda</code> funkcie.
+      Zadefinujeme si funkciu, ktorú si aj ponmenujeme:
+      <br> <br>
+      <code>sucet = lambda x,y: x + y</code>
+      <br> <br>
+      V tomto jedinom riadku sme zadefinovali premenné <code>x</code> a <code>y</code>
+      ako aj samotnú funkciu <code>x + y</code>. Ak ju chceme použiť, môžeme ju
+      jednoducho napísať:
+      <br> <br>
+      <code>sucet(10,15)</code>
+      <br> <br>
+      ALEBO
+      <br> <br>
+      <code>sucet("Hello"," World !!!")</code>
+      <br> <br>
+      </p>
+
+      <li><h3>A kde je PI ? </h3></li>
+      <p>
+      Samozrejme môžeme sa tomu povenovať a spraviť funkciu, ktorá nám ho
+      matematicky vypočíta, ale načo. My Pythonisti sme leniví a ak sa dá vyhnúť
+      zbytočným stlačeniam klávesnice tak to urobíme.
+      <br> <br>
+      <code>import math</code>
+      <br> <br>
+      a čerstvo vypočítané PI si vytiahneme z premennej:
+      <br> <br>
+      <code>math.pi</code>
+      <br> <br>
+      </p>
+
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme prešli ďalšie tri základné moduly jazyka Python
+      ktoré v kombinácií s našimi znalosťami Linuxu nám dávajú kontrolu nad
+      počítačom z Pythonovského kódu. naučili sme sa definovať LAMBDA funkcie.
+    <br>
+      Už nás čaká iba pár slov k DEBUGGERU a TESTOVANIU Softvéru a naša málá
+      Pythonistická kariéra môže začať. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
