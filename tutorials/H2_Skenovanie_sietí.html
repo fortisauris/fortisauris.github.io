@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 2 - Skenujeme siete a porty</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Hacking 2 - Skenujeme siete a porty</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>ping a traceroute</h3></li>
+      <p>S príkazom <code>ping</code> sme sa už stretli v Linuxovej časti kurzu
+        keď sme skúšali či
+        náš počítač je pripojený k internetu. Vieme teda, že:
+        <br> <br>
+        <code>ping 8.8.8.8</code>
+        <br> <br>
+        začne posielať packety po sieti a sledovať aký čas potrvá kým dojdu <!DOCTYPE html>
+        serveru Google.com. Tak sme sa dozvedeli, že sa počítač môže pripojiť ku
+        Googlu teda nemôže byť OFFLINE. to je absolútny základ skenovania siete.
+        <br>
+        Ak by sme chceli viac informácií o ceste, ktorou naše PING pakety cestujú
+        je tu príkaz <code>traceroute</code>, ktorý nám navyše k času pridá aj IP
+        adresy zariadení /uzlov a routerov/ cez ktoré cestujú do svojho cieľa.
+        Príkaz môžeme použiť s IP adresou:
+        <br> <br>
+        <code>traceroute 8.8.8.8</code>
+        <br> <br>
+        alebo
+        <br> <br>
+        <code>traceroute google.com</code>
+        <br> <br>
+        Pomocou nastavení príkazu vieme presne definovať množstvo metód a parametrov.
+        Ak ste videli kedysi staré filmy o hackeroch tak tento program vykresľoval
+        na obrovskú obrazovku mapu sveta a ukazoval kde je pripojená IP adresa.
+        <br>
+        Aj dnes to samozrejme funguje, ale Hackeri sa väčšinou maskujú pomocou VPN
+        , Proxy Serverov alebo počítačov nevedomých užívateľov.
+      </p>
+
+      <li><h3>Jednoduchý skener s portskenerom v Pythone</h3></li>
+      <p>Na skenovanie siete nepotrebujete toho naozaj veľa. Pomocou prepojenia
+        Pythonoveho modulu <code>os</code> s operacčným systémom môžeme Pomocou
+        <code>ping</code> zisťovať či sa je počítač dostupný na sieti alebo nie je.
+        Stačí len vypočítať potrebný rozsah skenovania pomocou jednoduchej funkcie.
+        <br>
+        Takisto je možné pomocou modulu <code>socket</code>, ktorý zabezpečuje
+        v Pythone sieťovú komunikáciu skúšať ako počítač reaguje keď sa pokúšame
+        osloviť jeho porty. Ako už vieme má 65tisíc portov. My budeme oslovovať
+        len:
+        <br> <br>
+        <code>
+        PORT 21 = FTP určený na prenos súborov cez sieť. <br>
+        PORT 22 = SSH šifrované pripojenie cez sieť. <br>
+        PORT 80 = HTTP štandardné pripojenie na webový server <br>
+        PORT 447 = HTTPS šifrované pripojenie na webserver  <br>
+        </code>
+        <br> <br>
+        V praxi sa používa množstvo iných portov, ktoré môžu byť zraniteľné alebo
+        zaujímavé z pohľadu Hackerov.
+        <br>
+        Pre demonštráciu a ukážku dnes ukážeme ako vyzerá jednoduchý skener
+        napísaný v Pythone:
+        <br> <br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">socket</span>  <span style="color: #776e71"># importujeme socket modul na sietovu komunikaciu</span>
+<span style="color: #5bc4bf">import</span> <span style="color: #fec418">os</span>  <span style="color: #776e71"># importujeme os modul na manipulaciu s operacnym systemom</span>
+
+<span style="color: #776e71">"""</span>
+<span style="color: #776e71">Tento program je urceny iba pre ucebne ucely tejto stranky a pochopenie</span>
+<span style="color: #776e71">principov skenovania siete.</span>
+<span style="color: #776e71">Mozno ho pouzivat pod GPL2 licenciou - https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</span>
+
+<span style="color: #776e71">Bol pisany v Python 3.8.3 a pre pouzitie v nizsich verziach bude mozno potrebne</span>
+<span style="color: #776e71">upravit kod.</span>
+
+<span style="color: #776e71">Nepodporuje Multithreading a preto je na velke skeny nie je vhodny.</span>
+<span style="color: #776e71">Bol testovany iba na Linux Debian 10 a nema napisane testy ani dokumentaciu.</span>
+<span style="color: #776e71">FORTIS AURIS 2020</span>
+<span style="color: #776e71">"""</span>
+
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">ip_adress_generator</span><span style="color: #e7e9db">(ip4:</span> <span style="color: #e7e9db">str,</span> <span style="color: #e7e9db">iprange</span><span style="color: #5bc4bf">=</span><span style="color: #f99b15">24</span><span style="color: #e7e9db">):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia na generovanie ip adries na skenovanie pomocou prikazu PING. na zistenie</span>
+<span style="color: #776e71">    ci je adresa aktivna alebo nie..</span>
+<span style="color: #776e71">    param: ip4 - Stringova hodnota ip adresy IPv4</span>
+<span style="color: #776e71">    param: iprange - rozsah ip adries 3tanfardne nastaven7 na 24 t.j. 255 adries</span>
+<span style="color: #776e71">    return: Generator objekt obsahujuci vsetky skenovane adresy</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">list()</span>  <span style="color: #776e71"># definujeme vysledok ako novy prazdny zoznam</span>
+    <span style="color: #e7e9db">ip_part1</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">split_ip4(ip4)</span>  <span style="color: #776e71"># pouzijeme funkciu split_ip4 na odstranenie</span>
+    <span style="color: #776e71"># poslednej casti IPv4</span>
+    <span style="color: #815ba4">if</span> <span style="color: #e7e9db">range_generator(iprange)</span> <span style="color: #5bc4bf">==</span> <span style="color: #e7e9db">[</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">]:</span>  <span style="color: #776e71"># ak IP rozsah je iba jedna adresa</span>
+        <span style="color: #e7e9db">result</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">append(ip4)</span>  <span style="color: #776e71"># pridaj zadanu adresu do zoznamu na skenovanie</span>
+        <span style="color: #815ba4">yield</span> <span style="color: #e7e9db">result</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range_generator(iprange):</span>  <span style="color: #776e71"># pouzijeme funkciu range_generatora</span>
+        <span style="color: #e7e9db">value</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str(i)</span>  <span style="color: #776e71"># definujeme hodnotu ako string integeru z range_generator</span>
+        <span style="color: #e7e9db">prepared_ip</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str(ip_part1)</span> <span style="color: #5bc4bf">+</span> <span style="color: #e7e9db">value</span>  <span style="color: #776e71"># skladame finalnu podobu IP adresy na skenovanie</span>
+        <span style="color: #e7e9db">result</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">append(prepared_ip)</span>  <span style="color: #776e71"># pridavame adresu do listu</span>
+    <span style="color: #815ba4">yield</span> <span style="color: #e7e9db">result</span>  <span style="color: #776e71"># vraciame vysledok ako generator object</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">range_generator</span><span style="color: #e7e9db">(iprange:</span> <span style="color: #e7e9db">int):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia na generovanie range listu v rozsahu 1 IP</span>
+<span style="color: #776e71">    alebo 255 adries.</span>
+<span style="color: #776e71">    param: iprange - rozsah skenovania siete</span>
+<span style="color: #776e71">    resturn zoznam poslednych hodnot ip adresy IPv4.</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">range_list</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">list()</span>  <span style="color: #776e71"># definuje novu prazdnu premennu ako Zoznam</span>
+    <span style="color: #815ba4">if</span> <span style="color: #e7e9db">iprange</span> <span style="color: #5bc4bf">==</span> <span style="color: #f99b15">32</span> <span style="color: #5bc4bf">or</span> <span style="color: #e7e9db">iprange</span> <span style="color: #5bc4bf">is</span> <span style="color: #815ba4">None</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># ak zadany rozsah je iba 1 alebo 0 tak UROB:</span>
+        <span style="color: #e7e9db">[range_list</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">append(x)</span> <span style="color: #815ba4">for</span> <span style="color: #e7e9db">x</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">,</span> <span style="color: #f99b15">2</span><span style="color: #e7e9db">)]</span>  <span style="color: #776e71"># pridaj iba jednu adresu</span>
+    <span style="color: #815ba4">if</span> <span style="color: #e7e9db">iprange</span> <span style="color: #5bc4bf">==</span> <span style="color: #f99b15">24</span><span style="color: #e7e9db">:</span> <span style="color: #776e71"># ak zadany rozsah je 24 tak UROB:</span>
+        <span style="color: #e7e9db">[range_list</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">append(x)</span> <span style="color: #815ba4">for</span> <span style="color: #e7e9db">x</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">,</span> <span style="color: #f99b15">256</span><span style="color: #e7e9db">)]</span>  <span style="color: #776e71"># pridaj 255 adries</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">range_list</span>  <span style="color: #776e71"># vrat range list ako vysledok funkcie</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">split_ip4</span><span style="color: #e7e9db">(ip4:</span> <span style="color: #e7e9db">str):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia rozdeli ipadresu na jednotlive casti, skontroluje ci ma</span>
+<span style="color: #776e71">    zodpovedajucu dlzku a odreze posledne cislo doplneniu rozsahu.</span>
+<span style="color: #776e71">    param: ip4 adresa v podobe STRINGU</span>
+<span style="color: #776e71">    return: prve tri cisla IPv4 adresy v STRINGU</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str()</span>  <span style="color: #776e71"># definuj ako novu prazdnu premennu ak RETAZEC</span>
+    <span style="color: #e7e9db">ip_values</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">ip4</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">split(</span><span style="color: #48b685">"."</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># rozdel STRING na zoznam hodnot IP adresy</span>
+    <span style="color: #776e71"># print(ip_values)  # Kontrolne vypis hodnoty</span>
+    <span style="color: #815ba4">if</span> <span style="color: #e7e9db">len(ip_values)</span> <span style="color: #5bc4bf">!=</span> <span style="color: #f99b15">4</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># ak dlzka zoznamu nie je 4</span>
+        <span style="color: #815ba4">raise</span> <span style="color: #ef6155">ValueError</span>  <span style="color: #776e71"># vyvolaj chybu hodnoty,</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">):</span>  <span style="color: #776e71"># prechadzaj prve tri hodnoty IPv4 adresy</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">+=</span> <span style="color: #e7e9db">ip_values[i]</span> <span style="color: #5bc4bf">+</span> <span style="color: #48b685">"."</span>  <span style="color: #776e71"># pridaj ich k resultu aj s deliacimi bodkami</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">result</span>  <span style="color: #776e71"># vrat hodnotu prvej casti IPv4 v STRINGU</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">portscanner</span><span style="color: #e7e9db">(ip4):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Jednoduchy Portscanner, ktory skenuje iba porty FTP,SSH, HTTP a HTTPS.</span>
+<span style="color: #776e71">    param: ip4 adresa v STRINGu</span>
+<span style="color: #776e71">    return: logicku hodnotu ci ma pocitac otvoreny nejaky port</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">vlajka</span> <span style="color: #5bc4bf">=</span> <span style="color: #815ba4">False</span>  <span style="color: #776e71"># definuj logicku premennu vlajka JE DOLE</span>
+    <span style="color: #e7e9db">porty_na_skenovanie</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">[</span><span style="color: #f99b15">21</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">22</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">80</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">447</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># definuje porty na skenovanie v LISTe</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">port</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">porty_na_skenovanie:</span>  <span style="color: #776e71"># V cykle prechadza portami na skenovanie</span>
+        <span style="color: #776e71"># vytvarame objekt modulu SOCKET, ktory ma na starosti sietove pripojenia</span>
+        <span style="color: #e7e9db">obj</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">socket(socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">AF_INET,socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">SOCK_STREAM)</span>
+        <span style="color: #e7e9db">socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">setdefaulttimeout(</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># nastavujeme hodnotu odpojenia</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">obj</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">connect_ex((ip4,port))</span>  <span style="color: #776e71"># pripajame sa na IP a urceny port</span>
+        <span style="color: #815ba4">if</span> <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">==</span> <span style="color: #f99b15">0</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Ak je vysledok 0 podarilo sa nadviazat spojenie s portom</span>
+            <span style="color: #e7e9db">print(</span><span style="color: #48b685">"ADRESA"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">ip4,</span> <span style="color: #48b685">"PORT:"</span><span style="color: #e7e9db">,port,</span> <span style="color: #48b685">"JE AKTIVNY"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># vypise, ze je port aktivny</span>
+            <span style="color: #e7e9db">vlajka</span> <span style="color: #5bc4bf">=</span> <span style="color: #815ba4">True</span>  <span style="color: #776e71"># zmen vlajku na HORE</span>
+        <span style="color: #815ba4">else</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># inak</span>
+            <span style="color: #815ba4">pass</span>  <span style="color: #776e71"># neurob nic a chod dalej</span>
+        <span style="color: #e7e9db">obj</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">close()</span>  <span style="color: #776e71"># ukonci komunikaciu</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">vlajka</span>  <span style="color: #776e71"># ak si skoncil vrat True</span>
+
+<span style="color: #776e71"># H L A V N Y   P R O G R A M</span>
+<span style="color: #815ba4">if</span> <span style="color: #ef6155">__name__</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">"__main__"</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Ak bol program spusteny ako hlavny UROB</span>
+    <span style="color: #e7e9db">hosts_up</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">set()</span>  <span style="color: #776e71"># definuj novu prazdnu premennu ako SET</span>
+    <span style="color: #e7e9db">IP_ADRESA</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">"192.168.0.1"</span>  <span style="color: #776e71"># &lt;-- TU VLOZ IPv4 ADRESU</span>
+    <span style="color: #e7e9db">ROZSAH_SKENOVANIA</span> <span style="color: #5bc4bf">=</span> <span style="color: #815ba4">None</span>  <span style="color: #776e71"># &lt;-- TU ZADEFINUJ SIRKU SKENOVANEHO PASMA</span>
+    <span style="color: #e7e9db">adresy_na_skenovanie</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">ip_adress_generator(IP_ADRESA,</span> <span style="color: #e7e9db">ROZSAH_SKENOVANIA)</span>  <span style="color: #776e71"># zisti dostupne</span>
+    <span style="color: #776e71">#  adresy podla zadaneho rozsahu None = 1 adresa a 24 = 256 adries atd.</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">host</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">adresy_na_skenovanie:</span>  <span style="color: #776e71"># vytahujeme list z adresamiz generator objektu</span>
+        <span style="color: #815ba4">for</span> <span style="color: #e7e9db">values</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">host:</span>  <span style="color: #776e71"># prechadzame hodnotami v LISTE ip adries</span>
+            <span style="color: #e7e9db">cmd</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">'ping -c 1 '</span><span style="color: #5bc4bf">+</span> <span style="color: #e7e9db">values</span>  <span style="color: #776e71"># skladame prikaz pre system Linux</span>
+            <span style="color: #e7e9db">response</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">os</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">system(command</span><span style="color: #5bc4bf">=</span><span style="color: #e7e9db">cmd)</span>  <span style="color: #776e71"># pomocou modulu os ho spustame</span>
+            <span style="color: #815ba4">if</span> <span style="color: #e7e9db">response</span> <span style="color: #5bc4bf">==</span> <span style="color: #f99b15">0</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># ak je vysledok 0 tak je aktivny</span>
+                <span style="color: #e7e9db">hosts_up</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">add(values)</span>  <span style="color: #776e71"># pridaj hodnotu do SETu hosts_up</span>
+
+            <span style="color: #815ba4">else</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># INAK</span>
+                <span style="color: #815ba4">pass</span>  <span style="color: #776e71"># nerob nic a pokracuj v programe</span>
+    <span style="color: #e7e9db">print(hosts_up)</span>  <span style="color: #776e71"># vypis hostov na obrazovku</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">host</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">hosts_up:</span>  <span style="color: #776e71"># prejdi vsetkymi pocitacmi co su hore</span>
+        <span style="color: #e7e9db">vysledok_skenovania_portov</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">portscanner(host)</span>  <span style="color: #776e71"># skenuj porty</span>
+        <span style="color: #e7e9db">print(host,</span> <span style="color: #e7e9db">vysledok_skenovania_portov)</span>  <span style="color: #776e71"># vypis logicky vysledok ci ma</span>
+        <span style="color: #776e71"># otvorene porty alebo nie</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"DONE"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># vypis, ze program skoncil.</span>
+</pre></div>
+        <br> <br>
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">VYSKÚŠAJTE A PRISPǑSOBTE SI KÓD</h4>
+            <p>Tento program je napísaný tak aby vám krok za krokom ukázal čo robí.
+              Ak si prezriete funkcie, zistíte, že väčšina vypočítava rozsah skenovaných
+              IP adries. Študujte kód a pokúste sa ho optimalizovať. Prispôsobte si kód svojim potrebám.
+              <br>
+              Ak ste skúsenejší Pythonista, doprogramujte si Multithreading, alebo
+              inú funkcionalitu. Napríklad detekciu OS podľa otvorených portov :)
+            </p>
+            </div>
+
+      </p>
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">P O Z O R !!!</h4>
+          <p>Skenovanie siete je AKTÍVNA forma získavania informácií a preto môže
+            byť hodnotená ako nepriateľská aktivita alebo ranné štádium útoku.
+            Treba ju používať veľmi opatrne a s rozumom. <br>
+            Ak LAN lokálna sieť Wifi alebo Ethernet - nie je vaša tak je rozumné
+            si predom zadovážiť súhlas majiteľa.
+          </p>
+        </div>
+
+
+
+			<li><h3>Nmap</h3></li>
+      <p>Najčastejšie využívaný skener, ktorý má veľa možností nastavenia a dokáže
+        poskytnúť množstvo údajov o skenovanom objekte je NMAP. Ak ho ešte nemáte
+        tak ho nainštalujete do Linuxu cez packet manager napríklad takto:
+        <br> <br>
+        <code>apt-get install nmap</code>
+        <br> <br>
+        Ak chceme len vedieť čo je v našom bezprostrednom okolí tak pomocou príkazov
+        <code>ip addr</code> alebo <code>ifconfig</code> zistíme našu IP adresu,
+        prípadne IP adresu našeho routeru. Ak zadáme príkaz:
+        <br> <br>
+        <code>nmap nasaIP/24</code>
+        <br> <br>
+        NMAP sa spustí a prebehne 255 adries v našom okolí. To znamená xxx.xxx.xxx.1 až
+        xxx.xxx.xxx.255. Číslo 24 znamená rozsah/širku skenovaného pásma. Čím je číslo
+        menšie tým je skenovaných adries viac. Napríklad /16 znamená až 65536 adries
+        a /0 znamená prakticky celý internet. Skôr než sa do takého skenu pustíte
+        pripravte sa, že váš počítač bude pracovať dlho na plné obrátky a bude
+        to stáť veľa elektrickej energie.
+        <br>
+        Ako už vieme z časti Linuxového kurzu o architektúre siete. Takýto sken vám
+        toho moc neprinesie, lebo väčšina počítačov je umiestnená za ROUTERMI a
+        FIREWALLMI. Vrátime sa však k NMAPu, ktorý umožňuje aj skenovať porty,
+        získavať info o pripojených zariadeniach. Napríklad:
+        <br> <br>
+        <code>nmap -A nasaCielovaIP/24</code>
+        <br> <br>
+        Spustí detekciu Operačného systému, verzií, skriptov a traceroute. Príkaz:
+        <br> <br>
+        <code>nmap -sV nasaCielovaIP/24</code>
+        <br> <br>
+        Vyskúša všetky porty a snaží sa určiť aký servis ich využíva. NMAP umožňuje
+        obrovské množstvo nastavení a je možné pomocou neho získať veľa dôležitých
+        informácií o zariadení pripojené k adrese. Umožňuje buď priamo, alebo cez
+        Linuxové PIPE ukladať výsledky skenu do súborov v rôznych formátoch.
+      </p>
+
+      <li><h3>Nessus Pro a OpenVAS</h3></li>
+      <p> Na vrchole potravinového reťazca v období dinosaurov bol Tyranosaurus
+        Rex. To všetci vieme, ale na skenovanie siete je nám nanič. Na vrchole
+        medzi skenermi sú komerčný Nessus Pro a OpenSource OpenVAS. Tieto skenery
+        obsahujú rozsiahle databázy a vyhodnocujú priamo zraniteľnosti, ktoré
+        dokážu graficky zobrazovať podľa závažnosti a sú profesionálnym nástrojom
+        Penetračných testerov, hackerov a ITSec špecialistov.
+        <br>
+        Tieto úžasné programy však zatiaľ nepotrebujeme a preto sa budeme naďalej
+        zaoberať NMAPom a našimi Pythonovskými schopnosťami.
+      </p>
+      <div class="alert alert-secondary" role="alert">
+          <h4 class="alert-heading">Ú L O H A</h4>
+          <p>Zoskenujte svoju domácu sieť a zistite či máte nejaké pootvárané porty. <br>
+
+            AK SIEŤ NIE JE VAŠA: <br> SPÝTAJTE SA PREDTÝM MAJITEĽA ČI VÁM TO DOVOLÍ.
+          </p>
+        </div>
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme si ukázali jednoduché skenovanie siete pomocou
+      základných príkazov Linuxu, pomocou jednoduchého Python skriptu a doprogramu
+      NMAP. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
