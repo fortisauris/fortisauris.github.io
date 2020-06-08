@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 3 - Hrajeme sa so sieťovou mačkou</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Hacking 3 - Hrajeme sa so sieťovou mačkou</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>NETCAT - nástroj sieťovej záchrany</h3></li>
+      <p>Problémy so sieťami majú veľa podôb a často končia niekoľkohodinovým
+        hľadaním problému a ďalším časom pri frustrujúcom riešení nejakej banálnej
+        chyby. Aj v svete domácich routerov je to otravné a čo tak ešte v
+        datacentrách kde sa tiahnu kilometre káblov, hučí tisíce ventilátorov a
+        myši prehryznú 10 káblov denne. <br>
+        Našťastie niekto vymyslel šikovnú utilitku menom NETCAT, ktorú možno
+        použiť aj ako stetoskop na sieťové pripojenie. Má mnoho rôznych funkcionalít
+        a použiťí. <br>
+        Také úplne klasické je jednoduchý stetoskop na port sieťového rozhrania:
+        <br> <br>
+        <code>
+        ncat -l -k -p 6868
+        </code>
+        <br> <br>
+        NETCAT v móde zvanom LISTENER.
+         NETCAT teraz počúva na porte 6868 a všetky dáta zobrazuje na obrazovke.
+         Na druhej strane sa napojíme na port a pošleme tam nejaké data:
+         <br> <br>
+         <code>
+         ncat CieľováIP 6868
+         </code>
+         <br> <br>
+         Na obidvoch stranách je možné písať a po odolaní sa text objaví na
+         termináli druhého počítača.
+         <div class="alert alert-warning" role="alert">
+             <h4 class="alert-heading">P O Z O R</h4>
+             <p>Komunikácia medzi počítačmi prebieha NEŠIFROVANE. Ktokoľvek ju
+               môže zachytiť a zneužiť. V niektorých verziách NETCAT dáva možnosť
+               nastaviť šifrovanie pomocou pridania SSL šifrovanej vrstvy.
+               Ani tak však NETCAT nie je 100 percentne tým prostriedkom, ktorý
+               by ste mali na komunikáciu štandardne používať.
+             </p>
+           </div>
+         NETCAT nám umožňuje presúvať tiež súbory potlačiť PUSH- potiahnuť PULL,
+         respektíve obsah súborov. Pre potlačenie PUSH súboru spustíme na
+         jednej strane LISTENER:
+         <br> <br>
+         <code>
+           ncat -l -k -p 6868 > NAZOV_SUBORU
+          </code>
+          <br> <br>
+          Na druhom počítači zadáme cieľovú IP adresu, port a potlačíme súbor:
+          <br> <br>
+          <code>
+            ncat -w3 nasaCielovaIP 6868 < NAZOV_SUBORU
+           </code>
+           <br> <br>
+           <div class="alert alert-secondary" role="alert">
+               <h4 class="alert-heading">Ú L O H A</h4>
+               <p>Funguje to aj naopak systémom PULL. Skúste sami prísť na to ako :)
+               </p>
+             </div>
+             <br>
+             NETCAT toho zvládne ale omnoho viac. Napríklad jednoduchý PortScanner:
+             <br> <br>
+             <code>
+               ncat -w1 -v -z  nasaCielovaIP 0-100
+              </code>
+              <br> <br>
+              NETCAT s nastavenou verbozitou /ukecanosť/ čaká 1sekundu na odpoveď,
+              neposiela žiadne dáta a skenuje na cieľovej IP porty 0 až 100.
+
+      </p>
+
+      <li><h3>Jednoduché zadné vrátka pomocou NETCATu </h3></li>
+      <p>
+        Ak je na počítači nainštalovaný NETCAT s podporou -e execute command, vieme
+        jednoducho spustiť BACKDOOR tým, že mu dáme na LISTENERI sprístupniť
+        BASH skriptovací jazyk, ktorý vykonáva priamo príkazy Linuxového príkazového
+        riadku:
+        <br> <br>
+        <code>
+          ncat -l -k -p 6868 -e /bin/bash
+         </code>
+         Ak sa na počítač napojíme pomocou NETCATU z druhého počítača tak nám
+         prakticky poskytne všetky dostupné príkazy Linuxu a možnosť prezerať,
+         kopírovať a vymazávať súbory z druhého počítača. <b>-e</b> znamená
+         vykonaj kód a môžeme tam dať odkaz na textový súbor, python, alebo
+         čokoľvek.
+         <div class="alert alert-primary" role="alert">
+             <h4 class="alert-heading">Rôzne verzie NETCATu</h4>
+             <p>Táto funkcia je relatívne nebezpečná a preto ju niektoré verzie NETCATu
+               zámerne nepodporujú. Ak ju chcete doinštalovať tak musíte NETCAT odinštalovať
+               a nanovo nainštalovať verziu s podporou <b>-e</b>.
+             </p>
+           </div>
+           <div class="alert alert-secondary" role="alert">
+               <h4 class="alert-heading">WINDOWS</h4>
+               <p>Na Windowse darmo budete hľadať BASH, Treba spustiť <code>cmd.exe</code>
+               </p>
+             </div>
+             <div class="alert alert-primary" role="alert">
+                 <h4 class="alert-heading">ÚLOHA</h4>
+                 <p>Ak máte na jednej strane spustený LISTENER na porte 6868 tak
+                   prečo to neskúsiť opačne a nespustiť na ňom REVERZNÝ BACKDOOR.
+                   Vyskúšajte to.
+                 </p>
+               </div>
+      </p>
+
+
+
+
+
+
+			<li><h3>Server ZMRZLINÁR napísaný v Pythone</h3></li>
+      <p>Nemáte na počítači NETCAT a radi by ste s ním nejako komunikovali? Stačí
+        pár riadkov v Pythone a SOCKET server je na svete:
+
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">socket</span>
+
+<span style="color: #776e71">"""</span>
+<span style="color: #776e71">Tento program je urceny iba pre ucebne ucely tejto stranky a pochopenie</span>
+<span style="color: #776e71">principov komunikacie prostrednictvom siete.</span>
+<span style="color: #776e71">Mozno ho pouzivat pod GPL2 licenciou - https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</span>
+
+<span style="color: #776e71">Bol pisany v Python 3.8.3 a pre pouzitie v nizsich verziach bude mozno potrebne</span>
+<span style="color: #776e71">upravit kod.</span>
+
+<span style="color: #776e71">Nepodporuje ziadne bezpecnostne funkcie ako autorizacia alebo autentifikacia, a</span>
+<span style="color: #776e71">preto nie je vhodny na AKEKOLVEK INE POUZITIE ako testovanie svojich schopnosti.</span>
+<span style="color: #776e71">Bol testovany iba na Linux Debian 10 a nema napisane testy ani dokumentaciu.</span>
+<span style="color: #776e71">FORTIS AURIS 2020</span>
+<span style="color: #776e71">"""</span>
+
+<span style="color: #815ba4">while</span> <span style="color: #815ba4">True</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">HOST</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">''</span> <span style="color: #776e71"># Ak nie je specifikovana adresa beru sa vsetky rozhrania</span>
+    <span style="color: #e7e9db">PORT</span> <span style="color: #5bc4bf">=</span> <span style="color: #f99b15">6868</span>  <span style="color: #776e71"># Nejaky nevyuzity port</span>
+    <span style="color: #815ba4">with</span> <span style="color: #e7e9db">socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">socket(socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">AF_INET,</span> <span style="color: #e7e9db">socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">SOCK_STREAM)</span> <span style="color: #815ba4">as</span> <span style="color: #e7e9db">s:</span> <span style="color: #776e71"># S otvorenym SOCKETOM:</span>
+        <span style="color: #e7e9db">s</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">setsockopt(socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">SOL_SOCKET,</span> <span style="color: #e7e9db">socket</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">SO_REUSEADDR,</span> <span style="color: #f99b15">1</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># Moznost pouzit port ihned po ukonceni</span>
+        <span style="color: #e7e9db">s</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">bind((HOST,</span> <span style="color: #e7e9db">PORT))</span>  <span style="color: #776e71"># Spoj IP a port</span>
+        <span style="color: #e7e9db">s</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">listen()</span>  <span style="color: #776e71"># pocuvaj na SOCKETE</span>
+        <span style="color: #e7e9db">conn,</span> <span style="color: #e7e9db">addr</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">s</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">accept()</span>  <span style="color: #776e71"># Akceptuj pripojenie</span>
+        <span style="color: #e7e9db">conn</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">send(bytes(</span><span style="color: #48b685">"TU ZMRZLINAR, CO SI ZELATE?</span><span style="color: #f99b15">\n</span><span style="color: #48b685">"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"ascii"</span><span style="color: #e7e9db">))</span>  <span style="color: #776e71"># Posli spravu KLIENTOVI</span>
+        <span style="color: #815ba4">with</span> <span style="color: #e7e9db">conn:</span>  <span style="color: #776e71"># S uspesne konnektnutym KLIENTOM</span>
+            <span style="color: #e7e9db">print(</span><span style="color: #48b685">'SPOJENIE S '</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">addr,</span> <span style="color: #48b685">" BOLO USPESNE NADVIAZANE!"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># Oznam KTO sa pripojil</span>
+            <span style="color: #815ba4">while</span> <span style="color: #815ba4">True</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Nekonecny cyklus</span>
+                <span style="color: #815ba4">try</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Vyskusaj urobit:</span>
+                    <span style="color: #e7e9db">data</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">conn</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">recv(</span><span style="color: #f99b15">1024</span><span style="color: #e7e9db">)</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">decode(encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"ascii"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># prijat data v dlzke 1024 bytov</span>
+                    <span style="color: #815ba4">if</span> <span style="color: #5bc4bf">not</span> <span style="color: #e7e9db">data</span> <span style="color: #5bc4bf">or</span> <span style="color: #e7e9db">data[:</span><span style="color: #5bc4bf">-</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">"pistaciovu a pronto"</span><span style="color: #e7e9db">:</span> <span style="color: #776e71"># ak sa data - \n na konci rovnaju</span>
+                        <span style="color: #e7e9db">print(</span><span style="color: #48b685">"SPOJENIE S "</span><span style="color: #e7e9db">,addr,</span> <span style="color: #48b685">"BOLO USPESNE UKONCENE</span><span style="color: #f99b15">\n</span><span style="color: #48b685">"</span><span style="color: #e7e9db">)</span><span style="color: #776e71"># Ukonci spojenie s nezdvorilym klientom</span>
+                        <span style="color: #815ba4">break</span>  <span style="color: #776e71"># prerus cyklus a cakaj na spojenie</span>
+                <span style="color: #815ba4">except</span> <span style="color: #ef6155">KeyboardInterrupt</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># Odchyt prerusenie CTRL C</span>
+                    <span style="color: #e7e9db">message</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">input(</span><span style="color: #48b685">"ZMRZLINAR:"</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># Napis svoju spravu pre klienta</span>
+                    <span style="color: #815ba4">if</span> <span style="color: #e7e9db">message</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">'q'</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># ak zadas q tak prerusis spojenie s KLIENTOM a ukoncis server</span>
+                        <span style="color: #e7e9db">s</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">close()</span>  <span style="color: #776e71"># ZAVRI SOCKET - ukonci spojenie</span>
+                    <span style="color: #e7e9db">conn</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">send(bytes(</span><span style="color: #48b685">"ZMRZLINAR :"</span><span style="color: #5bc4bf">+</span><span style="color: #e7e9db">message</span><span style="color: #5bc4bf">+</span><span style="color: #48b685">"</span><span style="color: #f99b15">\n</span><span style="color: #48b685">"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"ascii"</span><span style="color: #e7e9db">))</span>  <span style="color: #776e71"># Posli spravu zo servera KLIENTOVI</span>
+                <span style="color: #815ba4">finally</span><span style="color: #e7e9db">:</span>  <span style="color: #776e71"># KOnecne UROB</span>
+                    <span style="color: #815ba4">pass</span>  <span style="color: #776e71"># Neurob nic a pokracuj v CYKLE.</span>
+</pre></div>
+  Tento program možno nakontaktovať z iného počítača pomocou <code>ncat nasaCielovaIP 6868</code>.
+  Ak bolo pripojenie úspešné, ozve sa vám ZMRZLINÁR.
+  <div class="alert alert-primary" role="alert">
+      <h4 class="alert-heading">ÚLOHA</h4>
+      <p>Skúste napísať klienta v Pythone a pripojiť sa bez NETCATU. Čo takto
+        spraviť nejaké jednoduché šifrovanie? Trúfnete si na to ? Vyskúšajte to.
+      </p>
+    </div>
+      </p>
+
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme si ukázali NETCAT a niektoré jeho funkcie.
+      Spravili sme si jednoduchý BACKDOOR do počítača ako aj SOCKET server v Pythone. Nabudúce budeme túto
+      komunikáciu odpočúvať a ukladať do súborov. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
