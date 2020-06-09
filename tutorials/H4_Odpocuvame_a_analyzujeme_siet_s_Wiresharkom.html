@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 4 - Odpočúvame a analyzujeme sieť s Wiresharkom</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Hacking 4 - Odpočúvame a analyzujeme sieťovú komunikáciu s
+             Wiresharkom</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>Čo je to ňuchač SNIFFER ?</h3></li>
+      <p> SNIFFER alebo po slovensky ňuchač je program, ktorý dokáže zachytávať,
+        analyzovať a triediť packety, ktoré putujú po sieti. Práve touto komunikáciou
+        putujú citlivé dáta a heslá cez sieť.
+        <br>
+        Na to aby ste mohli zachytávať všetky packety na sieti musíte mať sieťové
+        rozhranie pustené v MONITOR alebo tzv. PROMISKUITNOM móde.
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">P O Z O R</h4>
+            <p>Niektoré sieťové karty a adaptéry nepodporujú tieto módy.
+            </p>
+          </div>
+        Karta v týchto módoch zachytáva všetky packety zo siete a to aj také,
+        ktoré jej nie sú určené.  Najčastejšie používaným terminálovým snifferom je
+        program <code>tcpdump</code>, ktorý dokáže nahrávať sieťovú komunikáciu
+        podobne ako keď kamera nahráva video. Napríklad:
+        <br> <br>
+        <code>
+        tcpdump host nasaCielovaIP -w Komunikacia.cap
+        </code>
+        <br> <br>
+        Program začne okamžite nahrávať všetku komunikáciu z našej cieľovej IP
+        adresy a ukladať ju do súboru Komunikácia.cap. Súbory .cap a .pcap možno
+        v SNIFFEROCH neskôr prehrávať ako video a dozvedieť sa veľa zaújimavého.
+        Pomocou filtrov dokážeme nastaviť programu napríklad, že chceme iba komunikáciu
+        zo špecifickej adresy a portu.
+        <br> <br>
+        <code>
+        tcpdump host nasaCielovaIP and -vv src port 6868
+        </code>
+        <br> <br>
+        Teraz program bude zobrazovať iba prichádzajúcu z portu 6868 z našej
+        cieľovej IP. Alebo keď <code>src</code> vymeníme za <code>dst</code> tak
+        bude zobrazovať iba packety, ktoré na IP do portu smerujú. <br>
+        Na Internete existuje celá rada pripravených filtrov, ktoré umožňujú
+        užívateľské mená a heslá, Cookies a podobne.
+
+      </p>
+
+      <li><h3>Wireshark</h3></li>
+      <p>
+        Opustíme teraz priestor Linuxového príkazového riadku a spustíme si program
+        Wireshark, ktorý patrí medzi najobľúbenejší SNIFFER lomka ANALYZÉR. Je
+        napísaný v jazyku Lua a má výborné grafické rozhranie, ktoré dokáže
+        zachytené PACKETY rozpitvať do detailu. <br>
+        Má veľké množstvo možností rozšírenia a nastavení. Dokáže nastaviť
+        separátne filtre pre záznam CAPTURE a zobrazovanie. Pozná množstvo
+        sieťových protokolov vrátanie Telefonických, Video a iných.
+        <br> <br>
+        Po spustení Wiresharku si vyberieme, ktoré sieťové rozhranie chceme
+        monitorovať. Môžeme si vybrať aj Bluetooth alebo USB porty.
+        Monitor spustíme tlačidlom so žraločou plutvou v ľavom rohu okna.
+        V momente sa na nás vysype celý sieťový odpad. ARP, ICMP, SSDP, UDP, TLS.
+        Packety sú zoradené podľa času a farebne označené.
+        <br> <br>
+        Pod oknom packetov sa nachádza okno v ktorom si môžete rozklikať jeho
+        hlavičky a dozviete sa všetky podrobnosti ako ich zaznamenávajú jednotlivé
+        vrstvy a protokoly sieťovej komunikácie.
+        <br> <br>
+        V najnižšom okne máme hexadecimálny výpis jeho obsahu. Ak je obsahom
+        otvorený nešifrovaný text tak ho uvidíme práve tu. Nepotrebujeme zobrazovať
+        všetky packety takže ich odfiltrujeme. Opäť nás zaujíma iba naša cieľová
+        adresa:
+        <br> <br>
+        <code>
+        ip.addr == nasaCielovaIP
+        </code>
+        <br> <br>
+        V dalšej špecifikácii filtra budeme pokračovať tým, že chceme iba packety,
+        ktoré posiela <code>nasaCielovaIP</code> z portu 6868.
+        <br> <br>
+        <code>
+        tcp.srcport==6868 and ip.src == nasaCielovaIP
+        </code>
+        <br> <br>
+        Ak máme na druhej strane pusteného Pythonového Zmrlzinára tak zachytíme
+        časť jeho komunikácie vo forme packetov. Ale my uz vieme, že Komunikácia
+        prebieha zatiaľ nešifrovane a preto by sa v hexadecimálnych výpisoch mala
+        komunikácia objaviť. Preto sa ju pokúsime vyhľadať v texte pomocou
+        <b>contains</b>:
+        <br> <br>
+        <code>
+        tcp.srcport==6868 and ip.src == 192.168.1.33 and tcp contains Zmrzlinar
+        </code>
+        <br> <br>
+        Teraz nám Wireshark spoľahlivo ukáže v ktorom Packete sa tento text nachádza.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">SPÁJANIE PACKETOV</h4>
+            <p>Packety, ktoré cestujú po sieti sú rôzne poprehadzované a ak chceme
+              ich obsah celej relácie alebo streamu tak ich musíme pomocou filtrov
+              pospájať. Špecializované programy vedia spoľahlivo spájať packety a
+              exportovať ich do pôvodných súborov.
+              Tie sa potom ukladajú do adresárov, kde sa dajú prehliadať. Ak je
+              samozrejme obsah packetov šifrovaný napr. HTTPS tak bez príslušných
+              šifrovacích kľúčov. Ale k tomu sa dostaneme v budúcej lekcií.
+            </p>
+          </div>
+      </p>
+
+      <li><h3>Umiestnenie sieťového Odposluchu</h3></li>
+      <p>
+        Realita odpočúvania siete je oveľa komplikovanejšia ako by sa zdalo.
+        Musíte mať odposluch umiestnený tak aby sa na to hneď neprišlo a zároveň
+        aby mal prístupnú tú časť siete kde potrebujete zachytávať PACKETY.
+        Najlepšie je napojiť ho samozrejme na hlavný switch za Firewall do
+        monitorovacej prípojky. Ale nie je jednoduché sa k nej dostať a ak je
+        admin šikovný tak si to hneď všimne.
+        <br> <br>
+        Rozumným riešením je napojiť špeciálne zariadenie  do nejakej zabudnutej Ethernetovej zásuvky
+        kde je v blízkosti napájanie alebo wifi. Môže sa kľudne tváriť ako adaptér
+        akých sa váľajú pod stolmi desiatky. A napríklad nebude pracovať 24 hodín
+        denne je slušná šanca, že sa jeho stopa v logoch prehliadne.
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">Nastavenie Firewallov</h4>
+            <p>Pred odposluchom sa možno chrániť napríklad segmentáciou siete.
+              To znamená rozdeliť sieť na úseky pomocou routrov a tým pádom môže
+              byť odposluch relatívne neúčinný. Môže zachytiť iba malý fragment
+              komunikácie.
+              <br> <br>
+              Firewally treba nastaviť nie len na filtráciu packetov do siete ale
+               aj zo siete aby sa nestalo, že prostredníctvom nejakého nevyužívaného
+               portu potečú dáta smerom k útočníkom. Extra veľkú pozornosť  treba venovať
+               portu 80 HTTP a 447 HTTPS, ktoré má väčšina Firewallov von zo siete
+               otvorených.
+               <br> <br>
+               Miesto kde by mohol byť napojený odposluch treba pravidelne kontrolovať
+               a prehliadať. Áno aj tú nevyužívanú Ethernetovú zásuvku v zasadačke
+               za obývacou stenou. Tiež treba sledovať DHCP server akým zariadeniam
+               poskytuje IP adresy.
+            </p>
+          </div>
+      </p>
+
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme predviedli odpočúvanie siete a prezreli sme si
+      Zmrzlinárove packety. Podobne ako v šetriči Matrix sa vám zdá tajomstvo
+      záhadných packetov neriešiteľné. Garantujeme Vám, že po podrobnejšom skúmaní
+      sa Vám jednotlivé protokoly a vrstvy dostanú do povedomia a za istý čas pre
+      Vás prestanú byť záhadou. Dokonca budete vedieť na pohľad identifikovať nejaký
+      nezvyčajný TRAFFIC na konkrétnych portoch. Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
