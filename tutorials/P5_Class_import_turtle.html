@@ -279,7 +279,27 @@ READ BINARY.
             stačí vedieť, že existujú no čoskoro už napíšete vlastný dekorátor v Pythone.
           </p>
         </div>
-
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">DEDIČNOSŤ TRIED</h4>
+            <p>Podobne ako každý človek má rodičov a môže mať deti tak podobne
+              môžu mať triedy svojho rodiča <b>PARENT</b> a dieťa <b>CHILD</b>.
+              Ak na začiatku triedy uvedieťe do zátvorky inú triedu automaticky
+              preberie všetky jej metódy:
+              <br> <br>
+              <code>
+                class Dieťa(Rodič):
+              </code> <br> <br>
+              Pozor, ak chcete naimportovať aj magickú metódu <code>__init__(self)</code>
+              musíte ju nainportovať do <code>__init__(self)</code> z rodiča:
+              <br> <br>
+              <code>
+                super().__init__()
+              </code>
+              <br> <br>
+              Teraz má trieda Dieťa okrem metód aj <code>__init__()</code> svojho
+              Rodiča.
+            </p>
+          </div>
 
 
 		</ul>

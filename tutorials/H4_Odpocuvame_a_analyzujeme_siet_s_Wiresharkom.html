@@ -33,6 +33,18 @@
             <p>Niektoré sieťové karty a adaptéry nepodporujú tieto módy.
             </p>
           </div>
+
+          <div class="alert alert-primary" role="alert">
+              <h4 class="alert-heading">ARP Spoofing</h4>
+              <p>Možno si spomínate ako sme si pri sieťových technológiách predstavili
+                protokol ARP, ktorý zoznamuje počítače a routre pomocou MAC adries. Ak
+                zaplavíme router a <code>našuCieľovúIP</code> množstvom falošných
+                PACKETOV, router sa automaticky prepne do režimu FORWARDING a
+                posiela všetky PACKETY v sieti na všetky počítače. <br>
+                Toto sa dá využiť na to aby sme oklamali router a zároveň aj
+                <code>našuCieľovúIP</code>.
+              </p>
+            </div>
         Karta v týchto módoch zachytáva všetky packety zo siete a to aj také,
         ktoré jej nie sú určené.  Najčastejšie používaným terminálovým snifferom je
         program <code>tcpdump</code>, ktorý dokáže nahrávať sieťovú komunikáciu
@@ -57,7 +69,6 @@
         bude zobrazovať iba packety, ktoré na IP do portu smerujú. <br>
         Na Internete existuje celá rada pripravených filtrov, ktoré umožňujú
         užívateľské mená a heslá, Cookies a podobne.
-
       </p>
 
       <li><h3>Wireshark</h3></li>
