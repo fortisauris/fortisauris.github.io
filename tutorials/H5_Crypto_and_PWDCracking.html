@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 5 - Kryptografia a lúskanie hesiel</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Hacking 5 - Kryptografia a lúskanie hesiel</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>História šifier</h3></li>
+      <p>
+        Cezarova šifra - jednoduchá šifra, ktorá na dešifrovanie
+        a zašifrovanie používala palice rôznej hrúbky. Pásik pergamenu sa omotal
+        okolo palice a správa sa napísala zvisle. Potom sa pásik doplnil nezmyselnými
+        písmenami. <br>
+        Na jej rozlúštenie ste potrebovali palicu tej istej hrúbky inak výsledok
+        nedával zmysel. Nahradil ju šifrovací disk, ktorý vedel nastaviť posun v
+        abecede. Zostal v službách armád a panovníkov až do začiatku 20 storočia.<br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">random</span>
+
+<span style="color: #e7e9db">symbols</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">ceasar_cypher</span><span style="color: #e7e9db">(plaintext,</span> <span style="color: #e7e9db">posun):</span>
+    <span style="color: #e7e9db">encrypted_text</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">''</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">len(plaintext)):</span>
+        <span style="color: #e7e9db">encrypted_text</span> <span style="color: #5bc4bf">+=</span> <span style="color: #e7e9db">plaintext[i]</span>
+        <span style="color: #e7e9db">encrypted_text</span> <span style="color: #5bc4bf">+=</span> <span style="color: #e7e9db">dopln_znaky(posun)</span>
+    <span style="color: #776e71"># encrypted_text += dopln_znaky(posun)</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">encrypted_text</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">dopln_znaky</span><span style="color: #e7e9db">(x):</span>
+    <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str()</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">k</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,x):</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">+=</span> <span style="color: #e7e9db">random</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">choice(symbols)</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">result</span>
+
+<span style="color: #815ba4">if</span> <span style="color: #ef6155">__name__</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">"__main__"</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">CS</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">ceasar_cypher(</span><span style="color: #48b685">"TOTOJEDOMACAULOHA"</span><span style="color: #e7e9db">,</span> <span style="color: #f99b15">11</span><span style="color: #e7e9db">)</span>
+    <span style="color: #e7e9db">print(CS)</span>
+</pre></div>
+
+        Vernamova šifra - bola jednoduchá šifra, ktorá používala jednorázový kľúč
+        (One Time Pad). Ak druhá strana nemala rovnaký kľúč nebolo možné šifru
+        odšifrovať. Po použití sa kľúč zničil. Pomocou jednoduchých matematických
+        operácií PLUS a MINUS (my však použijeme XOR) sa dala správa PLAINTEXT
+        zašifrovať bez pomoci počítača. <br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #815ba4">def</span> <span style="color: #06b6ef">apply_xor_operation</span><span style="color: #e7e9db">(value</span> <span style="color: #e7e9db">:</span> <span style="color: #e7e9db">str,</span> <span style="color: #e7e9db">key</span> <span style="color: #e7e9db">:</span> <span style="color: #e7e9db">str):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia aplikuje vypocet bitwise XOR hodnoty a kluca hexadecimalne cislo 0x00 do 0xff v STRINGU.</span>
+<span style="color: #776e71">    Vysledkom je hexadecimalne cislo od 00 do FF tj. 0 do 255.</span>
+<span style="color: #776e71">    parameter::: value - STRING s hex cislom od 0x00 do 0xff</span>
+<span style="color: #776e71">    parameter::: key - STRING s hex cislom od 0x00 do 0xff</span>
+<span style="color: #776e71">    return ::: vysledok vypoctu - hex cislom od 0x00 do 0xff</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">value</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">eval(value)</span>
+    <span style="color: #e7e9db">key</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">eval(key)</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">hex(value</span> <span style="color: #5bc4bf">^</span> <span style="color: #e7e9db">key)</span>
+
+
+<span style="color: #815ba4">if</span> <span style="color: #ef6155">__name__</span> <span style="color: #5bc4bf">==</span> <span style="color: #48b685">"__main__"</span><span style="color: #e7e9db">:</span>
+    <span style="color: #e7e9db">value</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">hex(random</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">randint(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">255</span><span style="color: #e7e9db">))</span>
+    <span style="color: #e7e9db">key</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">hex(random</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">randint(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">255</span><span style="color: #e7e9db">))</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"VALUE : "</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">value,</span> <span style="color: #48b685">" KEY : "</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">key,</span><span style="color: #48b685">" RESULT : "</span><span style="color: #e7e9db">,apply_xor_operation(</span> <span style="color: #e7e9db">value,</span> <span style="color: #e7e9db">key))</span>
+</pre></div>
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">RANDOM a PSEUDORANDOM ČÍSLA</h4>
+            <p>Problémom šifier postavených na náhodných číslach je to, že musia
+              byť naozaj náhodné. Ak ich náhodnosť nie je dostatočná tak je možné
+              ich prelomiť. Preto treba používať iba generátory iba špeciálne
+              určené pre kryptografiu !!!
+            </p>
+          </div>
+
+        RANDOM A PSEUDORANDOM ČÍSLA
+
+        Enigma - nemecký elektromechanický šifrovací stroj, ktorý pomocou širokého nastavenia
+        mechanických rotorov a elektrických prepojov šifroval pre človeka neprelomiteľnú
+        šifru. Jeho rozlúsknutie počítačom Colosuss, ktorý zostrojil Alan Turingom
+        a jeho tým z Bletchley Parku bol jedným z prelomovým momentom druhej
+        svetovej vojny.
+        Skladala sa z dvoch častí:
+        A.Mechanickej časti s vymeniteľnými šifrovacími rotormi, ktoré sa otáčali.
+        B.elektrického permutačného boxu, kde sa modifikovali výstupy pomocou káblikov
+
+      </p>
+
+      <li><h3>Moderné šifrovanie</h3></li>
+      <p>
+        Symetrické Šifrovanie - je rýchle a jeho hlavnou slabinou je fakt, že na
+        obidvoch stranách komunikácie musia byť totožné šifrovacie kľúče.
+        Tie sú pomocou jednoduchých matematických operácií ako napríklad XOR
+        zrátané so správou PLAINTEXT a výsledkom je zašifrovaný obsah.
+
+        Príklad SP jednoduchého šifrovania:
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #815ba4">def</span> <span style="color: #06b6ef">four_bit_sbox1</span><span style="color: #e7e9db">(input_value:</span> <span style="color: #e7e9db">int):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia 4bitov0ho SBOXU prijima ako argument číslo od 0 to 16, ktoré potom</span>
+<span style="color: #776e71">    zmení na iné podľa prednastavených parametrov v boxe. Príklad ak je číslo 5</span>
+<span style="color: #776e71">    tak na výstupe je zmenené na 13.</span>
+<span style="color: #776e71">    parameter ::: input value - INTEGER od 0 do 16</span>
+<span style="color: #776e71">    return ::: zmenené číslo INTEGER</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #776e71"># normal_values = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]</span>
+    <span style="color: #e7e9db">box_rules</span><span style="color: #5bc4bf">=</span><span style="color: #e7e9db">[</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">8</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">15</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">9</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">13</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">2</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">7</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">11</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">10</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">6</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">14</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">12</span><span style="color: #e7e9db">]</span>
+    <span style="color: #776e71"># [print(normal_values[i], box_rules[i]) for i in normal_values]</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">box_rules[input_value]</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">four_bit_sbox2</span><span style="color: #e7e9db">(input_value:</span> <span style="color: #e7e9db">int):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia 4bitov0ho SBOXU prijima ako argument číslo od 0 to 15, ktoré potom</span>
+<span style="color: #776e71">    zmení na iné podľa prednastavených parametrov v boxe. Príklad ak je číslo 5</span>
+<span style="color: #776e71">    tak na výstupe je zmenené na 11.</span>
+<span style="color: #776e71">    parameter ::: input value - INTEGER od 0 do 16</span>
+<span style="color: #776e71">    return ::: zmenené číslo INTEGER</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #776e71"># normal_values = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]</span>
+    <span style="color: #e7e9db">box_rules</span><span style="color: #5bc4bf">=</span><span style="color: #e7e9db">[</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">12</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">15</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">6</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">9</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">11</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">13</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">2</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">7</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">10</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">8</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">14</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">]</span>
+    <span style="color: #776e71"># [print(normal_values[i], box_rules[i]) for i in normal_values]</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">box_rules[input_value]</span>
+
+<span style="color: #815ba4">def</span> <span style="color: #06b6ef">eight_bit_permutation_box</span><span style="color: #e7e9db">(value:</span> <span style="color: #e7e9db">str):</span>
+    <span style="color: #776e71">"""</span>
+<span style="color: #776e71">    Funkcia simuluje Permutačný box, ktorý zoberie na vstupe binárny 8bitový string</span>
+<span style="color: #776e71">    očistený od znakov 0b na začiatku binárneho stringu. V definovanom prázdnom LISTE final_value</span>
+<span style="color: #776e71">    mení postupne hodnoty podľa toho kde sa nachádzajú. Napríklad ak je piaty bit v stringu 0</span>
+<span style="color: #776e71">    tak druhý znak vo final_value bude 1. Následne z listu final_value zloží výsledný</span>
+<span style="color: #776e71">    STRING.</span>
+<span style="color: #776e71">    parameter::: 8bitové binárne číslo bez 0b na začiatku STRING</span>
+<span style="color: #776e71">    return::: 8bitové binárne číslo s poprehadzovanými hodnotami STRING</span>
+<span style="color: #776e71">    """</span>
+    <span style="color: #e7e9db">final_value</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">[</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># definuje novy list obsahujuci 8 nul.</span>
+    <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str()</span>  <span style="color: #776e71"># definuje vysledok ako prazdny STRING.</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"LENGTH OF VALUE BEFORE ZEROING"</span><span style="color: #e7e9db">,value)</span>
+    <span style="color: #e7e9db">value</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">zfill(</span><span style="color: #f99b15">8</span><span style="color: #e7e9db">)</span>  <span style="color: #776e71"># Ak nie je cislo dlhe 8 bitov tak doplni na zaciatok nuly</span>
+    <span style="color: #e7e9db">print(</span><span style="color: #48b685">"LENGTH OF VALUE AFTER ZEROING"</span><span style="color: #e7e9db">,value)</span>
+    <span style="color: #e7e9db">print(value)</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,len(final_value)):</span>  <span style="color: #776e71"># prechadza LISTOM a meni hodnoty</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 1 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 2 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">2</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 3 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">3</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">2</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 4 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">6</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 5 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">5</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">1</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 6 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">6</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">7</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 7 clena listu</span>
+        <span style="color: #e7e9db">final_value[</span><span style="color: #f99b15">7</span><span style="color: #e7e9db">]</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">value[</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">]</span>  <span style="color: #776e71"># modifikuje 8 clena listu</span>
+    <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">final_value:</span>  <span style="color: #776e71"># prechadza LISTOM a robi</span>
+        <span style="color: #e7e9db">result</span> <span style="color: #5bc4bf">+=</span> <span style="color: #e7e9db">str(i)</span>  <span style="color: #776e71"># pridava hodnoty do vysledneho STRINGU</span>
+    <span style="color: #815ba4">return</span> <span style="color: #e7e9db">result</span>  <span style="color: #776e71"># vracia modifikovane 8bitove binarne cislo v STRINGU</span>
+</pre></div>
+
+
+
+        Asymetrické Šifrovanie - je matematicky oveľa náročnejšie ako symetrické šifrovanie.
+        Ráta sa s prítomnosťou dvoch odlišných kľúčov a to <b>verejného - PUBLIC</b>
+        a <b>súkromného - PRIVATE</b>. Väčšinou sa používa iba na výmenu šifrovacieho
+        kľúča pre symetrické šifrovanie
+
+        Výmena kľúčou prebieha pomocou mechanizmu Diffie Hellman algoritmu.
+        Je to algoritmus, ktorý umožňuje dvom osobám dohodnúť sa na spoločnom kľúči. <br>
+        <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #776e71"># ALICA</span>
+<span style="color: #e7e9db">AlicineTajomstvo</span> <span style="color: #5bc4bf">=</span> <span style="color: #f99b15">75433</span>
+
+<span style="color: #776e71"># BOB</span>
+<span style="color: #e7e9db">BoboTajomstvo</span> <span style="color: #5bc4bf">=</span> <span style="color: #f99b15">56575</span>
+
+<span style="color: #776e71"># Server</span>
+<span style="color: #e7e9db">g</span> <span style="color: #5bc4bf">=</span> <span style="color: #f99b15">5472437625635634658438583468564336543654365346546534</span> <span style="color: #776e71"># nahodne vybrane cislo</span>
+<span style="color: #e7e9db">n</span> <span style="color: #5bc4bf">=</span> <span style="color: #f99b15">911</span> <span style="color: #776e71"># prvocislo</span>
+
+<span style="color: #776e71"># Alica ide poslat Bobovi kluc</span>
+<span style="color: #e7e9db">A_posiela</span> <span style="color: #5bc4bf">=</span><span style="color: #e7e9db">(g</span> <span style="color: #5bc4bf">**</span> <span style="color: #e7e9db">AlicineTajomstvo)</span> <span style="color: #5bc4bf">%</span> <span style="color: #e7e9db">n</span>
+<span style="color: #e7e9db">print(</span><span style="color: #48b685">"ALICA POSIELA"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">A_posiela)</span>
+<span style="color: #776e71"># Bob ide poslat kluc Alici</span>
+<span style="color: #e7e9db">B_posiela</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">(g</span> <span style="color: #5bc4bf">**</span> <span style="color: #e7e9db">BoboTajomstvo)</span> <span style="color: #5bc4bf">%</span> <span style="color: #e7e9db">n</span>
+<span style="color: #e7e9db">print(</span><span style="color: #48b685">"BOB POSIELA"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">B_posiela)</span>
+
+<span style="color: #776e71"># Alica otvara Bobov kluc</span>
+<span style="color: #e7e9db">Bobov_kluc</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">(B_posiela</span> <span style="color: #5bc4bf">**</span> <span style="color: #e7e9db">AlicineTajomstvo)</span> <span style="color: #5bc4bf">%</span> <span style="color: #e7e9db">n</span>
+<span style="color: #e7e9db">print(</span><span style="color: #48b685">"Bobov zdielany kluc"</span><span style="color: #e7e9db">,Bobov_kluc)</span>
+
+<span style="color: #776e71"># Bob otvara Alicin kluca</span>
+<span style="color: #e7e9db">Alicin_Kluc</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">(A_posiela</span> <span style="color: #5bc4bf">**</span> <span style="color: #e7e9db">BoboTajomstvo)</span> <span style="color: #5bc4bf">%</span> <span style="color: #e7e9db">n</span>
+<span style="color: #e7e9db">print(</span><span style="color: #48b685">"Alicin Zdielany kluc"</span><span style="color: #e7e9db">,Alicin_Kluc)</span>
+</pre></div>
+
+
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">PRVOČÍSLA</h4>
+            <p>Prvočísla majú veľký význam pre modernú kryptografiu, lebo je to
+              množina čísel platná univerzálne kdekoľvek vo vesmíre. Je to pevný
+              bod o ktorý sa opiera množstvo kryptografických algoritmov.
+            </p>
+          </div>
+
+      </p>
+
+      <li><h3>Lúskanie HASHSTRINGOV v Pythone</h3></li>
+      <p>
+        Ako sme sa už dozvedeli pri výuke Pythonu HASH je kryptografický algoritmus, ktorého
+        výsledkom je jedinečný STRING vložených dát. Možno ho zjednodušene prirovnať
+        k otlačku prsta. Tento je možné napríklad použiť na verifikáciu vloženého hesla.
+        Vložíte heslo z ktorého sa vypočíta HASH hesla a to sa zašle na vzdialený server.
+        Server porovná hash, ktorý s prišiel s hashom tým, ktorý má uložený v pamäti.
+        Ak sa zhodujú zadané heslo je správne. <br>
+          V minulej lekcií sme sa naučili pomocou Wiresharku odpočúvať sieť.
+          Zachytené hashe možno
+        Predvedieme si to na jednoduchom programe, ktorý lúska kódy <b>Hrubou
+          silou - BRUTEFORCE</b>:
+
+
+          Druhou ešte účinnejšou metódou je použitie slovníkového útoku, kde program
+          vyberá najčastejšie používané slová v heslách a porovnáva ich HASHe.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Ú L O H A</h4>
+            <p>Skúste spraviť jednoduchý program v Pythone, ktorý bude lúskať kódy
+              podľa slov, ktoré si bude vyberať z pripraveného slovníka.
+            </p>
+          </div>
+
+
+      </p>
+
+      <li><h3>Lúskanie HASHSTRINGOV s Crunch</h3></li>
+      <p>Existuje množstvo vynikajúcich nástrojov na lúskanie hashov. Moderné
+        nástroje ako Hashcat podporujú využitie Grafických kariet pri výpočtoch
+        a sú naozaj veľmi rýchle.
+        <br> My si ukážeme však niečo jednoduchšie a to je program crunch, ktorý
+        nám vygeneruje slovník podľa našich špecifických požiadaviek:
+        <br> <br>
+        <code>crunch 6 6 -t abc%%% -o zoznam.txt</code>
+        <br> <br>
+        Pomocou tohoto programu môžeme vygenerovať jednoduch slovníky aby sme sa
+        mohli pustiť do porovnávania hashov.
+        <br> <br>
+        <code>
+          % znamena cislovku <br>
+          @ znamena male pismeno <br>
+          , znamena velke pismeno <br>
+          ^ znamena symbol
+        </code>
+        <br> <br>
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">RAINBOW TABLES</h4>
+            <p>Existuje ešte jedna technika, Je to obbrovská databáza všetkých
+              rozlúštených hesiel v rôznych formátoch hashov a ukladačov hesiel.
+              Je voľne prístupná na internete a Hackeri ju nazvali RAINBOW TABLES.
+            </p>
+          </div>
+      </p>
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme si povedali niečo o základoch kryptografie a lúskaní
+      hesiel uložených v Hashstringoch. Nabudúce sa pozrieme na zúbok Metasploitu.
+       Happy Hacking !!!</p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
