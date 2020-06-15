@@ -219,7 +219,26 @@
           Zachytené hashe možno
         Predvedieme si to na jednoduchom programe, ktorý lúska kódy <b>Hrubou
           silou - BRUTEFORCE</b>:
+          <div class="highlight" style="background: #2f1e2e"><pre style="line-height: 125%"><span></span><span style="color: #5bc4bf">import</span> <span style="color: #fec418">hashlib</span>
 
+          <span style="color: #e7e9db">HASH</span> <span style="color: #5bc4bf">=</span> <span style="color: #48b685">"cfdea3ada9e5646068d4288f9b9ad0de"</span>
+
+          <span style="color: #815ba4">def</span> <span style="color: #06b6ef">hash_it</span><span style="color: #e7e9db">(password:</span> <span style="color: #e7e9db">str):</span>
+              <span style="color: #e7e9db">h</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">hashlib</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">md5()</span>
+              <span style="color: #e7e9db">prepared_pwd</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">bytes(password,</span> <span style="color: #e7e9db">encoding</span><span style="color: #5bc4bf">=</span><span style="color: #48b685">'utf-8'</span><span style="color: #e7e9db">)</span>
+              <span style="color: #e7e9db">h</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">update(prepared_pwd)</span>
+              <span style="color: #815ba4">return</span> <span style="color: #e7e9db">h</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">hexdigest()</span>
+
+          <span style="color: #815ba4">if</span> <span style="color: #ef6155">__name__</span><span style="color: #5bc4bf">==</span><span style="color: #48b685">"__main__"</span><span style="color: #e7e9db">:</span>
+              <span style="color: #815ba4">for</span> <span style="color: #e7e9db">i</span> <span style="color: #5bc4bf">in</span> <span style="color: #e7e9db">range(</span><span style="color: #f99b15">0</span><span style="color: #e7e9db">,</span><span style="color: #f99b15">10000</span><span style="color: #e7e9db">):</span>
+                  <span style="color: #e7e9db">prepare</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">str(i)</span><span style="color: #5bc4bf">.</span><span style="color: #e7e9db">zfill(</span><span style="color: #f99b15">4</span><span style="color: #e7e9db">)</span>
+                  <span style="color: #776e71"># print(prepare)</span>
+                  <span style="color: #e7e9db">hashed_prepared_pwd</span> <span style="color: #5bc4bf">=</span> <span style="color: #e7e9db">hash_it(prepare)</span>
+                  <span style="color: #e7e9db">print(i,</span> <span style="color: #e7e9db">hashed_prepared_pwd)</span>
+                  <span style="color: #815ba4">if</span> <span style="color: #e7e9db">HASH</span> <span style="color: #5bc4bf">==</span> <span style="color: #e7e9db">hashed_prepared_pwd:</span>
+                      <span style="color: #e7e9db">print(</span><span style="color: #48b685">"MAM TO. HESLO JE :"</span><span style="color: #e7e9db">,</span> <span style="color: #e7e9db">prepare)</span>
+                      <span style="color: #e7e9db">quit()</span>
+          </pre></div>
 
           Druhou ešte účinnejšou metódou je použitie slovníkového útoku, kde program
           vyberá najčastejšie používané slová v heslách a porovnáva ich HASHe.
