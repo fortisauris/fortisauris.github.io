@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 6 - Metasploit</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 6 - Metasploit</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>Predstavenie Frameworku METASPLOIT</h3></li>
+      <p>Získali sme informácie o načom Cieli, Zoskenovali sme sieť aj porty,
+        Odpočuli sme sieť a prelúskali všetky zachytené HASHe. Máme veľa infomácii
+        o Cieli samotnom aj o jeho hardvéri a softvéri. Ale nevieme sa pohnúť ďalej.
+        Keď je NETCAT nožíkom švajčiarskej armády tak METASPLOIT je otvárak na konzervy,
+        páčidlo aj sekera v jednom. <br>
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">Čo je FRAMEWORK?</h4>
+            <p>Frameworky sú nadstavbou jednoduchého programovacieho jazyka, alebo
+              iných softvérových nástrojov. Umožňujú pomocou unifikovaného prostredia
+              či syntaxu komplexnejšie a jednoduchšie vykonanie úloh na ktoré by bolo
+              nutné použiť množstvo individuálnych nástrojov.
+            </p>
+          </div>
+        Obsahuje vyše tisíce exploitov (metód prieniku) do rôznych zariadení,
+        platforiem a servisov, využívajúc
+        všetky známe fígle a zraniteľnosti softvéru. <br>
+        <b>1. Nainštalujte si METASPLOIT alebo rovno KALI Linux na svoj počítač.</b> <br>
+        <b>2. Naštartujte METASPLOIT príkazom <code>msfconsole</code> </b>
+
+      </p>
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">POZOR WARNING UWAGA FIDELEM ACHTUNG</h4>
+          <p>Použitie METASPLOITU bez ohľadu na jeho úspešnosť je nepriateľským
+            aktom a porušením niekoľkých trestnoprávnych paragrafov. Môže napáchať
+            škody na majetku a preto s ním treba zaobchádzať veľmi opatrne. <br>
+            Ak sa chcete s ním naučiť pracovať, môžete tak urobiť v podmienkach
+            vlastnej autonómnej siete alebo v rámci Wargamingu v na to určenom
+            hardvéri.
+          </p>
+        </div>
+
+      <li><h3>Moduly METASPLOITU</h3></li>
+      <p>Počas rokov sa z METASPLOITU vyvinul univerzálny nástroj, ktorý obsahuje
+        množstvo vecí, ktoré už poznáme. To čo zatiaľ nepoznáme je samotná EXPLOITÁCIA.
+        Je to spôsob ako využiť zraniteľnosť, alebo nestabilitu systému  a
+        preniknúť do neho. <br>
+        Výsledkom EXPLOITÁCIE počítača je jeho "zblbnutie" a umožnenie neoprávneného
+        prístupu v podobe prebratia jeho kontroly Hackerom.
+        Jednou z najobľúbenešou formou je METERPRETER, ktorý nám umožní zadávať príkazy
+        do príkazového riadku konzoly. <br>
+      <code>EXPLOITY = Nástroje na využitie slabín systémov <br>
+        PAYLOADY = Reťazce škodlivého kódu <br>
+        AUXILIARY = Doplňujúce nástroje a príkazy <br>
+        ENCODERS = Nástroje na prevádzanie kódu a informácií do rôznych podôb <br>
+        LISTENERS = Reťazce škodlivého kódy počuvajúce naše príkazy <br>
+        SHELLCODE = Kód spustiteľný na CieľovejIP <br>
+        POST-EXPLOITACIA = Pomáha preniknúť hlbšie do systému <br>
+        NOPS = Inštrukcie zabraňujúce zlyhaniu Exploitácie <br>
+
+      </code>
+
+      </p>
+
+      <li><h3>Vyhľadanie vhodného EXPLOITU</h3></li>
+      <p>V METASPLOITE je možné vyhľadávať nástroje podľa <b>kľúčových slov</b>,
+        <b>platformy</b> aj <b>typu</b> nástroja. Vyskúšame si v konzole Metasploitu
+        nájsť nejaký nástroj na exploitáciu Windowsu:
+        <br> <br>
+        <code>search type:exploit platform:windows</code>
+        <br> <br>
+        <code>search keyword</code>
+        <br> <br>
+        Okrem toho všetky nástroje sú uložené v adresárovom strome Metasploitu a preto
+        je ich jednoduché prehľadávať pomocou bežných linuxových príkazov. Nie všetky
+        nástroje METASPLOITU sú rovnako účinné a preto Hackeri spravili systém akýchsi
+        likov pre jednotlivé nástroje.
+        <br> <br>
+        <code>show exploits</code>
+        <br> <br>
+        Nástroje <b>EXCELLENT</b> a <b>GREAT</b> majú väčšiu šancu byť úspešné.
+      </p>
+      <div class="alert alert-primary" role="alert">
+          <h4 class="alert-heading">Čo je METERPRETER?</h4>
+          <p>Ak je exploitácia úspešná na cieľovom zariadení sa spustí METERPRETER.
+            Je to nástroj, ktorý pomocou nástrojov vie manipulovať s počítačom bez
+            vedomia svojho majiteľa. Dokáže vytiahnuť fotky z kamery, stať sa Adminom
+             a kopec užitočných vecí.
+          </p>
+        </div>
+      <li><h3>Použitie EXPLOITU</h3></li>
+      <p>Moduly sú pekne zoradené v adresároch Metasploitu a je ich tam fakt veľa.
+      Pre použitie nejakého konkrétneho použijeme príkaz <code>use</code> a zadáme
+      k nemu cestu. Príkazom <code>show</code> is vieme zobraziť nastavenie: <br>
+      <b>PAYLOADS - škodlivého kódu, ktorý chceme použiť</b> <br>
+      <b>OPTIONS - ďalších možností Exploitu</b> <br>
+      <b>CIEĽOV - samotných nastavení Cieľovej IP a portov</b> <br>
+      Kedykoľvek môžeme pomocou príkazu <code>info</code> zobraziť informácie o
+      zvolenom typu a možnostiach útoku. <br>
+      Pomocou <code>set</code> a <code>unset</code> ponastavujeme jednotlivé parametre.
+      Ak sme rozhodnutí spustiť útok tak spustíme ho príkazom <code>exploit</code>
+      alebo <code>run</code>.
+      <div class="alert alert-warning" role="alert">
+          <h4 class="alert-heading">P O Z O R </h4>
+          <p>Na PAYLOADY neplatí <code>run</code> ani <code>exploit</code>. Ide totiž
+            o generátory škodlivého kódu, ktorý sa musí spustiť na CIELI. Preto
+            ho treba spúšťať príkazom <code>generate</code>. <br>
+            Toto vám síce vygeneruje payload v HEX podobe ale ak ho chceme vygenerovať
+            do viac použiteľného formátu použijeme nástroj <code>msfvenom</code>:
+            <br> <br>
+            <code>msfvenom -p PAYLOAD -f exe -o calc.exe </code>
+            <br> <br>
+            Tento príkaz nám zabalí PAYLOAD do spustiteľného súboru, ktorý sa bude
+            tváriť, že je kalkulačka.
+          </p>
+        </div>
+      kedykoľvek sa vieme vrátiť príkazom <code>back</code> alebo opustiť konzolu
+      <code>exit</code>
+      </p>
+
+      <li><h3>Iné nástroje METASPLOITU</h3></li>
+      <p>Metasploit je postavený ako široká platforma nástrojov hackera. Existuje
+        aj verzia PRO obsahujúca ešte viac nástrojov. Štandardný Metasploit obsahuje
+        všetky nástroje Hackera ako skenery sieťe, skenery zraniteľností, nástrojov na
+        tvorbu vlastných PAYLOADov a prípravu škodlivých súborov či linkov. <br>
+        Používa sa preto aj v oblasti ako je Sociálne inžinierstvo o ktorom si
+        povieme niečo nabudúce.
+      </p>
+		</ul>
+
+    <p>Gratulujeme, dnes sme si povedali niečo o jednom z najsilnejších nástrojov
+       hackera - METASPLOITE. Skúšajte ho iba v bezpečnom prostredí nakoľko len
+       ťažko možno povedať, že ide o jemný a nežný spôsob prenikania pomocou
+       ukradnutho hesla. Môže napáchať veľké škody. Happy Hacking !!! </p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
