@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lekcia 8 - Reverzné Inžinierstvo a Wifi Hacking</title>
+    <!-- <link href="css/flextest.css" rel="stylesheet" type="text/css"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="css/main.css">
+</head>
+<body style=" background-color: #00314f; color: darkorange;">
+  <div class="container-fluid">
+    <div class="row" style="margin: 3%;">
+      <div class="col-sm">
+	       <header>
+           <h3>Lekcia 7 - Sociálne inžinierstvo</h3>
+	       </header>
+
+	<main>
+
+    <div class="collapsible">
+		<ul>
+    	<li><h3>Reverzné inžinierstvo - Analýza a spätné rozoberanie programov</h3></li>
+      <p>Ak máme podozrenie, že nejaký program obsahuje škodlivý kód je niekedy
+        potrebné ho rozobrať ho na kúsky a pozrieť sa čo vlastne robí. <br>
+        Pythonovský kód nie je kompilovaný do strojového kodu a preto ho môžeme
+        čítať kedykoľvek ho otvoríme v nejakom editore. <br>
+        Horšie je to s kompilovanými jazykmi (C), ktoré treba dekompilovať predtým
+        ako ich začneme čítať. <br>
+        Nakoľko škodlivý kód môže byť krátky a dodatočne injektovaný do programu
+        je niekedy potrebné analyzovať kód priamo v strojovom kóde. Nebojte sa
+        nebudeme čítať hexadecimálne hodnoty <b>bytov</b> ale stojový kód preložený
+        do inštrukcií jazyka <b>ASSEMBLY</b>. <br> <br>
+
+        Skôr ako to urobíme pozrieme sa na ktorýkoľvek Linuxový príkaz uložený
+        v adresári <code>/bin/</code>. Napríklad príkaz <code>find</code>:
+        <br> <br>
+        <code>file /bin/find</code>
+        <br> <br>
+        Nám vypíše základné informácie o súbore. <b>.ELF</b> znamená, že je
+        Linuxový, spustiteľný program, architektúra a ďalšie informácie.
+        Ak chceme zobraziť všetky STRINGY, ktoré obsahuje použijeme príkaz:
+        <br> <br>
+        <code>strings /bin/find</code>
+        <br> <br>
+        ďalším príkazom si zobrazíme jeho <b>HEXDUMP</b> obsah hexadecimálnych hodnôt.
+        Použijeme zároveň <b>PIPE</b> na príkaz <code>less</code> aby sme mohli
+        prezerať jeho obsah postupne:
+        <br> <br>
+        <code>xxd /bin/find | less</code>
+        <br> <br>
+        Ak by sme si chceli pozrieť ako program vyzerá v <b>ASSEMBLY</b> musíme
+        definovať jeho platformu napríklad Intel alebo Arm. Na vypísanie obsahu
+        potrebujeme tzv. <b>DISASSEMBLER</b>, program, ktorý jeho hexadecimálne
+        hodnoty preloží do jazyka <b>ASSEMBLY</b>:
+        <br> <br>
+        <code>objdump -M intel -D /bin/find | less</code>
+        <br> <br>
+        Program sa nám zobrazí po jednotlivých sekciách (niečo ako funkcie v Pythone)
+        v jazyku, ktorý zatiaľ nepoznáme.
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">ZNALOSTI JAZYKA C a ASSEMBLY</h4>
+            <p>Na pochopenie inštrukcií jazyka <b>ASSEMBLY</b> alebo <b>C</b>, treba
+              zjesť veľa mrkvy a bdieť nad knihami čo vám vrelo odporúčame.
+              <br>
+              Nateraz nám stačí vedieť, že veľa vecí, ktoré nám stačí na jednoduché
+              úlohy je ukrytých v STRINGOCH programu a pomenovaní jednotlivých sekcií.
+              Tak napríklad hlavný program je prevažne označený ako sekcia <b>main</b>
+            </p>
+          </div>
+          <div class="alert alert-secondary" role="alert">
+              <h4 class="alert-heading">MOCNÉ KÚZLENIE S POMOCOU DEBUGGERA</h4>
+              <p>Teraz nastupujú na scénu <b>DEBUGGERY</b> teda programy pôvodne
+                používané na odstránenie <b>BUGOV - chýb</b>. Základy ich použitia
+                sú nám už známe z časti tohto kurzu venujúcemu sa Python3. <br>
+                Vieme teda, že určením <code>BR</code> tzv <b>BREAK POITOV</b>,
+                môžeme program zastaviť a prezerať premenné, ísť riadok po riadku
+                kódu a pochopiť tak kde môže byť chyba v našom programe.
+              </p>
+            </div>
+          Posledný program, ktorý si ukážeme <code>readelf</code> dokáže čítať
+          v Linuxových spustiteľných súboroch ELF.
+      </p>
+
+
+      <li><h3>Čo z Hacknutým počítačom ?</h3></li>
+
+      <p>Ak máte podozrenie, že s Vašim počítačom nie je niečo v poriadku tak
+        najjednoduchšie riešenie je vytiahnuť ho z elektriky. Počkať, ale čo keď
+        už hackeri umiestnili svoje spätné vrátka do počítača a on sa po pripojení
+        na Internet opäť pripojí na Hackera ? <br>
+        Jedno je isté - čaká nás veľa práce: <br>
+        A. Pomocou usbéčka s Kali Linux Live (Forensic Mode) spravíme <b>DISK IMAGE</b>
+        alebo jednoducho vytiahneme z neho HDD alebo SSD a použijeme ho na ďalšiu forenznú analýzu. <br>
+        B. Nainštalujeme znova OS na čistý NOVÝ HDD alebo SSD. <br>
+        C. Nainštalujeme čistý zakúpený softvér. <br>
+        D. Súbory, ktoré potrebujeme stiahneme zo ZÁLOHY - BACKUPU. Pre
+        istotu to pred použitím dôkladne prehľadajte Antivírom. <br>
+        <div class="alert alert-primary" role="alert">
+            <h4 class="alert-heading">PRAVIDLO TROCH ZÁLOH</h4>
+            <p>Odporúča sa mať kľúčové dokumenty a súbory ako fotky, videa, textové súbory,
+              tabuľky a databázy zálohované MINIMÁLNE TRIKRÁT: <br>
+              1. Pravidelne zálohujte SSD a HDD (najlepšie aj so systémom). <br>
+              2. Dokumenty, fotky a pod si ukladajte ešte na externý disk alebo USB (šifrovane) <br>
+              3. Využite Cloud na zálohovanie najnutnejších vecí v rámci svojich možností.
+              (Používate silné heslá a kryptografiu) <br>
+            </p>
+          </div>
+        E. Môžeme opäť pracovať na počítači - zatiaľ čo infikované SSD a HDD
+        odpočíva zatiaľ v skrini a čaká na ďalšiu analýzu. <br>
+        F. HDD alebo SSD môžeme odovzdať na analýzu špecializovanej firme ktorá
+        prevedie pitvu s cieľom zistiť či sa podarí škodlivý kód nájsť. <br>
+        <div class="alert alert-secondary" role="alert">
+            <h4 class="alert-heading">VM a SANDBOXY</h4>
+            <p>Ak je škodlivý kód izolovaný, môžeme pomocou rôznych Forenzných
+              nástrojov skúmať jeho obsah. Môžeme ho aj spustiť vo <b>VM</b> z img.
+              Dobre napísaný Malware testuje či nie je pozorovaný a analyzovaný...
+              preto je dobré mať URČENÉ ŠPECIÁLNE PC na ktorom vytvoríme SANDBOX, ktorý sa bude
+              tváriť, že je skutočné zariadenie s pripojením na internet, aplikáciami,
+              súbormi, logmi, swapmi atď. NEBUDE TO VŠAK PRAVDA.
+          </div>
+          <div class="alert alert-warning" role="alert">
+              <h4 class="alert-heading">POZOR WARNING ACHTUNG UWAGA FIDELEM</h4>
+              <p>NIKDY NEPOUŽITE NA ANALÝZU MALWARE ALEBO ŠKODLIVÉHO KÓDU SVOJ
+                PRACOVNÝ POČÍTAČ. MUSÍTE SI BYŤ ISTÝ, ŽE SA ŠKODLIVÝ KÓD NEPREKÚŠE
+                IZOLÁCIOU A NAINFIKUJE HOSTITEĽA ALEBO SIEŤ.
+                <br>
+                INTERNET A SIEŤ JE PRE MALWARE LEN ILÚZIOU. PC MUSÍ BYŤ DOKONALE
+                IZOLOVANÉ OD WIFI ALEBO LAN.
+            </div>
+      </p>
+
+      <li><h3>Hackujeme Wifi pomocou Aircrack-ng</h3></li>
+      <p>
+        Útoky na WiFi využívajú zraniteľnosť WEP šifrovania a faktu, že dáta
+        lietajú voľne prístupné v povetrí takže sa dajú voľne odchytávať.
+        <br>
+        Najprv hackeri vyberú pomocou príkazu <code>airmon-ng</code>nejakú wifi sieť a poznačia si jej kanál a bssid
+        reťazec. To sú dve veci na základe ktorých ju možno pomocou príkazu
+        <code>airdump-ng</code> odpočúvať a zaznamenávať jej prevádzku. Dáta sú
+        šifrované a nateraz nás nezaujímajú. Zaújima nás <b>HANDSHAKE</b> medzi
+        zariadeniami na sieti.
+        <br>
+        Ak je dostatočný počet packetov zachytených môžeme sa pokúsiť zlomiť
+        pomocou slovníkového alebo BruteForce útoku s použitím
+        <code>aircrack-ng</code>.
+      </p>
+
+      <li><h3>VOJNA HACKEROV POMOCOU DDOS a BOTNETOV</h3></li>
+      <p>Ako sme si ukázali, škála útokov Hackerov je pomerne široká. Prešli sme
+        archaickými metódami, exploitáciou, sociálnym a reverzným inžinierstvom
+        ale nepovedali sme si o najpoužívanejšom a zároveň najjednoduchšom útoku
+        na počítačovú infraštruktúru:
+        <b>DoS Denial of Services</b> spočíva na modifikovaní našeho obľúbeného príkazu
+        <code>ping</code>. Tentokrát však použije modifikovanú verziu s režimom
+        <code>--flood</code> to znamená, že zaplaví cieľový počítač packetmi. Ak
+        je takýchto packetov primnoho tak zahltí počítač a ten jednoducho najprv spomalí
+        a potom skolabuje. Je jedno či ide o webstránku alebo nejakú inú službu.
+        Samozrejme jeden počítač proti serverovej štruktúre, ktorá ráta s vysokým
+        zaťažením toho veľa neurobí. Ale keď je ich tisíce tak dokáže preťažiť aj
+        najsilnejší server.<br>
+        Tento útoky sa volá Distributed Denial of Service Attack a možno ich life
+        sledovať v priamom prenose na :
+        <a href="https://norse-corp.com/map/">NORSE CORP MAP</a>
+
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">POZOR WARNING ACHTUNG UWAGA FIDELEM</h4>
+            <p>AK SME POVEDALI ŽE METASPLOIT FRAMEWORK JE PÁČIDLO TAK TOTO JE
+            KYBERNETICKÁ ZBRAŇ. AK JU CHCETE VYSKÚŠAŤ TAK IBA V KONTROLOVANOM
+          PROSTREDÍ VLASTNEJ LAN ALEBO SO SÚHLASOM JEJ MAJITEĽA. <br>
+        JEJ POUŽITIE NA AKÉKOĽVEK CIELE V RÁMCI KYBERPRIESTORU JE NEZÁKONNÉ
+        A MǑŽE SPǑSOBIŤ VEĽKÉ ŠKODY NA MAJETKU AJ ŽIVOTOCH !!!</p>
+          </div>
+
+
+
+      </p>
+
+
+		</ul>
+
+    <p>Gratulujeme, dnes sme ukončili poslednú lekciu kurzu. Ukázali sme si Reverzné
+      inžinierstvo, povedali sme si čo spraviť s hacknutým počítačom, Ukázali sme si
+      ako prebieha celosvetový boj medzi hackermi pomocou DDoS útokov a Botnetov.
+       Happy Hacking !!! </p>
+
+		<section>
+
+
+		</section>
+    </div>
+
+  </div>
+  </div> <!-- End of Second ROW -->
+	</main>
+
+	<footer>
+	<a href="../TBO.html">BACK TO MAIN MENU</a>
+	</footer>
+</div> <!-- End of Container -->
+</body>
+</html>
