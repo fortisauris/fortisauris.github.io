@@ -1,0 +1,138 @@
+.footer-dark {
+  padding: 50px 0;
+  color: #f0f9ff;
+  background-color: #282d32;
+}
+
+.footer-dark h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.footer-dark ul {
+  padding: 0;
+  list-style: none;
+  line-height: 1.6;
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+.footer-dark ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.6;
+}
+
+.footer-dark ul a:hover {
+  opacity: 0.8;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item:not(.social) {
+    text-align: center;
+    padding-bottom: 20px;
+  }
+}
+
+.footer-dark .item.text {
+  margin-bottom: 36px;
+}
+
+@media (max-width:767px) {
+  .footer-dark .item.text {
+    margin-bottom: 0;
+  }
+}
+
+.footer-dark .item.text p {
+  opacity: 0.6;
+  margin-bottom: 0;
+}
+
+.footer-dark .item.social {
+  text-align: center;
+}
+
+@media (max-width:991px) {
+  .footer-dark .item.social {
+    text-align: center;
+    margin-top: 20px;
+  }
+}
+
+.footer-dark .item.social > a {
+  font-size: 20px;
+  width: 36px;
+  height: 36px;
+  line-height: 36px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.4);
+  margin: 0 8px;
+  color: #fff;
+  opacity: 0.75;
+}
+
+.footer-dark .item.social > a:hover {
+  opacity: 0.9;
+}
+
+.footer-dark .copyright {
+  text-align: center;
+  padding-top: 24px;
+  opacity: 0.3;
+  font-size: 13px;
+  margin-bottom: 0;
+}
+
+#main_section {
+  background-color: #184e8e;
+  background: linear-gradient(45deg, #172a74, #21a9af);
+  /*display: inline-flex;*/
+}
+
+@media (min-width: 300px) {
+  #sidebar {
+    display: block;
+    width: 15%;
+  }
+}
+
+#main-section-title {
+  color: rgba(255,255,255,0.8);
+  text-align: center;
+  font-family: inherit;
+  padding: 30px;
+  margin: 0px 30px 30px 30px;
+  font-size: xx-large;
+}
+
+.device {
+  width: 150%;
+}
+
+#popis {
+  color: #fff;
+  padding: 30px;
+}
+
+#header_info {
+  background-image: url("../../assets/img/FA_webOptimized.png?h=ad37cd0a1f4b6fe2cbaf62c95a5b9676");
+}
+
+#banner_small {
+  width: 60%;
+  padding: 3%;
+}
+
+#Form {
+  font-size: x-large;
+  color: #ffff;
+}
+
+.navbar.navbar-light.navbar-expand-md.navigation-clean-search {
+}
+
