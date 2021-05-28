@@ -13,3 +13,13 @@ color: orangered !important;
 #team {
   color: white;
 }
+
+.flyer {
+  
+margin: auto;
+}
+
+.infocard {
+  background-color: #ff9933;
+  margin: 2%;
+}
