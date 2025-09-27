@@ -1,0 +1,47 @@
+title: "FORTIS AURIS Hackerspace"
+description: "Educational platform for IT, cybersecurity, and programming in Slovakia"
+url: "https://fortisauris.com"
+baseurl: ""
+
+# Internationalization
+languages: ["sk", "en"]
+default_lang: "sk"
+exclude_from_localization: ["assets", "img", "css", "js"]
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# SEO and social
+author: "FORTIS AURIS"
+social:
+  name: "FORTIS AURIS"
+  links:
+    - "https://twitter.com/fortisauris"
+    - "https://github.com/fortisauris"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+sass:
+  sass_dir: assets/css
+  style: compressed
+
+# Performance optimizations
+compress_html:
+  clippings: all
+  comments: all
+  endings: all
+  ignore:
+    envs: development
+
+# Collections for tutorials
+collections:
+  tutorials_sk:
+    output: true
+    permalink: /:collection/:name/
+  tutorials_en:
+    output: true
+    permalink /:collection/:name/

@@ -1,0 +1,91 @@
+<!-- Language Selector Component -->
+<div class="language-selector">
+    <div class="dropdown">
+        <button class="btn btn-sm btn-outline-light dropdown-toggle" type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-globe"></i>
+            <span class="current-lang">SK</span>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="languageDropdown">
+            <a class="dropdown-item" href="/sk/" data-lang="sk">
+                <img src="/assets/img/flags/sk.svg" alt="SK" class="flag-icon"> Slovenčina
+            </a>
+            <a class="dropdown-item" href="/en/" data-lang="en">
+                <img src="/assets/img/flags/en.svg" alt="EN" class="flag-icon"> English
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+.language-selector {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.language-selector .dropdown-toggle {
+    border-color: rgba(255,255,255,0.3);
+}
+
+.language-selector .dropdown-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+}
+
+.flag-icon {
+    width: 16px;
+    height: 12px;
+    margin-right: 8px;
+}
+
+.current-lang {
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .language-selector {
+        position: static;
+        text-align: center;
+        margin: 10px 0;
+    }
+}
+</style>
+
+<script>
+// Language selector functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const currentPath = window.location.pathname;
+    const langDropdown = document.getElementById('languageDropdown');
+    const currentLangSpan = document.querySelector('.current-lang');
+    
+    // Detect current language from path
+    if (currentPath.startsWith('/en/')) {
+        currentLangSpan.textContent = 'EN';
+    } else {
+        currentLangSpan.textContent = 'SK';
+    }
+    
+    // Handle language switching
+    document.querySelectorAll('[data-lang]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetLang = this.dataset.lang;
+            const newPath = switchLanguage(currentPath, targetLang);
+            window.location.href = newPath;
+        });
+    });
+});
+
+function switchLanguage(currentPath, targetLang) {
+    // Remove current language prefix
+    let basePath = currentPath.replace(/^\/(sk|en)\//, '/');
+    
+    // Add new language prefix
+    if (targetLang === 'en') {
+        return '/en' + basePath;
+    } else {
+        return '/sk' + basePath;
+    }
+}
+</script>

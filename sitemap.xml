@@ -1,0 +1,78 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+    
+    <!-- Homepage - Slovak -->
+    <url>
+        <loc>{{ site.url }}/sk/</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}/en/" />
+        <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}/sk/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/sk/" />
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Homepage - English -->
+    <url>
+        <loc>{{ site.url }}/en/</loc>
+        <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}/en/" />
+        <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}/sk/" />
+        <xhtml:link rel="alternate" hreflang="x-default" href="{{ site.url }}/sk/" />
+        <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+    </url>
+    
+    <!-- Static Pages -->
+    {% for page in site.pages %}
+        {% unless page.url contains '/assets/' or page.url contains '/404' %}
+            <url>
+                <loc>{{ site.url }}{{ page.url }}</loc>
+                {% if page.lang == 'sk' and page.url != '/sk/' %}
+                    <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url | replace: '/sk/', '/en/' }}" />
+                    <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}{{ page.url }}" />
+                {% elsif page.lang == 'en' and page.url != '/en/' %}
+                    <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}{{ page.url }}" />
+                    <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}{{ page.url | replace: '/en/', '/sk/' }}" />
+                {% endif %}
+                <lastmod>{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
+                <changefreq>{% if page.changefreq %}{{ page.changefreq }}{% else %}monthly{% endif %}</changefreq>
+                <priority>{% if page.priority %}{{ page.priority }}{% else %}0.5{% endif %}</priority>
+            </url>
+        {% endunless %}
+    {% endfor %}
+    
+    <!-- Tutorial Collections -->
+    {% for tutorial in site.tutorials_sk %}
+        <url>
+            <loc>{{ site.url }}{{ tutorial.url }}</loc>
+            <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}{{ tutorial.url }}" />
+            {% assign en_tutorial = site.tutorials_en | where: "slug", tutorial.slug | first %}
+            {% if en_tutorial %}
+                <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}{{ en_tutorial.url }}" />
+            {% endif %}
+            <lastmod>{% if tutorial.last_modified_at %}{{ tutorial.last_modified_at | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
+        </url>
+    {% endfor %}
+    
+    {% for tutorial in site.tutorials_en %}
+        <url>
+            <loc>{{ site.url }}{{ tutorial.url }}</loc>
+            <xhtml:link rel="alternate" hreflang="en" href="{{ site.url }}{{ tutorial.url }}" />
+            {% assign sk_tutorial = site.tutorials_sk | where: "slug", tutorial.slug | first %}
+            {% if sk_tutorial %}
+                <xhtml:link rel="alternate" hreflang="sk" href="{{ site.url }}{{ sk_tutorial.url }}" />
+            {% endif %}
+            <lastmod>{% if tutorial.last_modified_at %}{{ tutorial.last_modified_at | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
+            <changefreq>monthly</changefreq>
+            <priority>0.7</priority>
+        </url>
+    {% endfor %}
+    
+</urlset>

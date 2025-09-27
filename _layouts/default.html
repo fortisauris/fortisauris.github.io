@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.default_lang }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ page.description | default: site.description }}">
+    <meta name="author" content="{{ site.author }}">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+    
+    <!-- Open Graph / Social Media -->
+    <meta property="og:title" content="{% if page.title %}{{ page.title }} - {% endif %}{{ site.title }}">
+    <meta property="og:description" content="{{ page.description | default: site.description }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="{{ '/assets/img/FA_webOptimized.png' | absolute_url }}">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@fortisauris">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ '/assets/img/favicon.png' | relative_url }}">
+    
+    <!-- Critical CSS (inlined for performance) -->
+    <link rel="stylesheet" href="{{ '/assets/css/critical.css' | relative_url }}">
+    
+    <!-- Preload important resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&family=Abel&family=Aleo&display=swap" as="style">
+    <link rel="preload" href="{{ '/assets/css/main.css' | relative_url }}" as="style">
+    
+    <!-- Async load non-critical CSS -->
+    <link rel="preload" href="{{ '/assets/bootstrap/css/bootstrap.min.css' | relative_url }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ '/assets/bootstrap/css/bootstrap.min.css' | relative_url }}"></noscript>
+    
+    <!-- Load fonts asynchronously -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;700&family=Abel&family=Aleo&display=swap">
+    
+    <!-- Language alternates -->
+    {% if page.lang == 'sk' %}
+        <link rel="alternate" hreflang="en" href="{{ page.url | replace: '/sk/', '/en/' | absolute_url }}">
+    {% else %}
+        <link rel="alternate" hreflang="sk" href="{{ page.url | replace: '/en/', '/sk/' | absolute_url }}">
+    {% endif %}
+    <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}">
+    
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "FORTIS AURIS",
+        "description": "{{ site.description }}",
+        "url": "{{ site.url }}",
+        "logo": "{{ '/assets/img/FA_webOptimized.png' | absolute_url }}",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Dolná 24",
+            "addressLocality": "Modra",
+            "postalCode": "90001",
+            "addressCountry": "SK"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service",
+            "email": "fortisauris@gmail.com"
+        },
+        "sameAs": [
+            "https://twitter.com/fortisauris",
+            "https://github.com/fortisauris"
+        ]
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Skip to main content for accessibility -->
+    <a class="sr-only sr-only-focusable" href="#main-content">Skip to main content</a>
+    
+    <!-- Language Selector -->
+    {% include language-selector.html %}
+    
+    <!-- Navigation Header -->
+    <header class="header-blue">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ '/' | relative_url }}">FORTIS AURIS</a>
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto">
+                        {% if page.lang == 'sk' %}
+                            <li class="nav-item"><a class="nav-link" href="/sk/pravidla.html">Pravidla</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/sk/index.html">Hlavná stránka</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown">Kurzy</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/sk/kurzy/zakladny-kurz-scratch.html">Základný kurz SCRATCH/MAKECODE/HTML</a></li>
+                                    <li><a class="dropdown-item" href="/sk/kurzy/zakladny-kurz-linux.html">Základný kurz LINUX/PYTHON3/HACKING</a></li>
+                                    <li><a class="dropdown-item" href="/sk/kurzy/it-kemp.html">IT "KEMP"</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item"><a class="nav-link" href="/en/rules.html">Rules</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/en/index.html">Home</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="coursesDropdown" role="button" data-bs-toggle="dropdown">Courses</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/en/courses/beginner-scratch-course.html">Beginner SCRATCH/MAKECODE/HTML Course</a></li>
+                                    <li><a class="dropdown-item" href="/en/courses/beginner-linux-course.html">Beginner LINUX/PYTHON3/HACKING Course</a></li>
+                                    <li><a class="dropdown-item" href="/en/courses/it-camp.html">IT Security Camp</a></li>
+                                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        
+        <!-- Hero Section -->
+        <div class="container hero">
+            <img id="banner_big" 
+                 src="{{ '/assets/img/FA_webOptimized.png' | relative_url }}" 
+                 alt="FORTIS AURIS Logo"
+                 width="400" 
+                 height="200"
+                 loading="eager">
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        {{ content }}
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-dark">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>{% if page.lang == 'sk' %}Služby{% else %}Services{% endif %}</h3>
+                    <ul>
+                        {% if page.lang == 'sk' %}
+                            <li><a href="#">Základné IT kurzy</a></li>
+                            <li><a href="#">Coding Camp</a></li>
+                            <li><a href="#">Poradenstvo</a></li>
+                        {% else %}
+                            <li><a href="#">Basic IT Courses</a></li>
+                            <li><a href="#">Coding Camp</a></li>
+                            <li><a href="#">Consulting</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+                
+                <div class="col-sm-6 col-md-3 item">
+                    <h3>{% if page.lang == 'sk' %}Kontakt{% else %}Contact{% endif %}</h3>
+                    <ul>
+                        <li>Email: fortisauris@gmail.com</li>
+                        <li>{% if page.lang == 'sk' %}Adresa{% else %}Address{% endif %}: Dolná 24, 90001 Modra, {% if page.lang == 'sk' %}SLOVENSKÁ REPUBLIKA{% else %}SLOVAKIA{% endif %}</li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 item text">
+                    <h3>{% if page.lang == 'sk' %}Otváracie hodiny{% else %}Opening Hours{% endif %}</h3>
+                    <p>
+                        {% if page.lang == 'sk' %}
+                            Pondelok - Piatok: 9:00 - 22:00<br>
+                            Sobota: 9:00 - 12:00<br>
+                            Nedeľa: ZATVORENÉ
+                        {% else %}
+                            Monday - Friday: 9:00 - 22:00<br>
+                            Saturday: 9:00 - 12:00<br>
+                            Sunday: CLOSED
+                        {% endif %}
+                    </p>
+                </div>
+                
+                <div class="col item social">
+                    <a href="https://twitter.com/fortisauris" aria-label="Twitter"><i class="icon ion-social-twitter"></i></a>
+                    <a href="https://github.com/fortisauris" aria-label="GitHub"><i class="icon ion-social-github"></i></a>
+                </div>
+            </div>
+            <p class="copyright">FORTIS AURIS © {{ 'now' | date: "%Y" }}</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="{{ '/assets/js/jquery.min.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/bootstrap/js/bootstrap.bundle.min.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}" defer></script>
+    
+    <!-- Lazy loading script -->
+    <script>
+        // Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        img.classList.add('loaded');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>
